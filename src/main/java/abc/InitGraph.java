@@ -1,0 +1,90 @@
+package abc;
+
+import java.util.ArrayList;
+
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+
+public class InitGraph {
+	public static void initGraph(GraphTraversalSource g) {
+		Vertex worker = g.addV("Page").property("DN", "worker.com").property("IP", "104.68.75.206").next();
+		Vertex global = g.addV("Page").property("DN", "global.com").property("IP", "54.11.3.92").next();
+		Vertex union = g.addV("Page").property("DN", "union.com").property("IP", "22.48.79.5").next();
+		Vertex industry = g.addV("Page").property("DN", "industry.com").property("IP", "44.68.112.65").next();
+		Vertex october = g.addV("Page").property("DN", "october.com").property("IP", "117.59.152.203").next();
+		Vertex science = g.addV("Page").property("DN", "science.com").property("IP", "91.70.2.56").next();
+		Vertex republic = g.addV("Page").property("DN", "republic.com").property("IP", "28.146.90.6").next();
+		Vertex information = g.addV("Page").property("DN", "information.com").property("IP", "57.8.115.29").next();
+		Vertex culture = g.addV("Page").property("DN", "culture.com").property("IP", "85.42.99.5").next();
+		Vertex national = g.addV("Page").property("DN", "national.com").property("IP", "84.155.207.199").next();
+		Vertex agriculture = g.addV("Page").property("DN", "agriculture.com").property("IP", "147.86.180.43").next();
+		Vertex economy = g.addV("Page").property("DN", "economy.com").property("IP", "20.9.216.55").next();
+		Vertex finance = g.addV("Page").property("DN", "finance.com").property("IP", "98.165.22.137").next();
+		Vertex district = g.addV("Page").property("DN", "district.com").property("IP", "177.82.155.164").next();
+		
+		g.addE("link").from(worker).to(october).iterate();
+		g.addE("link").from(worker).to(information).iterate();
+		g.addE("link").from(worker).to(culture).iterate();
+		g.addE("link").from(worker).to(october).iterate();
+		g.addE("link").from(worker).to(district).iterate();
+		g.addE("link").from(global).to(worker).iterate();
+		g.addE("link").from(global).to(union).iterate();
+		g.addE("link").from(global).to(information).iterate();
+		g.addE("link").from(global).to(industry).iterate();
+		g.addE("link").from(global).to(republic).iterate();
+		g.addE("link").from(global).to(agriculture).iterate();
+		g.addE("link").from(global).to(finance).iterate();
+		g.addE("link").from(global).to(district).iterate();
+		g.addE("link").from(union).to(worker).iterate();
+		g.addE("link").from(union).to(october).iterate();
+		g.addE("link").from(union).to(science).iterate();
+		g.addE("link").from(union).to(information).iterate();
+		g.addE("link").from(union).to(economy).iterate();
+		g.addE("link").from(industry).to(national).iterate();
+		g.addE("link").from(industry).to(october).iterate();
+		g.addE("link").from(industry).to(worker).iterate();
+		g.addE("link").from(industry).to(economy).iterate();
+		g.addE("link").from(october).to(worker).iterate();
+		g.addE("link").from(october).to(science).iterate();
+		g.addE("link").from(october).to(information).iterate();
+		g.addE("link").from(science).to(global).iterate();
+		g.addE("link").from(science).to(industry).iterate();
+		g.addE("link").from(science).to(agriculture).iterate();
+		g.addE("link").from(science).to(republic).iterate();
+		g.addE("link").from(science).to(culture).iterate();
+		g.addE("link").from(republic).to(union).iterate();
+		g.addE("link").from(republic).to(industry).iterate();
+		g.addE("link").from(republic).to(culture).iterate();
+		g.addE("link").from(republic).to(economy).iterate();
+		g.addE("link").from(republic).to(finance).iterate();
+		g.addE("link").from(republic).to(district).iterate();
+		g.addE("link").from(information).to(national).iterate();
+		g.addE("link").from(information).to(worker).iterate();
+		g.addE("link").from(information).to(science).iterate();
+		g.addE("link").from(information).to(industry).iterate();
+		g.addE("link").from(information).to(agriculture).iterate();
+		g.addE("link").from(information).to(economy).iterate();
+		g.addE("link").from(information).to(finance).iterate();
+		g.addE("link").from(culture).to(national).iterate();
+		g.addE("link").from(culture).to(union).iterate();
+		g.addE("link").from(culture).to(science).iterate();
+		g.addE("link").from(national).to(republic).iterate();
+		g.addE("link").from(national).to(culture).iterate();
+		g.addE("link").from(national).to(industry).iterate();
+		g.addE("link").from(agriculture).to(industry).iterate();
+		g.addE("link").from(agriculture).to(union).iterate();
+		g.addE("link").from(agriculture).to(republic).iterate();
+		g.addE("link").from(agriculture).to(economy).iterate();
+		g.addE("link").from(agriculture).to(district).iterate();
+		g.addE("link").from(economy).to(information).iterate();
+		g.addE("link").from(economy).to(science).iterate();
+		g.addE("link").from(economy).to(global).iterate();
+		g.addE("link").from(economy).to(finance).iterate();
+		g.addE("link").from(finance).to(worker).iterate();
+		g.addE("link").from(finance).to(union).iterate();
+		g.addE("link").from(finance).to(industry).iterate();
+		g.addE("link").from(district).to(october).iterate();
+		g.addE("link").from(district).to(science).iterate();
+		g.addE("link").from(district).to(national).iterate();
+	}
+}
