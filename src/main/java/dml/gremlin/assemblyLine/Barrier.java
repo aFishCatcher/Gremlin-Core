@@ -1,6 +1,7 @@
 package dml.gremlin.assemblyLine;
 
 public class Barrier {
+	//注释
 	volatile int[] barrierBuffer;
 	public void masterSync() {
 		int n = barrierBuffer.length;
