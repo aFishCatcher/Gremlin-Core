@@ -7,9 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Task implements Runnable{
-	private static int next_id = 0;
+	private static volatile int next_id = 0;
+	
 	private final int id;
 	private final List<Worker> workers;
 	private final Barrier barrier;
@@ -30,7 +32,7 @@ public class Task implements Runnable{
 			e1.printStackTrace();
 		}
 		long cal=0, syn=0, temp_cal=0, temp_syn=0;
-		long c1=0, c2=0;
+		long c1=0, c2=0, c3=0; 
 		int stage[] = new int[Global.N_STAGE];
 		stage[0] = 1;
 		for(int stageNum=0; stageNum<Global.DATA_NUM+Global.N_STAGE-1;stageNum++) {
@@ -54,14 +56,13 @@ public class Task implements Runnable{
 			temp_cal = c2-c1;
 			cal += c2-c1;
 			
-			c1 = System.nanoTime();
 			//同步
 			my_await();
 			
-			c2 = System.nanoTime();
-			temp_syn = c2-c1;
-			syn += c2-c1;
-			out.printf("%d,%d\n",temp_cal,temp_syn );
+			c3 = System.nanoTime();
+			temp_syn = c3-c2;
+			syn += c3-c2;
+			out.printf("%10d,%10d, %d--%d--%d\n",temp_cal/1_000,temp_syn/1_000, c1, c2,c3 );
 			//out.printf("cal: %10dns syn: %10dns\n",cal, syn);
 			
 		}
@@ -71,17 +72,6 @@ public class Task implements Runnable{
 		
 	}
 	
-//	private static volatile int flag = 0; 
-//	private void my_await() {
-//		if(id == 0) {
-//			flag = 1;
-//			while(flag == 1);
-//		}
-//		else {
-//			while(flag==0);
-//			flag = 0;
-//		}
-//	}
 	
 	private void my_await() {
 		if(id==0) barrier.masterSync();
