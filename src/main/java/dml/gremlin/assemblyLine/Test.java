@@ -12,16 +12,23 @@ import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
+import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 public class Test {
 
+	private GraphTraversalSource loadGraph(String graph_name) {
+		final GraphTraversalSource g = new GraphTraversalSource(TinkerGraph.open());
+		g.io(graph_name).read().iterate();
+		return g;
+	}
+	
 	public static void main(String[] args) {
 		//创建、加载图
-		final TinkerGraph graph = TinkerGraph.open();
+		final Graph graph = TinkerGraph.open();
 		final GraphTraversalSource g = new GraphTraversalSource(graph);
 		String dataPath = "D:/Dir/data-0.1.xml";
-		//dataPath = "testdata/grateful-dead.xml";
+		dataPath = "testdata/grateful-dead.xml";
 		g.io(dataPath).read().iterate();
 		
 		Traversal t = g.V().hasLabel("person").out("knows").out("created");
@@ -30,7 +37,7 @@ public class Test {
 				.identity().identity().identity().identity()
 				.identity().identity().identity().identity()
 				.identity().identity().identity().identity();
-		t = g.V().identity();
+		//t = g.V().identity();
 		//t=g.V().hasLabel("person").out("knows").out("workAt");
 //		t=g.V().property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
 //				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)

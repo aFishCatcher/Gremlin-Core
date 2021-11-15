@@ -12,7 +12,12 @@ public class Barrier {
 		barrierBuffer = new boolean[len];
 	}
 	
-	public void masterSync() {
+	public void my_await(int tid) {
+		if(tid==0) masterSync();
+		else workerSync(tid);
+	}
+	
+	private void masterSync() {
 		if(len<1) return;
 		boolean result = true;
 		do {
@@ -26,7 +31,7 @@ public class Barrier {
 			barrierBuffer[i] = false;
 	}
 	
-	public void workerSync(int tid) {
+	private void workerSync(int tid) {
 		int index = tid - 1;
 		barrierBuffer[index] = true;
 		while(barrierBuffer[index]);
