@@ -37,35 +37,35 @@ public class Worker {
 		return this.stageNum;
 	}
 	
-	public void work() {
-		computer.compute(up, down);
-	}
-	
-//	public void work(){
-//		int output_count = 0;
-//		if(isSource) {
-//			List<Traverser> list = computer.compute(null);
-//			if(list!=null&&!list.isEmpty()) {
-//				output_count += list.size();
-//				for(Traverser t : list) {
-//					down.putData(t);
-//				}
-//			}
-//			down.putNum(output_count);
-//		}
-//		else {
-//			int rec_count = up.takeNum();
-//			for(int i=0; i<rec_count; i++) {
-//				Traverser traverser = up.takeData();
-//				List<Traverser> list = computer.compute(traverser);
-//				if(list!=null&&!list.isEmpty()) {
-//					output_count += list.size();
-//					for(Traverser t : list) {
-//						down.putData(t);
-//					}
-//				}
-//			}
-//			down.putNum(output_count);
-//		}
+//	public void work() {
+//		computer.compute(up, down);
 //	}
+	
+	public void work(){
+		int output_count = 0;
+		if(isSource) {
+			List<Traverser> list = computer.compute(null);
+			if(list!=null) {
+				for(Traverser t : list) {
+					down.putData(t);
+					output_count++;
+				}
+			}
+			down.putNum(output_count);
+		}
+		else {
+			int rec_count = up.takeNum();
+			for(int i=0; i<rec_count; i++) {
+				Traverser traverser = up.takeData();
+				List<Traverser> list = computer.compute(traverser);
+				if(list!=null) {
+					for(Traverser t : list) {
+						down.putData(t);
+						output_count++;
+					}
+				}
+			}
+			down.putNum(output_count);
+		}
+	}
 }

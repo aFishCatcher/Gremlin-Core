@@ -2,7 +2,11 @@
 *****************************************************
 Summary
 -------
+<<<<<<< HEAD
 Generated at: 2021-11-15T20:08:40+08:00
+=======
+Generated at: 2021-11-15T11:33:18+08:00
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 
 Notes: 0
 Binaries: 6
@@ -21,6 +25,7 @@ Generated files do not require license headers.
 
 Files with unapproved licenses:
 
+<<<<<<< HEAD
   C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/InitGraph.java
   C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/TestaExe.java
   C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/Testc.java
@@ -64,6 +69,51 @@ Files with unapproved licenses:
   C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/stream/util/xStream.java
   C:/CSCode/git-repositories/Gremlin-Core/testdata/grateful-dead.txt
   C:/CSCode/git-repositories/Gremlin-Core/testdata/tinkerpop-classic.txt
+=======
+  D:/Code/git-repository/Gremlin-Core/src/main/java/abc/InitGraph.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/abc/TestaExe.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/abc/Testc.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/abc/TestMain.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Direction.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/afront/StreamGraph.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Test_StreamGraph.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Global.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Thread_0.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Actor.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/ArrayDequeBuffer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Barrier.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Buffer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/DequeConsumer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/DequeProducer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/LinkedListBuffer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Math.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/NumPtr.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/RunCOStream.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/xStream.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Analysis.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Barrier.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Buffer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/BufferStep.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Compute.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/GenHelpData.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Task.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Test.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Worker.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/Step.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/StepsList.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalProgress.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalSource.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalStart.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalTerminal.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalThread.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/usecase/UmPageRank.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/ArrayDequeBuffer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/Consumer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/Producer.java
+  D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/xStream.java
+  D:/Code/git-repository/Gremlin-Core/testdata/grateful-dead.txt
+  D:/Code/git-repository/Gremlin-Core/testdata/tinkerpop-classic.txt
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 
 *****************************************************
 
@@ -72,6 +122,7 @@ Files with unapproved licenses:
   Binary files (which do not require any license headers) will be marked B
   Compressed archives will be marked A
   Notices, licenses etc. will be marked N
+<<<<<<< HEAD
  !????? C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/InitGraph.java
  !????? C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/TestaExe.java
  !????? C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/Testc.java
@@ -797,13 +848,744 @@ Files with unapproved licenses:
  !????? C:/CSCode/git-repositories/Gremlin-Core/testdata/grateful-dead.txt
   AL    C:/CSCode/git-repositories/Gremlin-Core/testdata/script-input.groovy
  !????? C:/CSCode/git-repositories/Gremlin-Core/testdata/tinkerpop-classic.txt
+=======
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/abc/InitGraph.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/abc/TestaExe.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/abc/Testc.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/abc/TestMain.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Direction.java
+  B     D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Edge.java
+  B     D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Node.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/afront/StreamGraph.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Test_StreamGraph.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Global.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Thread_0.java
+  B     D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Thread_1.java
+  B     D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Thread_2.java
+  B     D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Thread_3.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Actor.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/ArrayDequeBuffer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Barrier.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Buffer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/DequeConsumer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/DequeProducer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/GetOpt.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/LinkedListBuffer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Math.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/NumPtr.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/RunCOStream.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/xStream.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Analysis.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Barrier.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Buffer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/BufferStep.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Compute.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/GenHelpData.java
+  B     D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Global.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Task.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Test.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Worker.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/Step.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/StepsList.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalProgress.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalSource.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalStart.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalTerminal.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalThread.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/usecase/UmPageRank.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/ArrayDequeBuffer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/Consumer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/Producer.java
+ !????? D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/xStream.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/AbstractGremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/AbstractGremlinScriptEngineFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/BindingsCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/BindingsGremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/CachedGremlinScriptEngineManager.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/ConcurrentBindings.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/console/ConsoleCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/console/GremlinShellEnvironment.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/console/RemoteAcceptor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/console/RemoteException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/CoreGremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/CoreImports.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/Customizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/DefaultBindingsCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/DefaultGremlinScriptEngineManager.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/DefaultImportCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/DefaultScriptCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/GremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/GremlinScriptContext.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/GremlinScriptEngine.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/GremlinScriptEngineFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/GremlinScriptEngineManager.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/ImportCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/ImportGremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/JavaTranslator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/LazyBindingsCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/ScriptCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/ScriptEngineCache.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/ScriptFileGremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/SingleGremlinScriptEngineManager.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/jsr223/TranslatorCustomizer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/bulkdumping/BulkDumperVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/bulkloading/BulkLoader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/bulkloading/BulkLoaderVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/bulkloading/IncrementalBulkLoader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/bulkloading/OneTimeBulkLoader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/clone/CloneVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/clustering/connected/ConnectedComponentVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/clustering/peerpressure/ClusterCountMapReduce.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/clustering/peerpressure/ClusterPopulationMapReduce.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/clustering/peerpressure/PeerPressureVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/Computer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/ComputerResult.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/GraphComputer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/GraphFilter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/KeyValue.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/MapReduce.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/Memory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/MemoryComputeKey.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/MessageCombiner.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/MessageScope.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/Messenger.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/ProgramPhase.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/ranking/pagerank/PageRankMapReduce.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/ranking/pagerank/PageRankMessageCombiner.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/ranking/pagerank/PageRankVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/search/path/ShortestPathVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/lambda/HaltedTraversersCountTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/MasterExecutor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/MemoryTraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/ComputerResultStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/ConnectedComponent.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/ConnectedComponentVertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/PageRank.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/PageRankVertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/PeerPressure.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/PeerPressureVertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/ProgramVertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/ShortestPath.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/ShortestPathVertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/TraversalVertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/map/VertexProgramStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/step/VertexComputing.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/strategy/decoration/VertexProgramStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/strategy/finalization/ComputerFinalizationStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/strategy/optimization/GraphFilterStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/strategy/optimization/MessagePassingReductionStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/strategy/VertexProgramInterceptor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/TraversalVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/TraversalVertexProgramMessageCombiner.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/traversal/WorkerExecutor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/AbstractVertexProgramBuilder.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/ComputerGraph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/DefaultComputerResult.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/EmptyMemory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/GraphComputerHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/ImmutableMemory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/MapMemory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/MapReducePool.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/MemoryHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/SingleMessenger.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/StaticMapReduce.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/StaticVertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/VertexProgramHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/util/VertexProgramPool.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/VertexComputeKey.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/computer/VertexProgram.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/EmbeddedRemoteConnection.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/RemoteConnection.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/RemoteConnectionException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/AbstractRemoteTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/AbstractRemoteTraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/AbstractRemoteTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/DefaultRemoteTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/EmbeddedRemoteTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/EmbeddedRemoteTraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/RemoteTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/RemoteTraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/RemoteTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/step/map/RemoteStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/remote/traversal/strategy/decoration/RemoteStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/AnonymousTraversalSource.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Bindings.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Bytecode.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Compare.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Contains.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/graph/DefaultGraphTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/graph/GraphTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/graph/GraphTraversalSource.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/graph/__.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/GremlinDsl.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/GremlinDslProcessor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/dsl/ProcessorException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/IO.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/AbstractLambdaTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/ColumnTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/ConstantTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/ElementValueTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/FunctionTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/IdentityTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/LoopTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/PredicateTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/PredicateTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/TokenTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/lambda/TrueTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Operator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Order.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/P.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Path.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Pop.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/SackFunctions.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Scope.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Barrier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/branch/BranchStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/branch/ChooseStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/branch/LocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/branch/OptionalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/branch/RepeatStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/branch/UnionStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/ByModulating.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Bypassing.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/ComparatorHolder.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Configuring.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/AndStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/ClassFilterStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/CoinStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/ConnectiveStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/DedupGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/DropStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/FilterStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/HasStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/IsStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/LambdaFilterStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/NoneStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/NotStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/OrStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/PathFilterStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/RangeGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/SampleGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/TailGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/TimeLimitStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/TraversalFilterStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/WherePredicateStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/filter/WhereTraversalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/FromToModulating.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Generating.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/GraphComputing.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/HasContainerHolder.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/LambdaHolder.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/LocalBarrier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/AddEdgeStartStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/AddEdgeStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/AddVertexStartStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/AddVertexStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/CoalesceStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/ConstantStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/CountGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/CountLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/DedupLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/EdgeOtherVertexStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/EdgeVertexStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/ElementMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/FlatMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/FoldStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/GraphStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/GroupCountStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/GroupStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/HasNextStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/IdStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/IndexStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/LabelStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/LambdaCollectingBarrierStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/LambdaFlatMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/LambdaMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/LoopsStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MatchStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MathStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MaxGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MaxLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MeanGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MeanLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MinGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/MinLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/NoOpBarrierStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/OrderGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/OrderLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/PathStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/ProjectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/PropertiesStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/PropertyKeyStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/PropertyMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/PropertyValueStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/RangeLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/SackStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/SampleLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/SelectOneStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/SelectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/SumGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/SumLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/TailLocalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/TraversalFlatMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/TraversalMapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/TraversalSelectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/TreeStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/UnfoldStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/map/VertexStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/MapReducer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/MemoryComputing.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Mutating.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Parameterizing.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/PathProcessor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Profiling.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/ProfilingAware.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Ranging.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/ReadWriting.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/Scoping.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/AddPropertyStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/AggregateStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/GroupCountSideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/GroupSideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/IdentityStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/InjectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/IoStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/LambdaSideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/ProfileSideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/SackValueStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/SideEffectCapStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/SideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/StartStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/StoreStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/SubgraphStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/TraversalSideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/sideEffect/TreeSideEffectStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/SideEffectCapable.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/TimesModulating.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/TraversalOptionParent.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/TraversalParent.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/AbstractStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/BulkSet.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/CollectingBarrierStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ComputerAwareStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ElementFunctionComparator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ElementValueComparator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/EmptyPath.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/EmptyStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/event/CallbackRegistry.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/event/ConsoleMutationListener.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/event/Event.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/event/EventCallback.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/event/ListCallbackRegistry.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/event/MutationListener.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ExpandableStepIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/FunctionComparator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/HasContainer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ImmutablePath.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/MapHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/MutablePath.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/Parameters.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ProfileStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/ReducingBarrierStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/RequirementsStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/SupplyingBarrierStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/Tree.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/step/util/WithOptions.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Step.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/AbstractTraversalStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/ConnectiveStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/ElementIdStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/EventStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/HaltedTraverserStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/OptionsStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/PartitionStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/RequirementsStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/SackStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/SideEffectStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/decoration/SubgraphStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/finalization/MatchAlgorithmStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/finalization/ProfileStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/finalization/ReferenceElementStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/AdjacentToIncidentStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/CountStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/EarlyLimitStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/FilterRankingStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/IdentityRemovalStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/IncidentToAdjacentStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/InlineFilterStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/LazyBarrierStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/MatchPredicateStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/OrderLimitStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/PathProcessorStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/PathRetractionStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/optimization/RepeatUnrollStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/TraversalStrategyProxy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/AbstractWarningVerificationStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/ComputerVerificationStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/EdgeLabelVerificationStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/LambdaRestrictionStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/ReadOnlyStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/ReservedKeysVerificationStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/StandardVerificationStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/strategy/verification/VerificationException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Text.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/TextP.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/translator/GroovyTranslator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/translator/PythonTranslator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Translator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Traversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/TraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/TraversalSource.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/TraversalStrategies.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/TraversalStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_NL_O_P_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_NL_O_P_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_NL_O_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_NL_O_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_O_P_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_O_P_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_O_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_LP_O_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_NL_O_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_NL_O_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_O_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_O_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_O_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/B_O_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_NL_O_OB_P_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_NL_O_OB_P_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_NL_O_OB_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_NL_O_OB_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_O_OB_P_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_O_OB_P_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_O_OB_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/LP_O_OB_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/NL_O_OB_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/NL_O_OB_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/O_OB_S_SE_SL_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/O_OB_S_SE_SL_TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/O_Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/ProjectedTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/TraverserGeneratorFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/TraverserRequirement.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/util/AbstractTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/util/DefaultTraverserGeneratorFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/util/EmptyTraverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/util/IndexedTraverserSet.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/util/LabelledCounter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/traverser/util/TraverserSet.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/Traverser.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/TraverserGenerator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/AbstractExplanation.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/AndP.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/BytecodeHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/BytecodeUtil.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/ConnectiveP.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/DefaultTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/DefaultTraversalMetrics.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/DefaultTraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/DefaultTraversalStrategies.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/EmptyTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/EmptyTraversalSideEffects.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/EmptyTraversalStrategies.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/FastNoSuchElementException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/ImmutableExplanation.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/ImmutableMetrics.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/Metrics.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/MutableMetrics.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/OrP.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/PathUtil.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/PureTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/ScriptTraversal.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/SideEffectHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/StepPosition.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalClassFunction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalExplanation.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalInterruptedException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalMatrix.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalMetrics.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalObjectFunction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalRing.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalSourceFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/process/traversal/util/TraversalUtil.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Column.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Direction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Edge.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Element.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Graph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/AbstractIoRegistry.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/DataType.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/GraphBinaryIo.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/GraphBinaryReader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/GraphBinaryWriter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/BigDecimalSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/BigIntegerSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/BindingSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/BulkSetSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/ByteBufferSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/ByteCodeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/CharSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/ClassSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/CollectionSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/CustomTypeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/DateSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/DurationSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/EdgeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/EnumSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/GraphSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/InetAddressSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/InstantSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/LambdaSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/ListSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/LocalDateSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/LocalDateTimeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/LocalTimeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/MapEntrySerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/MapSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/MetricsSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/MonthDaySerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/OffsetDateTimeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/OffsetTimeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/PathSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/PeriodSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/PropertySerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/PSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/SetSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/SimpleTypeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/SingleTypeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/StringSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/TransformSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/TraversalExplanationSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/TraversalMetricsSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/TraversalStrategySerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/TraverserSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/TreeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/UUIDSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/VertexPropertySerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/VertexSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/YearMonthSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/ZonedDateTimeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/types/ZoneOffsetSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/TypeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/binary/TypeSerializerRegistry.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/Buffer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/BufferFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/GraphMigrator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphml/GraphMLIo.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphml/GraphMLMapper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphml/GraphMLReader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphml/GraphMLTokens.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphml/GraphMLWriter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphml/GraphMLWriterHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/GraphReader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/AbstractGraphSONTypeSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/AbstractObjectDeserializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONIo.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONMapper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONModule.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONReader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONSerializerProvider.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONSerializersV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONSerializersV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONSerializersV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONTokens.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONTypeDeserializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONTypeIdResolver.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONTypeResolverBuilder.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONTypeSerializerV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONTypeSerializerV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONUtil.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONVersion.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONWriter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONXModuleV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/GraphSONXModuleV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JavaTimeSerializersV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JavaTimeSerializersV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JavaTimeSerializersV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JavaUtilSerializersV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JavaUtilSerializersV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JavaUtilSerializersV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/JsonParserConcat.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/LegacyGraphSONReader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/TinkerPopJacksonModule.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/ToStringGraphSONSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/TraversalSerializersV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/TraversalSerializersV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/graphson/TypeInfo.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/GraphWriter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/AbstractGryoClassResolver.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoClassResolverV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoClassResolverV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoIo.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoMapper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoPool.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoReader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoSerializersV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoSerializersV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoTypeReg.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoVersion.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/GryoWriter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/JavaTimeSerializers.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/InputShim.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/KryoShim.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/KryoShimService.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/KryoShimServiceLoader.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/OutputShim.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/package-info.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/SerializerShim.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/shaded/package-info.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/shaded/ShadedInputAdapter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/shaded/ShadedKryoAdapter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/shaded/ShadedOutputAdapter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/kryoshim/shaded/ShadedSerializerAdapter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/TypeRegistration.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/UtilSerializers.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/VertexByteArrayInputStream.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/gryo/VertexTerminator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/Io.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/IoCore.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/IoRegistry.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/Mapper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/Storage.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/io/util/IoRegistryHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Property.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/PropertyType.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/T.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Transaction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/AbstractThreadedTransaction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/AbstractThreadLocalTransaction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/AbstractTransaction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/Attachable.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/CloseableIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/Comparators.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/DefaultCloseableIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedEdge.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedElement.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedPath.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedVertex.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/detached/DetachedVertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/ElementHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/empty/EmptyGraph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/empty/EmptyProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/empty/EmptyVertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/FeatureDescriptor.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/GraphFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/GraphFactoryClass.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/GraphVariableHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/Host.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/keyed/KeyedProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/keyed/KeyedVertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferenceEdge.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferenceElement.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferenceFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferencePath.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferenceProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferenceVertex.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/reference/ReferenceVertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/DirectionalStarGraph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraphGraphSONDeserializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraphGraphSONSerializerV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraphGraphSONSerializerV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraphGraphSONSerializerV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraphGryoSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/star/StarGraphSerializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/StringFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/TransactionException.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedEdge.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedElement.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedGraph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedVariables.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedVertex.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/util/wrapped/WrappedVertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/Vertex.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/structure/VertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/jsr223/TinkerGraphGremlinPlugin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerGraphComputer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerGraphComputerView.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerMapEmitter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerMemory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerMessageBoard.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerMessenger.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerReduceEmitter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerWorkerMemory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/computer/TinkerWorkerPool.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/traversal/step/map/TinkerCountGlobalStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/traversal/step/sideEffect/TinkerGraphStep.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/traversal/strategy/optimization/TinkerGraphCountStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/process/traversal/strategy/optimization/TinkerGraphStepStrategy.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerEdge.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerElement.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerFactory.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerGraph.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerGraphIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerGraphVariables.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerIndex.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerIoRegistryV1d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerIoRegistryV2d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerIoRegistryV3d0.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerVertex.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/tinkergraph/structure/TinkerVertexProperty.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/config/YamlConfiguration.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ArrayListSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/BulkSetSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ChainedComparator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ConstantSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/DefaultTraversalMetricsSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/FunctionUtils.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/HashMapSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/HashSetSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/Lambda.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/MeanNumberSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/MultiComparator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/MutableMetricsSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ScriptEngineLambda.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ThrowingBiConsumer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ThrowingConsumer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ThrowingFunction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/ThrowingSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/TraversableLambda.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/TraverserSetSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/TreeSupplier.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/TriConsumer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/function/TriFunction.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/Gremlin.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/ArrayIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/DoubleIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/EmptyIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/IteratorUtils.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/MultiIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/SingleIterator.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/iterator/StoreIteratorCounter.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/NumberHelper.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/Serializer.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/SystemUtil.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/TestSupport.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/TimeUtil.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/java/org/apache/tinkerpop/gremlin/util/tools/MultiMap.java
+  AL    D:/Code/git-repository/Gremlin-Core/src/main/resources/tp2-to-tp3-graphml.xslt
+ !????? D:/Code/git-repository/Gremlin-Core/testdata/grateful-dead.txt
+  AL    D:/Code/git-repository/Gremlin-Core/testdata/script-input.groovy
+ !????? D:/Code/git-repository/Gremlin-Core/testdata/tinkerpop-classic.txt
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
  
 *****************************************************
 
  Printing headers for text files without a valid license header...
  
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/InitGraph.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/abc/InitGraph.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package abc;
 
@@ -857,7 +1639,11 @@ public class InitGraph {
 		g.addE("link").from(science).to(global).iterate();
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/TestaExe.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/abc/TestaExe.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package abc;
 
@@ -911,7 +1697,11 @@ public class TestaExe {
 		graph = TinkerGraph.open();
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/Testc.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/abc/Testc.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package abc;
 
@@ -965,7 +1755,11 @@ public final class Testc {
 				property("value1", 80).property("value1", 90).property("value1", 100).property("value1", 110).
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/abc/TestMain.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/abc/TestMain.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package abc;
 
@@ -1012,7 +1806,11 @@ public class TestMain {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/afront/Direction.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Direction.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package afront;
 
@@ -1021,7 +1819,11 @@ public enum Direction {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/afront/StreamGraph.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/afront/StreamGraph.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package afront;
 
@@ -1075,7 +1877,11 @@ public class StreamGraph {
 			case "OrStep":
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/afront/Test_StreamGraph.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/afront/Test_StreamGraph.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package afront;
 
@@ -1109,7 +1915,11 @@ public class Test_StreamGraph {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/cde/Global.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Global.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package cde;
 
@@ -1118,7 +1928,11 @@ public class Global {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/cde/Thread_0.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/cde/Thread_0.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package cde;
 
@@ -1172,7 +1986,11 @@ public class Thread_0 extends Thread {
 //				System.out.println("Thread0 stageNum: " + stageNum);
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/Actor.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Actor.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1195,7 +2013,11 @@ public abstract class Actor {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/ArrayDequeBuffer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/ArrayDequeBuffer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1237,7 +2059,11 @@ public class ArrayDequeBuffer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/Barrier.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Barrier.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1267,7 +2093,11 @@ public class Barrier {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/Buffer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Buffer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1291,7 +2121,11 @@ public class Buffer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/DequeConsumer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/DequeConsumer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1334,7 +2168,11 @@ public class DequeConsumer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/DequeProducer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/DequeProducer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1368,7 +2206,11 @@ public class DequeProducer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/LinkedListBuffer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/LinkedListBuffer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1410,7 +2252,11 @@ public class LinkedListBuffer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/Math.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/Math.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1464,7 +2310,11 @@ public final class Math {
 		return java.lang.Math.exp(x);
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/NumPtr.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/NumPtr.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1501,7 +2351,11 @@ public class NumPtr {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/RunCOStream.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/RunCOStream.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1516,7 +2370,11 @@ public abstract class RunCOStream {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/costream/lib/xStream.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/costream/lib/xStream.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.costream.lib;
 
@@ -1528,7 +2386,11 @@ public interface xStream {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Analysis.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Analysis.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1582,12 +2444,19 @@ class Process{
 			System.out.println("-----"+data);
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Barrier.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Barrier.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
 public class Barrier {
+<<<<<<< HEAD
 	//娉ㄩ噴
+=======
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 	volatile int[] barrierBuffer;
 	public void masterSync() {
 		int n = barrierBuffer.length;
@@ -1614,7 +2483,11 @@ public class Barrier {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Buffer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Buffer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1662,7 +2535,11 @@ public class Buffer<T> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/BufferStep.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/BufferStep.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1688,7 +2565,11 @@ public class BufferStep<S> extends AbstractStep<S,S> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Compute.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Compute.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1704,7 +2585,11 @@ public interface Compute<S,E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/GenHelpData.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/GenHelpData.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1758,7 +2643,11 @@ public class GenHelpData {
 //		for(int i=1; i<=N; i++) {
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Task.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Task.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1812,7 +2701,11 @@ public class Task implements Runnable{
 			if(stageNum==(Global.DATA_NUM-1))
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Test.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Test.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1866,7 +2759,11 @@ public class Test {
 				out.println(it.next());
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Worker.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/assemblyLine/Worker.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.assemblyLine;
 
@@ -1920,7 +2817,11 @@ public class Worker {
 //				for(Traverser t : list) {
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/Step.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/Step.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -1974,7 +2875,11 @@ public class Step implements Serializable {
         private StepName() {
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/StepsList.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/StepsList.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -1997,7 +2902,11 @@ public class StepsList {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalProgress.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalProgress.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -2051,7 +2960,11 @@ public class TraversalProgress {
 	
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalSource.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalSource.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -2102,7 +3015,11 @@ public class TraversalSource {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalStart.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalStart.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -2156,7 +3073,11 @@ public class TraversalStart {
 		}
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalTerminal.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalTerminal.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -2184,7 +3105,11 @@ public class TraversalTerminal {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalThread.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/general/TraversalThread.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.general;
 
@@ -2238,7 +3163,11 @@ public class TraversalThread extends Thread {
 			e.printStackTrace();
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/gremlin/usecase/UmPageRank.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/gremlin/usecase/UmPageRank.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.gremlin.usecase;
 
@@ -2291,7 +3220,11 @@ public class UmPageRank {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/stream/util/ArrayDequeBuffer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/ArrayDequeBuffer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.stream.util;
 
@@ -2345,7 +3278,11 @@ public class ArrayDequeBuffer<E> implements Consumer<E>, Producer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/stream/util/Consumer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/Consumer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.stream.util;
 
@@ -2362,7 +3299,11 @@ public interface Consumer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/stream/util/Producer.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/Producer.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.stream.util;
 
@@ -2375,7 +3316,11 @@ public interface Producer<E> {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/src/main/java/dml/stream/util/xStream.java
+=======
+== File: D:/Code/git-repository/Gremlin-Core/src/main/java/dml/stream/util/xStream.java
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 package dml.stream.util;
 
@@ -2401,7 +3346,11 @@ public interface xStream {
 }
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/testdata/grateful-dead.txt
+=======
+== File: D:/Code/git-repository/Gremlin-Core/testdata/grateful-dead.txt
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 1,song,HEY BO DIDDLEY,cover,5	followedBy,2,1|followedBy,3,2|followedBy,4,1|followedBy,5,1|followedBy,6,1|sungBy,340|writtenBy,527	followedBy,3,2|followedBy,5,2|followedBy,62,1|followedBy,153,1
 2,song,IM A MAN,cover,1	followedBy,50,1|followedBy,123,1|sungBy,525|writtenBy,525	followedBy,1,1|followedBy,34,1
@@ -2455,7 +3404,11 @@ public interface xStream {
 631,song,THE LAST TIME,cover,70	sungBy,507|writtenBy,632	
 
 =====================================================
+<<<<<<< HEAD
 == File: C:/CSCode/git-repositories/Gremlin-Core/testdata/tinkerpop-classic.txt
+=======
+== File: D:/Code/git-repository/Gremlin-Core/testdata/tinkerpop-classic.txt
+>>>>>>> dfffe92797d9a990cec589aa2a36ee85d53785e0
 =====================================================
 1:person:marko:29 knows:2:0.5,knows:4:1.0,created:3:0.4
 2:person:vadas:27

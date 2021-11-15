@@ -32,12 +32,12 @@ public class Test {
 				.identity().identity().identity().identity();
 		t = g.V().identity();
 		//t=g.V().hasLabel("person").out("knows").out("workAt");
-		t=g.V().property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
-				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
-				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
-				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
-				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
-				;
+//		t=g.V().property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
+//				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
+//				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
+//				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
+//				.property("value0", 0).property("value0", 0).property("value0", 0).property("value0", 0)
+//				;
 		try {
 			PrintWriter out = new PrintWriter("STAND_output.txt");
 			Traversal copy_t = t.asAdmin().clone();
@@ -110,12 +110,6 @@ public class Test {
 			
 		}
 		
-		try {
-			Analysis.analysis();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
