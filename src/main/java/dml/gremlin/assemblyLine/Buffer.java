@@ -1,6 +1,7 @@
 package dml.gremlin.assemblyLine;
 
 import java.util.ArrayDeque;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
@@ -40,5 +41,9 @@ public class Buffer<T> {
 	
 	public boolean isEmpty() {
 		return data.isEmpty();
+	}
+	
+	public Iterator<T> iterator() {
+		return data.iterator();
 	}
 }
