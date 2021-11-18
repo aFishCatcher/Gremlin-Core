@@ -1,2 +1,9 @@
-#数据
+target/
+/testdata
 *.txt
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
