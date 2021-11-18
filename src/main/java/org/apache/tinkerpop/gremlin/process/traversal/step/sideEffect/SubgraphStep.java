@@ -33,9 +33,6 @@ import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
 import org.apache.tinkerpop.gremlin.structure.util.GraphFactory;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -153,28 +150,4 @@ public final class SubgraphStep extends SideEffectStep<Edge> implements SideEffe
         final Edge subGraphEdge = subGraphOutVertex.addEdge(edge.label(), subGraphInVertex, T.id, edge.id());
         edge.properties().forEachRemaining(property -> subGraphEdge.property(property.key(), property.value()));
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

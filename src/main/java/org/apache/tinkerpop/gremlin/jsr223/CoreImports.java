@@ -19,28 +19,22 @@
 
 package org.apache.tinkerpop.gremlin.jsr223;
 
-import org.apache.commons.configuration.BaseConfiguration;
-import org.apache.commons.configuration.CombinedConfiguration;
-import org.apache.commons.configuration.CompositeConfiguration;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationBuilder;
-import org.apache.commons.configuration.ConfigurationUtils;
-import org.apache.commons.configuration.FileConfiguration;
-import org.apache.commons.configuration.HierarchicalConfiguration;
-import org.apache.commons.configuration.MapConfiguration;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.configuration.SubsetConfiguration;
-import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.configuration2.BaseConfiguration;
+import org.apache.commons.configuration2.CombinedConfiguration;
+import org.apache.commons.configuration2.CompositeConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.ConfigurationUtils;
+import org.apache.commons.configuration2.HierarchicalConfiguration;
+import org.apache.commons.configuration2.MapConfiguration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.SubsetConfiguration;
+import org.apache.commons.configuration2.XMLConfiguration;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.tinkerpop.gremlin.process.computer.Computer;
 import org.apache.tinkerpop.gremlin.process.computer.ComputerResult;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.computer.Memory;
 import org.apache.tinkerpop.gremlin.process.computer.VertexProgram;
-import org.apache.tinkerpop.gremlin.process.computer.bulkdumping.BulkDumperVertexProgram;
-import org.apache.tinkerpop.gremlin.process.computer.bulkloading.BulkLoader;
-import org.apache.tinkerpop.gremlin.process.computer.bulkloading.BulkLoaderVertexProgram;
-import org.apache.tinkerpop.gremlin.process.computer.bulkloading.IncrementalBulkLoader;
-import org.apache.tinkerpop.gremlin.process.computer.bulkloading.OneTimeBulkLoader;
 import org.apache.tinkerpop.gremlin.process.computer.clone.CloneVertexProgram;
 import org.apache.tinkerpop.gremlin.process.computer.clustering.connected.ConnectedComponentVertexProgram;
 import org.apache.tinkerpop.gremlin.process.computer.clustering.peerpressure.ClusterCountMapReduce;
@@ -57,6 +51,7 @@ import org.apache.tinkerpop.gremlin.process.computer.traversal.step.map.PeerPres
 import org.apache.tinkerpop.gremlin.process.computer.traversal.step.map.ShortestPath;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.decoration.VertexProgramStrategy;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.optimization.GraphFilterStrategy;
+import org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.verification.VertexProgramRestrictionStrategy;
 import org.apache.tinkerpop.gremlin.process.remote.RemoteConnection;
 import org.apache.tinkerpop.gremlin.process.traversal.Bindings;
 import org.apache.tinkerpop.gremlin.process.traversal.IO;
@@ -85,6 +80,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.Subgra
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.MatchAlgorithmStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.ProfileStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.AdjacentToIncidentStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.ByModulatorOptimizationStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.EarlyLimitStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.FilterRankingStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.IdentityRemovalStrategy;
@@ -234,14 +230,13 @@ public final class CoreImports {
         CLASS_IMPORTS.add(CombinedConfiguration.class);
         CLASS_IMPORTS.add(CompositeConfiguration.class);
         CLASS_IMPORTS.add(Configuration.class);
-        CLASS_IMPORTS.add(ConfigurationBuilder.class);
         CLASS_IMPORTS.add(ConfigurationUtils.class);
-        CLASS_IMPORTS.add(FileConfiguration.class);
         CLASS_IMPORTS.add(HierarchicalConfiguration.class);
         CLASS_IMPORTS.add(MapConfiguration.class);
         CLASS_IMPORTS.add(PropertiesConfiguration.class);
         CLASS_IMPORTS.add(SubsetConfiguration.class);
         CLASS_IMPORTS.add(XMLConfiguration.class);
+        CLASS_IMPORTS.add(Configurations.class);
         // strategies
         CLASS_IMPORTS.add(ConnectiveStrategy.class);
         CLASS_IMPORTS.add(ElementIdStrategy.class);
@@ -253,6 +248,8 @@ public final class CoreImports {
         CLASS_IMPORTS.add(MatchAlgorithmStrategy.class);
         CLASS_IMPORTS.add(ProfileStrategy.class);
         CLASS_IMPORTS.add(AdjacentToIncidentStrategy.class);
+        CLASS_IMPORTS.add(ByModulatorOptimizationStrategy.class);
+        CLASS_IMPORTS.add(CountStrategy.class);
         CLASS_IMPORTS.add(FilterRankingStrategy.class);
         CLASS_IMPORTS.add(IdentityRemovalStrategy.class);
         CLASS_IMPORTS.add(IncidentToAdjacentStrategy.class);
@@ -260,13 +257,13 @@ public final class CoreImports {
         CLASS_IMPORTS.add(EarlyLimitStrategy.class);
         CLASS_IMPORTS.add(OrderLimitStrategy.class);
         CLASS_IMPORTS.add(PathProcessorStrategy.class);
-        CLASS_IMPORTS.add(CountStrategy.class);
         CLASS_IMPORTS.add(ComputerVerificationStrategy.class);
         CLASS_IMPORTS.add(LambdaRestrictionStrategy.class);
         CLASS_IMPORTS.add(ReadOnlyStrategy.class);
         CLASS_IMPORTS.add(ReferenceElementStrategy.class);
         CLASS_IMPORTS.add(StandardVerificationStrategy.class);
         CLASS_IMPORTS.add(EdgeLabelVerificationStrategy.class);
+        CLASS_IMPORTS.add(VertexProgramRestrictionStrategy.class);
         // graph traversal
         CLASS_IMPORTS.add(AnonymousTraversalSource.class);
         CLASS_IMPORTS.add(__.class);
@@ -285,11 +282,6 @@ public final class CoreImports {
         CLASS_IMPORTS.add(Memory.class);
         CLASS_IMPORTS.add(VertexProgram.class);
         CLASS_IMPORTS.add(CloneVertexProgram.class);
-        CLASS_IMPORTS.add(BulkDumperVertexProgram.class);
-        CLASS_IMPORTS.add(BulkLoader.class);
-        CLASS_IMPORTS.add(BulkLoaderVertexProgram.class);
-        CLASS_IMPORTS.add(IncrementalBulkLoader.class);
-        CLASS_IMPORTS.add(OneTimeBulkLoader.class);
         CLASS_IMPORTS.add(ClusterCountMapReduce.class);
         CLASS_IMPORTS.add(ClusterPopulationMapReduce.class);
         CLASS_IMPORTS.add(MemoryTraversalSideEffects.class);

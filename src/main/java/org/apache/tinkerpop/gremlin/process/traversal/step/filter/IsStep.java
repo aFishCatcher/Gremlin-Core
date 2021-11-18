@@ -24,9 +24,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -74,29 +71,5 @@ public final class IsStep<S> extends FilterStep<S> {
     public Set<TraverserRequirement> getRequirements() {
         return EnumSet.of(TraverserRequirement.OBJECT);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

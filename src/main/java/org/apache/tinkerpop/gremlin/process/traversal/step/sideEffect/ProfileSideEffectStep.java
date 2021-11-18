@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalMetri
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.util.function.DefaultTraversalMetricsSupplier;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.function.Supplier;
 
 /**
@@ -95,28 +92,4 @@ public final class ProfileSideEffectStep<S> extends SideEffectStep<S> implements
     public void onGraphComputer() {
         onGraphComputer = true;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

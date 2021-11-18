@@ -18,7 +18,7 @@
  */
 package org.apache.tinkerpop.gremlin.process.computer.clustering.peerpressure;
 
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.computer.Memory;
 import org.apache.tinkerpop.gremlin.process.computer.MemoryComputeKey;
@@ -243,23 +243,6 @@ public class PeerPressureVertexProgram extends StaticVertexProgram<Pair<Serializ
             PureTraversal.storeState(this.configuration, INITIAL_VOTE_STRENGTH_TRAVERSAL, initialVoteStrengthTraversal);
             return this;
         }
-
-        /**
-         * @deprecated As of release 3.2.0, replaced by {@link PeerPressureVertexProgram.Builder#edges(Traversal.Admin)}
-         */
-        @Deprecated
-        public Builder traversal(final TraversalSource traversalSource, final String scriptEngine, final String traversalScript, final Object... bindings) {
-            return this.edges(new ScriptTraversal<>(traversalSource, scriptEngine, traversalScript, bindings));
-        }
-
-        /**
-         * @deprecated As of release 3.2.0, replaced by {@link PeerPressureVertexProgram.Builder#edges(Traversal.Admin)}
-         */
-        @Deprecated
-        public Builder traversal(final Traversal.Admin<Vertex, Edge> edgeTraversal) {
-            return this.edges(edgeTraversal);
-        }
-
     }
 
     ////////////////////////////

@@ -21,14 +21,11 @@ package org.apache.tinkerpop.gremlin.process.traversal.step.util;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
+import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.EmptyTraverser;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.TraverserSet;
 import org.apache.tinkerpop.gremlin.process.traversal.util.EmptyTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalInterruptedException;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
-import org.apache.tinkerpop.gremlin.util.function.TraverserSetSupplier;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -40,14 +37,13 @@ import java.util.Set;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-
 public abstract class AbstractStep<S, E> implements Step<S, E> {
 
     protected Set<String> labels = new LinkedHashSet<>();
     protected String id = Traverser.Admin.HALT;
     protected Traversal.Admin traversal;
     protected ExpandableStepIterator<S> starts;
-    protected Traverser.Admin<E> nextEnd = null;
+    protected Traverser.Admin<E> nextEnd = EmptyTraverser.instance();
     protected boolean traverserStepIdAndLabelsSetByChild = false;
 
     protected Step<?, S> previousStep = EmptyStep.instance();
@@ -87,7 +83,7 @@ public abstract class AbstractStep<S, E> implements Step<S, E> {
     @Override
     public void reset() {
         this.starts.clear();
-        this.nextEnd = null;
+        this.nextEnd = EmptyTraverser.instance();
     }
 
     @Override
@@ -98,6 +94,11 @@ public abstract class AbstractStep<S, E> implements Step<S, E> {
     @Override
     public void addStart(final Traverser.Admin<S> start) {
         this.starts.add(start);
+    }
+
+    @Override
+    public boolean hasStarts() {
+        return this.starts.hasNext();
     }
 
     @Override
@@ -120,48 +121,19 @@ public abstract class AbstractStep<S, E> implements Step<S, E> {
         return this.nextStep;
     }
 
-    /**
-         * 缁忓父浼氳皟鐢� {@link AbstractStep#prepareTraversalForNextStep(org.apache.tinkerpop.gremlin.process.traversal.Traverser.Admin)}
-     */
     @Override
     public Traverser.Admin<E> next() {
-        if (null != this.nextEnd) {
+        if (EmptyTraverser.instance() != this.nextEnd) {
             try {
                 return this.prepareTraversalForNextStep(this.nextEnd);
             } finally {
-                this.nextEnd = null;
+                this.nextEnd = EmptyTraverser.instance();
             }
         } else {
             while (true) {
                 if (Thread.interrupted()) throw new TraversalInterruptedException();
                 final Traverser.Admin<E> traverser = this.processNextStart();
-                if (null != traverser.get() && 0 != traverser.bulk())
-                    return this.prepareTraversalForNextStep(traverser);
-            }
-        }
-    }
-    
-    // 閲嶅啓 next() -- 灏藉彲鑳戒笉杩唬
-    public Traverser.Admin<E> next0() {
-    	if (null != this.nextEnd) {
-            try {
-                if (!this.traverserStepIdAndLabelsSetByChild) {
-                  	this.nextEnd.setStepId(this.nextStep.getId());
-                    this.nextEnd.addLabels(this.labels);
-                }
-                return this.nextEnd;
-            } finally {
-                this.nextEnd = null;
-            }
-        } else {
-            while (true) {
-                if (Thread.interrupted()) throw new TraversalInterruptedException();
-                final Traverser.Admin<E> traverser = this.processNextStart();
-                //
-                boolean x1 = traverser.get() != null? true : false;
-                long v2 = traverser.bulk();
-                //
-                if (null != traverser.get() && 0 != traverser.bulk())
+                if (traverser.bulk() > 0)
                     return this.prepareTraversalForNextStep(traverser);
             }
         }
@@ -169,17 +141,17 @@ public abstract class AbstractStep<S, E> implements Step<S, E> {
 
     @Override
     public boolean hasNext() {
-        if (null != this.nextEnd)
+        if (EmptyTraverser.instance() != this.nextEnd)
             return true;
         else {
             try {
                 while (true) {
                     if (Thread.interrupted()) throw new TraversalInterruptedException();
                     this.nextEnd = this.processNextStart();
-                    if (null != this.nextEnd.get() && 0 != this.nextEnd.bulk())
+                    if (this.nextEnd.bulk() > 0)
                         return true;
                     else
-                        this.nextEnd = null;
+                        this.nextEnd = EmptyTraverser.instance();
                 }
             } catch (final NoSuchElementException e) {
                 return false;
@@ -212,7 +184,7 @@ public abstract class AbstractStep<S, E> implements Step<S, E> {
             clone.starts = new ExpandableStepIterator<>(clone, (TraverserSet<S>) traversal.getTraverserSetSupplier().get());
             clone.previousStep = EmptyStep.instance();
             clone.nextStep = EmptyStep.instance();
-            clone.nextEnd = null;
+            clone.nextEnd = EmptyTraverser.instance();
             clone.traversal = EmptyTraversal.instance();
             clone.labels = new LinkedHashSet<>(this.labels);
             clone.reset();
@@ -244,48 +216,12 @@ public abstract class AbstractStep<S, E> implements Step<S, E> {
         return traverserStepIdAndLabelsSetByChild;
     }
 
-    /**
-         *  缁忓父琚皟鐢� {@link AbstractStep#next()}
-     **/
-    protected final Traverser.Admin<E> prepareTraversalForNextStep(final Traverser.Admin<E> traverser) {
+    protected Traverser.Admin<E> prepareTraversalForNextStep(final Traverser.Admin<E> traverser) {
         if (!this.traverserStepIdAndLabelsSetByChild) {
             traverser.setStepId(this.nextStep.getId());
             traverser.addLabels(this.labels);
         }
         return traverser;
     }
-    
-    // 涓存椂澧炲姞
-    public void resetNextEnd() {
-    	this.nextEnd = null;
-    }
 
-	public Traverser.Admin<E> getNextEnd() {
-		return this.nextEnd;
-	}
-	
-	public Set<String> getLabel() {
-		return this.labels;
-	}
-	
-	public boolean getTraverserStepIdAndLabelsSetByChild() {
-		return this.traverserStepIdAndLabelsSetByChild;
-	}
-	
-	/*work*/
-	private Producer<Traverser> producer;
-	private Consumer<Traverser> consumer;
-	
-	public void setProducer(Producer<Traverser> buffer) {
-		producer = buffer;
-	}
-	public void setConsumer(Consumer<Traverser> buffer) {
-		consumer = buffer;
-	}
-	public Producer<Traverser> getMyProducer() {
-		return producer;
-	}
-	public Consumer<Traverser> getMyConsumer() {
-		return consumer;
-	}
 }

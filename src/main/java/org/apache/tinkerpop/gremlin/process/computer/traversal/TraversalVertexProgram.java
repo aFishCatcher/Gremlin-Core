@@ -18,7 +18,7 @@
  */
 package org.apache.tinkerpop.gremlin.process.computer.traversal;
 
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.process.computer.Computer;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.computer.MapReduce;
@@ -178,7 +178,7 @@ public final class TraversalVertexProgram implements VertexProgram<TraverserSet<
                                 this.traversal.get().getParent().asStep().getNextStep().getNextStep() instanceof ComputerResultStep));
 
         // determine how to store halted traversers
-        final Iterator<?> itty = IteratorUtils.filter(this.traversal.get().getStrategies().toList(), strategy -> strategy instanceof HaltedTraverserStrategy).iterator();
+        final Iterator<?> itty = IteratorUtils.filter(this.traversal.get().getStrategies(), strategy -> strategy instanceof HaltedTraverserStrategy).iterator();
         this.haltedTraverserStrategy = itty.hasNext() ? (HaltedTraverserStrategy) itty.next() : HaltedTraverserStrategy.reference();
 
         // register traversal side-effects in memory
@@ -368,7 +368,7 @@ public final class TraversalVertexProgram implements VertexProgram<TraverserSet<
     public void workerIterationEnd(final Memory memory) {
         // store profile metrics in proper ProfileStep metrics
         if (this.profile) {
-            List<ProfileStep> profileSteps = TraversalHelper.getStepsOfAssignableClassRecursively(ProfileStep.class, this.traversal.get());
+            final List<ProfileStep> profileSteps = TraversalHelper.getStepsOfAssignableClassRecursively(ProfileStep.class, this.traversal.get());
             // guess the profile step to store data
             int profileStepIndex = memory.getIteration();
             // if we guess wrongly write timing into last step

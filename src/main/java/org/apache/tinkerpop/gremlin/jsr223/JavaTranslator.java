@@ -19,8 +19,8 @@
 
 package org.apache.tinkerpop.gremlin.jsr223;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.MapConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.MapConfiguration;
 import org.apache.tinkerpop.gremlin.process.traversal.Bytecode;
 import org.apache.tinkerpop.gremlin.process.traversal.Translator;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -43,7 +43,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -199,8 +202,8 @@ public final class JavaTranslator<S extends TraversalSource, T extends Traversal
         // without this initial check iterating an invalid methodName will lead to a null pointer and a less than
         // great error message for the user. 
         if (!methodCache.containsKey(methodName)) {
-            final String methodArgs = argumentsCopy.length > 0 ? Arrays.toString(argumentsCopy) : "";
-            throw new IllegalStateException("Could not locate method: " + delegate.getClass().getSimpleName() + "." + methodName + "(" + methodArgs + ")");
+            throw new IllegalStateException(generateMethodNotFoundMessage(
+                    "Could not locate method", delegate, methodName, argumentsCopy));
         }
 
         try {
@@ -214,7 +217,7 @@ public final class JavaTranslator<S extends TraversalSource, T extends Traversal
                         for (int i = 0; i < parameters.length; i++) {
                             if (parameters[i].isVarArgs()) {
                                 final Class<?> parameterClass = parameters[i].getType().getComponentType();
-                                if (argumentsCopy.length > i && !parameterClass.isAssignableFrom(argumentsCopy[i].getClass())) {
+                                if (argumentsCopy.length > i && argumentsCopy[i] != null && !parameterClass.isAssignableFrom(argumentsCopy[i].getClass())) {
                                     found = false;
                                     break;
                                 }
@@ -226,13 +229,34 @@ public final class JavaTranslator<S extends TraversalSource, T extends Traversal
                                 newArguments[i] = varArgs;
                                 break;
                             } else {
-                                if (i < argumentsCopy.length &&
-                                        (parameters[i].getType().isAssignableFrom(argumentsCopy[i].getClass()) ||
+                                // try to detect the right method by comparing the type of the parameter to the type
+                                // of the argument. doesn't always work so well because of null arguments which don't
+                                // bring their type in bytecode and rely on position. this doesn't seem to happen often
+                                // ...luckily...because method signatures tend to be sufficiently unique and do not
+                                // encourage whacky use - like g.V().has(null, null) is clearly invalid so we don't
+                                // even need to try to sort that out. on the other hand g.V().has('name',null) which
+                                // is valid hits like four different possible overloads, but we can rely on the most
+                                // generic one which takes Object as the second parameter. that seems to work in this
+                                // case, but it's a shame this isn't nicer. seems like nicer would mean a heavy
+                                // overhaul to Gremlin or to GLVs/bytecode and/or to serialization mechanisms.
+                                //
+                                // the check where argumentsCopy[i] is null could be accompanied by a type check for
+                                // allowable signatures like:
+                                // null == argumentsCopy[i] && parameters[i].getType() == Object.class
+                                // but that doesn't seem helpful. perhaps this approach is fine as long as we ensure
+                                // consistency of null calls to all overloads. in other words addV(String) must behave
+                                // the same as addV(Traversal) if null is used as the argument. so far, that seems to
+                                // be the case. if we find that is not happening we either fix that specific
+                                // inconsistency, start special casing those method finds here, or as mentioned above
+                                // do something far more drastic that doesn't involve reflection.
+                                if (i < argumentsCopy.length && (null == argumentsCopy[i] ||
+                                        (argumentsCopy[i] != null && (
+                                        parameters[i].getType().isAssignableFrom(argumentsCopy[i].getClass()) ||
                                                 (parameters[i].getType().isPrimitive() &&
                                                         (Number.class.isAssignableFrom(argumentsCopy[i].getClass()) ||
                                                                 argumentsCopy[i].getClass().equals(Boolean.class) ||
                                                                 argumentsCopy[i].getClass().equals(Byte.class) ||
-                                                                argumentsCopy[i].getClass().equals(Character.class))))) {
+                                                                argumentsCopy[i].getClass().equals(Character.class))))))) {
                                     newArguments[i] = argumentsCopy[i];
                                 } else {
                                     found = false;
@@ -247,12 +271,26 @@ public final class JavaTranslator<S extends TraversalSource, T extends Traversal
                 }
             }
         } catch (final Throwable e) {
-            throw new IllegalStateException(e.getMessage() + ":" + methodName + "(" + Arrays.toString(argumentsCopy) + ")", e);
+            throw new IllegalStateException(generateMethodNotFoundMessage(
+                    e.getMessage(), null, methodName, argumentsCopy), e);
         }
 
         // if it got down here then the method was in the cache but it was never called as it could not be found
         // for the supplied arguments
-        throw new IllegalStateException("Could not locate method: " + delegate.getClass().getSimpleName() + "." + methodName + "(" + Arrays.toString(argumentsCopy) + ")");
+        throw new IllegalStateException(generateMethodNotFoundMessage(
+                "Could not locate method", delegate, methodName, argumentsCopy));
+    }
+
+    /**
+     * Generates the message used when a method cannot be located in the translation. Arguments are converted to
+     * classes to avoid exposing data that might be sensitive.
+     */
+    private String generateMethodNotFoundMessage(final String message, final Object delegate,
+                                                 final String methodNameNotFound, final Object[] args) {
+        final Object[] arguments = null == args ? new Object[0] : args;
+        final String delegateClassName = delegate != null ? delegate.getClass().getSimpleName() : "";
+        return message + ": " + delegateClassName + "." + methodNameNotFound + "(" +
+                Stream.of(arguments).map(Object::getClass).map(Class::getSimpleName).collect(Collectors.joining(", ")) + ")";
     }
 
     private synchronized static void buildMethodCache(final Object delegate, final Map<String, List<ReflectedMethod>> methodCache) {

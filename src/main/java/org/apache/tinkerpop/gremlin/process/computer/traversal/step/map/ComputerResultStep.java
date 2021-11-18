@@ -33,9 +33,6 @@ import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 import org.apache.tinkerpop.gremlin.util.iterator.IteratorUtils;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -92,28 +89,4 @@ public final class ComputerResultStep<S> extends AbstractStep<ComputerResult, S>
         clone.currentIterator = EmptyIterator.instance();
         return clone;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

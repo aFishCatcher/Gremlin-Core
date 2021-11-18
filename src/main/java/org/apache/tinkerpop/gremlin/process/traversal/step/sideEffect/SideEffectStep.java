@@ -25,8 +25,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
 
-import dml.gremlin.assemblyLine.Buffer;
-
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
@@ -45,34 +43,9 @@ public abstract class SideEffectStep<S> extends AbstractStep<S, S> {
         return traverser;
     }
     
-    public void work() {
-    	int size = this.getMyConsumer().getCopySize();
-    	int put_num = 0;
-    	for(int i=0; i<size; i++) {
-    		Traverser.Admin t = this.getMyConsumer().pollElement().asAdmin();
-    		this.sideEffect(t);
-    		this.getMyProducer().offerElement(t);
-    		put_num++;
-    	}
-    	this.getMyProducer().offerCopySize(put_num);
-    }
-    
     @Override
     public List<Traverser> compute(Traverser t) {
     	this.sideEffect(t.asAdmin());
     	return Arrays.asList(t);
-    }
-    
-    @Override
-    public void compute(Buffer<Traverser> up, Buffer<Traverser> down)  {
-    	int N = up.takeNum();
-    	int count = 0;
-    	for(int i=0; i<N; i++) {
-    		Traverser t = up.takeData();
-    		this.sideEffect(t.asAdmin());
-    		down.putData(t);
-    		count++;
-    	}
-    	down.putNum(count);
     }
 }

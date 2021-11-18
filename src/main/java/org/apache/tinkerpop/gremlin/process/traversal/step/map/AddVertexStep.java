@@ -33,9 +33,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +40,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Stephen Mallette (http://stephen.genoprime.com)
  */
-public class AddVertexStep<S> extends MapStep<S, Vertex>
+public class AddVertexStep<S> extends ScalarMapStep<S, Vertex>
         implements Mutating<Event.VertexAddedEvent>, TraversalParent, Scoping {
 
     private Parameters parameters = new Parameters();
@@ -51,12 +48,12 @@ public class AddVertexStep<S> extends MapStep<S, Vertex>
 
     public AddVertexStep(final Traversal.Admin traversal, final String label) {
         super(traversal);
-        this.parameters.set(this, T.label, label);
+        this.parameters.set(this, T.label, null == label ? Vertex.DEFAULT_LABEL : label);
     }
 
     public AddVertexStep(final Traversal.Admin traversal, final Traversal.Admin<S,String> vertexLabelTraversal) {
         super(traversal);
-        this.parameters.set(this, T.label, vertexLabelTraversal);
+        this.parameters.set(this, T.label, null == vertexLabelTraversal ? Vertex.DEFAULT_LABEL : vertexLabelTraversal);
     }
 
     @Override
@@ -76,7 +73,20 @@ public class AddVertexStep<S> extends MapStep<S, Vertex>
 
     @Override
     public void configure(final Object... keyValues) {
-        this.parameters.set(this, keyValues);
+        if (keyValues[0] == T.label && this.parameters.contains(T.label)) {
+            if (this.parameters.contains(T.label, Vertex.DEFAULT_LABEL)) {
+                this.parameters.remove(T.label);
+                this.parameters.set(this, keyValues);
+            } else {
+                throw new IllegalArgumentException(String.format("Vertex T.label has already been set to [%s] and cannot be overridden with [%s]",
+                        this.parameters.getRaw().get(T.label).get(0), keyValues[1]));
+            }
+        } else if (keyValues[0] == T.id && this.parameters.contains(T.id)) {
+            throw new IllegalArgumentException(String.format("Vertex T.id has already been set to [%s] and cannot be overridden with [%s]",
+                    this.parameters.getRaw().get(T.id).get(0), keyValues[1]));
+        } else {
+            this.parameters.set(this, keyValues);
+        }
     }
 
     @Override
@@ -123,28 +133,4 @@ public class AddVertexStep<S> extends MapStep<S, Vertex>
         clone.parameters = this.parameters.clone();
         return clone;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

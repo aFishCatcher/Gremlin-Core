@@ -3,6 +3,7 @@ package dml.gremlin.assemblyLine;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,8 +19,11 @@ import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 public class Test {
 
 	private static GraphTraversalSource loadGraph(String graph_name) {
+		URL url = Test.class.getClassLoader().getResource(graph_name);
+		String path = url.getPath();
+		path = "D:/data/"+graph_name;
 		final GraphTraversalSource g = new GraphTraversalSource(TinkerGraph.open());
-		g.io(graph_name).read().iterate();
+		g.io(path).read().iterate();
 		return g;
 	}
 	
@@ -60,7 +64,7 @@ public class Test {
 	}
 	
 	public static void main(String[] args) {
-		String dataPath = "testdata/grateful-dead.xml";  //all paths: D:/Dir/data-0.1.xml  ;  testdata/grateful-dead.xml  ;  testdata/tinkerpop-modern.xml
+		String dataPath = "grateful-dead.xml";  //all paths: data-0.1.xml  ;  grateful-dead.xml  ;  tinkerpop-modern.xml
 		final GraphTraversalSource g = loadGraph(dataPath);  //加载图
 		Traversal t = loadTraversal(g);  //加载traversal语句 there are many traversal statements
 		

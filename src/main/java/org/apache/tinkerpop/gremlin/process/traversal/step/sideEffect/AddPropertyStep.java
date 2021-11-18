@@ -39,12 +39,6 @@ import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.structure.util.keyed.KeyedProperty;
 import org.apache.tinkerpop.gremlin.structure.util.keyed.KeyedVertexProperty;
 
-import dml.costream.lib.LinkedListBuffer;
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-import dml.costream.lib.DequeConsumer;
-import dml.costream.lib.DequeProducer;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -88,15 +82,29 @@ public class AddPropertyStep<S extends Element> extends SideEffectStep<S>
 
     @Override
     protected void sideEffect(final Traverser.Admin<S> traverser) {
-        final String key = (String) this.parameters.get(traverser, T.key, () -> {
+        final Object k = this.parameters.get(traverser, T.key, () -> {
             throw new IllegalStateException("The AddPropertyStep does not have a provided key: " + this);
         }).get(0);
+
+        // T identifies immutable components of elements. only property keys can be modified.
+        if (k instanceof T)
+            throw new IllegalStateException(String.format("T.%s is immutable on existing elements", ((T) k).name()));
+
+        final String key = (String) k;
         final Object value = this.parameters.get(traverser, T.value, () -> {
             throw new IllegalStateException("The AddPropertyStep does not have a provided value: " + this);
         }).get(0);
         final Object[] vertexPropertyKeyValues = this.parameters.getKeyValues(traverser, T.key, T.value);
 
         final Element element = traverser.get();
+
+        // can't set cardinality if the element is something other than a vertex as only vertices can have
+        // a cardinality of properties. if we don't throw an error here we end up with a confusing cast exception
+        // which doesn't explain what went wrong
+        if (this.cardinality != null && !(element instanceof Vertex))
+            throw new IllegalStateException(String.format(
+                    "Property cardinality can only be set for a Vertex but the traversal encountered %s for key: %s",
+                    element.getClass().getSimpleName(), key));
 
         if (this.callbackRegistry != null && !callbackRegistry.getCallbacks().isEmpty()) {
             getTraversal().getStrategies().getStrategy(EventStrategy.class)
@@ -198,104 +206,5 @@ public class AddPropertyStep<S extends Element> extends SideEffectStep<S>
         final AddPropertyStep<S> clone = (AddPropertyStep<S>) super.clone();
         clone.parameters = this.parameters.clone();
         return clone;
-    }
-    
-    /////////////////
-    // ÐÞ¸ÄÇø
-    private Producer<Traverser> producer;
-    private Consumer<Traverser> consumer;
-    
-    @Override
-	public void setProducer(Producer<Traverser> producer) {
-		this.producer = producer;
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> consumer) {
-		this.consumer = consumer;
-	}
-    
-    public void init() {
-    	
-    }
-    
-    public void work() {
-    	Traverser.Admin<S> traverser = consumer.getElement().asAdmin();
-
-    	final String key = (String) this.parameters.get(traverser, T.key, () -> {
-            throw new IllegalStateException("The AddPropertyStep does not have a provided key: " + this);
-        }).get(0);
-        final Object value = this.parameters.get(traverser, T.value, () -> {
-            throw new IllegalStateException("The AddPropertyStep does not have a provided value: " + this);
-        }).get(0);
-        final Object[] vertexPropertyKeyValues = this.parameters.getKeyValues(traverser, T.key, T.value);
-        final Element element = traverser.get();
-        
-        if (this.callbackRegistry != null && !callbackRegistry.getCallbacks().isEmpty()) {
-            getTraversal().getStrategies().getStrategy(EventStrategy.class)
-                    .ifPresent(eventStrategy -> {
-                        Event.ElementPropertyChangedEvent evt = null;
-                        if (element instanceof Vertex) {
-                            final VertexProperty.Cardinality cardinality = this.cardinality != null
-                                    ? this.cardinality
-                                    : element.graph().features().vertex().getCardinality(key);
-
-                            if (cardinality == VertexProperty.Cardinality.list) {
-                                evt = new Event.VertexPropertyChangedEvent(eventStrategy.detach((Vertex) element),
-                                        new KeyedVertexProperty(key), value, vertexPropertyKeyValues);
-                            }
-                            else if (cardinality == VertexProperty.Cardinality.set) {
-                                Property currentProperty = null;
-                                final Iterator<? extends Property> properties = traverser.get().properties(key);
-                                while (properties.hasNext()) {
-                                    final Property property = properties.next();
-                                    if (Objects.equals(property.value(), value)) {
-                                        currentProperty = property;
-                                        break;
-                                    }
-                                }
-                                evt = new Event.VertexPropertyChangedEvent(eventStrategy.detach((Vertex) element),
-                                        currentProperty == null ?
-                                                new KeyedVertexProperty(key) :
-                                                eventStrategy.detach((VertexProperty) currentProperty), value, vertexPropertyKeyValues);
-                            }
-                        }
-                        if (evt == null) {
-                            final Property currentProperty = traverser.get().property(key);
-                            final boolean newProperty = element instanceof Vertex ? currentProperty == VertexProperty.empty() : currentProperty == Property.empty();
-                            if (element instanceof Vertex)
-                                evt = new Event.VertexPropertyChangedEvent(eventStrategy.detach((Vertex) element),
-                                        newProperty ?
-                                                new KeyedVertexProperty(key) :
-                                                eventStrategy.detach((VertexProperty) currentProperty), value, vertexPropertyKeyValues);
-                            else if (element instanceof Edge)
-                                evt = new Event.EdgePropertyChangedEvent(eventStrategy.detach((Edge) element),
-                                        newProperty ?
-                                                new KeyedProperty(key) :
-                                                eventStrategy.detach(currentProperty), value);
-                            else if (element instanceof VertexProperty)
-                                evt = new Event.VertexPropertyPropertyChangedEvent(eventStrategy.detach((VertexProperty) element),
-                                        newProperty ?
-                                                new KeyedProperty(key) :
-                                                eventStrategy.detach(currentProperty), value);
-                            else
-                                throw new IllegalStateException(String.format("The incoming object cannot be processed by change eventing in %s:  %s", AddPropertyStep.class.getName(), element));
-                        }
-                        final Event.ElementPropertyChangedEvent event = evt;
-                        this.callbackRegistry.getCallbacks().forEach(c -> c.accept(event));
-                    });
-        }
-
-        if (null != this.cardinality)
-            ((Vertex) element).property(this.cardinality, key, value, vertexPropertyKeyValues);
-        else if (vertexPropertyKeyValues.length > 0)
-            ((Vertex) element).property(key, value, vertexPropertyKeyValues);
-        else
-            element.property(key, value);
-        
-        producer.offerElement(traverser);
-//        producer.offerCopySize(1);
-        consumer.pollElement();
-//        consumer.pollCopySize();
     }
 }

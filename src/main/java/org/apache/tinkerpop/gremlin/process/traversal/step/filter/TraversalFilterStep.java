@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +42,10 @@ public final class TraversalFilterStep<S> extends FilterStep<S> implements Trave
     public TraversalFilterStep(final Traversal.Admin traversal, final Traversal<S, ?> filterTraversal) {
         super(traversal);
         this.filterTraversal = this.integrateChild(filterTraversal.asAdmin());
+    }
+
+    public Traversal.Admin<S, ?> getFilterTraversal() {
+        return filterTraversal;
     }
 
     @Override
@@ -94,30 +95,8 @@ public final class TraversalFilterStep<S> extends FilterStep<S> implements Trave
     public Set<TraverserRequirement> getRequirements() {
         return this.getSelfAndChildRequirements();
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	/*获取子traversal*/
+    
+    /*获取子traversal*/
 	public Traversal getSubTraversal() {
 		return this.filterTraversal;
 	}

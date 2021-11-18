@@ -23,8 +23,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.LambdaHolder;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Producer;
-
 import java.util.function.Consumer;
 
 /**
@@ -57,28 +55,4 @@ public final class LambdaSideEffectStep<S> extends SideEffectStep<S> implements 
     public int hashCode() {
         return super.hashCode() ^ this.consumer.hashCode();
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(dml.stream.util.Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -59,6 +59,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.DropStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.IsStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.LambdaFilterStep;
+import org.apache.tinkerpop.gremlin.process.traversal.step.filter.NoneStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.NotStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.OrStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.PathFilterStep;
@@ -124,7 +125,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.map.TreeStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.UnfoldStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.VertexStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.AddPropertyStep;
-import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.AggregateStep;
+import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.AggregateGlobalStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.GroupCountSideEffectStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.GroupSideEffectStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.IdentityStep;
@@ -135,12 +136,13 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.ProfileSid
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.SackValueStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.SideEffectCapStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.StartStep;
-import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.StoreStep;
+import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.AggregateLocalStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.SubgraphStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.TraversalSideEffectStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.TreeSideEffectStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.Tree;
+import org.apache.tinkerpop.gremlin.process.traversal.step.util.WithOptions;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.TraverserSet;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalHelper;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalMetrics;
@@ -154,7 +156,6 @@ import org.apache.tinkerpop.gremlin.structure.PropertyType;
 import org.apache.tinkerpop.gremlin.structure.T;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
-import org.apache.tinkerpop.gremlin.structure.util.empty.EmptyGraph;
 import org.apache.tinkerpop.gremlin.util.function.ConstantSupplier;
 
 import java.util.ArrayList;
@@ -170,6 +171,8 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import static org.apache.tinkerpop.gremlin.structure.VertexProperty.Cardinality.single;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -550,7 +553,7 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      */
     public default <E2> GraphTraversal<S, Map<String, E2>> propertyMap(final String... propertyKeys) {
         this.asAdmin().getBytecode().addStep(Symbols.propertyMap, propertyKeys);
-        return this.asAdmin().addStep(new PropertyMapStep<>(this.asAdmin(), false, PropertyType.PROPERTY, propertyKeys));
+        return this.asAdmin().addStep(new PropertyMapStep<>(this.asAdmin(), WithOptions.none, PropertyType.PROPERTY, propertyKeys));
     }
 
     /**
@@ -584,7 +587,7 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      */
     public default <E2> GraphTraversal<S, Map<Object, E2>> valueMap(final String... propertyKeys) {
         this.asAdmin().getBytecode().addStep(Symbols.valueMap, propertyKeys);
-        return this.asAdmin().addStep(new PropertyMapStep<>(this.asAdmin(), false, PropertyType.VALUE, propertyKeys));
+        return this.asAdmin().addStep(new PropertyMapStep<>(this.asAdmin(), WithOptions.none, PropertyType.VALUE, propertyKeys));
     }
 
     /**
@@ -603,7 +606,7 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
     @Deprecated
     public default <E2> GraphTraversal<S, Map<Object, E2>> valueMap(final boolean includeTokens, final String... propertyKeys) {
         this.asAdmin().getBytecode().addStep(Symbols.valueMap, includeTokens, propertyKeys);
-        return this.asAdmin().addStep(new PropertyMapStep<>(this.asAdmin(), includeTokens, PropertyType.VALUE, propertyKeys));
+        return this.asAdmin().addStep(new PropertyMapStep<>(this.asAdmin(), WithOptions.all, PropertyType.VALUE, propertyKeys));
     }
 
     /**
@@ -1046,7 +1049,7 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      */
     public default GraphTraversal<S, Vertex> addV(final Traversal<?, String> vertexLabelTraversal) {
         this.asAdmin().getBytecode().addStep(Symbols.addV, vertexLabelTraversal);
-        return this.asAdmin().addStep(new AddVertexStep<>(this.asAdmin(), vertexLabelTraversal.asAdmin()));
+        return this.asAdmin().addStep(new AddVertexStep<>(this.asAdmin(), null == vertexLabelTraversal ? null : vertexLabelTraversal.asAdmin()));
     }
 
     /**
@@ -1083,7 +1086,7 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      */
     public default GraphTraversal<S, Edge> addE(final Traversal<?, String> edgeLabelTraversal) {
         this.asAdmin().getBytecode().addStep(Symbols.addE, edgeLabelTraversal);
-        return this.asAdmin().addStep(new AddEdgeStep<>(this.asAdmin(), edgeLabelTraversal.asAdmin()));
+        return this.asAdmin().addStep(new AddEdgeStep<>(this.asAdmin(), null == edgeLabelTraversal ? null : edgeLabelTraversal.asAdmin()));
     }
 
     /**
@@ -1095,8 +1098,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * @since 3.1.0-incubating
      */
     public default GraphTraversal<S, E> to(final String toStepLabel) {
+        final Step<?,?> prev = this.asAdmin().getEndStep();
+        if (!(prev instanceof FromToModulating))
+            throw new IllegalArgumentException(String.format(
+                    "The to() step cannot follow %s", prev.getClass().getSimpleName()));
+
         this.asAdmin().getBytecode().addStep(Symbols.to, toStepLabel);
-        ((FromToModulating) this.asAdmin().getEndStep()).addTo(toStepLabel);
+        ((FromToModulating) prev).addTo(toStepLabel);
         return this;
     }
 
@@ -1109,8 +1117,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * @since 3.1.0-incubating
      */
     public default GraphTraversal<S, E> from(final String fromStepLabel) {
+        final Step<?,?> prev = this.asAdmin().getEndStep();
+        if (!(prev instanceof FromToModulating))
+            throw new IllegalArgumentException(String.format(
+                    "The from() step cannot follow %s", prev.getClass().getSimpleName()));
+
         this.asAdmin().getBytecode().addStep(Symbols.from, fromStepLabel);
-        ((FromToModulating) this.asAdmin().getEndStep()).addFrom(fromStepLabel);
+        ((FromToModulating) prev).addFrom(fromStepLabel);
         return this;
     }
 
@@ -1124,8 +1137,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * @since 3.1.0-incubating
      */
     public default GraphTraversal<S, E> to(final Traversal<?, Vertex> toVertex) {
+        final Step<?,?> prev = this.asAdmin().getEndStep();
+        if (!(prev instanceof FromToModulating))
+            throw new IllegalArgumentException(String.format(
+                    "The to() step cannot follow %s", prev.getClass().getSimpleName()));
+
         this.asAdmin().getBytecode().addStep(Symbols.to, toVertex);
-        ((FromToModulating) this.asAdmin().getEndStep()).addTo(toVertex.asAdmin());
+        ((FromToModulating) prev).addTo(toVertex.asAdmin());
         return this;
     }
 
@@ -1139,8 +1157,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * @since 3.1.0-incubating
      */
     public default GraphTraversal<S, E> from(final Traversal<?, Vertex> fromVertex) {
+        final Step<?,?> prev = this.asAdmin().getEndStep();
+        if (!(prev instanceof FromToModulating))
+            throw new IllegalArgumentException(String.format(
+                    "The from() step cannot follow %s", prev.getClass().getSimpleName()));
+
         this.asAdmin().getBytecode().addStep(Symbols.from, fromVertex);
-        ((FromToModulating) this.asAdmin().getEndStep()).addFrom(fromVertex.asAdmin());
+        ((FromToModulating) prev).addFrom(fromVertex.asAdmin());
         return this;
     }
 
@@ -1154,8 +1177,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * @since 3.3.0
      */
     public default GraphTraversal<S, E> to(final Vertex toVertex) {
+        final Step<?,?> prev = this.asAdmin().getEndStep();
+        if (!(prev instanceof FromToModulating))
+            throw new IllegalArgumentException(String.format(
+                    "The to() step cannot follow %s", prev.getClass().getSimpleName()));
+
         this.asAdmin().getBytecode().addStep(Symbols.to, toVertex);
-        ((FromToModulating) this.asAdmin().getEndStep()).addTo(__.constant(toVertex).asAdmin());
+        ((FromToModulating) prev).addTo(__.constant(toVertex).asAdmin());
         return this;
     }
 
@@ -1169,8 +1197,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * @since 3.3.0
      */
     public default GraphTraversal<S, E> from(final Vertex fromVertex) {
+        final Step<?,?> prev = this.asAdmin().getEndStep();
+        if (!(prev instanceof FromToModulating))
+            throw new IllegalArgumentException(String.format(
+                    "The from() step cannot follow %s", prev.getClass().getSimpleName()));
+
         this.asAdmin().getBytecode().addStep(Symbols.from, fromVertex);
-        ((FromToModulating) this.asAdmin().getEndStep()).addFrom(__.constant(fromVertex).asAdmin());
+        ((FromToModulating) prev).addFrom(__.constant(fromVertex).asAdmin());
         return this;
     }
 
@@ -2007,13 +2040,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * with a {@link Scope#local}.
      *
      * @param sideEffectKey the name of the side-effect key that will hold the aggregated objects
-     * @return the traversal with an appended {@link AggregateStep}
+     * @return the traversal with an appended {@link AggregateGlobalStep}
      * @see <a href="http://tinkerpop.apache.org/docs/${project.version}/reference/#aggregate-step" target="_blank">Reference Documentation - Aggregate Step</a>
      * @since 3.0.0-incubating
      */
     public default GraphTraversal<S, E> aggregate(final String sideEffectKey) {
         this.asAdmin().getBytecode().addStep(Symbols.aggregate, sideEffectKey);
-        return this.asAdmin().addStep(new AggregateStep<>(this.asAdmin(), sideEffectKey));
+        return this.asAdmin().addStep(new AggregateGlobalStep<>(this.asAdmin(), sideEffectKey));
     }
 
     /**
@@ -2021,14 +2054,14 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * {@link Scope#local} or eager ({@link Scope#global} while gathering those objects.
      *
      * @param sideEffectKey the name of the side-effect key that will hold the aggregated objects
-     * @return the traversal with an appended {@link AggregateStep}
+     * @return the traversal with an appended {@link AggregateGlobalStep}
      * @see <a href="http://tinkerpop.apache.org/docs/${project.version}/reference/#aggregate-step" target="_blank">Reference Documentation - Aggregate Step</a>
      * @since 3.4.3
      */
     public default GraphTraversal<S, E> aggregate(final Scope scope, final String sideEffectKey) {
         this.asAdmin().getBytecode().addStep(Symbols.aggregate, scope, sideEffectKey);
         return this.asAdmin().addStep(scope == Scope.global ?
-                new AggregateStep<>(this.asAdmin(), sideEffectKey) : new StoreStep<>(this.asAdmin(), sideEffectKey));
+                new AggregateGlobalStep<>(this.asAdmin(), sideEffectKey) : new AggregateLocalStep<>(this.asAdmin(), sideEffectKey));
     }
 
     /**
@@ -2089,14 +2122,14 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * Lazily aggregates objects in the stream into a side-effect collection.
      *
      * @param sideEffectKey the name of the side-effect key that will hold the aggregate
-     * @return the traversal with an appended {@link StoreStep}
+     * @return the traversal with an appended {@link AggregateLocalStep}
      * @see <a href="http://tinkerpop.apache.org/docs/${project.version}/reference/#store-step" target="_blank">Reference Documentation - Store Step</a>
      * @since 3.0.0-incubating
      * @deprecated As of release 3.4.3, replaced by {@link #aggregate(Scope, String)} using {@link Scope#local}.
      */
     public default GraphTraversal<S, E> store(final String sideEffectKey) {
         this.asAdmin().getBytecode().addStep(Symbols.store, sideEffectKey);
-        return this.asAdmin().addStep(new StoreStep<>(this.asAdmin(), sideEffectKey));
+        return this.asAdmin().addStep(new AggregateLocalStep<>(this.asAdmin(), sideEffectKey));
     }
 
     /**
@@ -2124,6 +2157,18 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
     @Override
     public default GraphTraversal<S, TraversalMetrics> profile() {
         return (GraphTraversal<S, TraversalMetrics>) Traversal.super.profile();
+    }
+
+    /**
+     * Filter all traversers in the traversal. This step has narrow use cases and is primarily intended for use as a
+     * signal to remote servers that {@link #iterate()} was called. While it may be directly used, it is often a sign
+     * that a traversal should be re-written in another form.
+     *
+     * @return the updated traversal with respective {@link NoneStep}.
+     */
+    @Override
+    default GraphTraversal<S, E> none() {
+        return (GraphTraversal<S, E>) Traversal.super.none();
     }
 
     /**
@@ -2164,12 +2209,19 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
             endStep = endStep.getPreviousStep();
         }
 
-        // edge properties can always be folded as there is no cardinality/metaproperties. for a vertex mutation,
-        // it's possible to fold the property() into the Mutating step if there are no metaproperties (i.e. keyValues)
-        // and if (1) the key is an instance of T OR OR (3) the key is a string and the cardinality is not specifiied.
-        // Note that checking for single cardinality of the argument doesn't work well because once folded we lose
-        // the cardinality argument associated to the key/value pair and then it relies on the graph. that
-        // means that if you do:
+        // edge properties can always be folded as there are no cardinality/metaproperties. of course, if the
+        // cardinality is specified as something other than single or null it would be confusing to simply allow it to
+        // execute and not throw an error.
+        if ((endStep instanceof AddEdgeStep || endStep instanceof AddEdgeStartStep) && (null != cardinality && cardinality != single))
+            throw new IllegalStateException(String.format(
+                    "Multi-property cardinality of [%s] can only be set for a Vertex but is being used for addE() with key: %s",
+                    cardinality.name(), key));
+
+        // for a vertex mutation, it's possible to fold the property() into the Mutating step if there are no
+        // metaproperties (i.e. keyValues) and if (1) the key is an instance of T OR OR (3) the key is a string and the
+        // cardinality is not specified. Note that checking for single cardinality of the argument doesn't work well
+        // because once folded we lose the cardinality argument associated to the key/value pair and then it relies on
+        // the graph. that means that if you do:
         //
         // g.addV().property(single, 'k',1).property(single,'k',2)
         //
@@ -2202,8 +2254,7 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * {@link VertexProperty.Cardinality} is defaulted to {@code null} which  means that the default cardinality for
      * the {@link Graph} will be used.
      * <p/>
-     * This method is effectively calls
-     * {@link #property(org.apache.tinkerpop.gremlin.structure.VertexProperty.Cardinality, Object, Object, Object...)}
+     * This method is effectively calls {@link #property(VertexProperty.Cardinality, Object, Object, Object...)}
      * as {@code property(null, key, value, keyValues}.
      *
      * @param key       the key for the property
@@ -2215,8 +2266,8 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      */
     public default GraphTraversal<S, E> property(final Object key, final Object value, final Object... keyValues) {
         return key instanceof VertexProperty.Cardinality ?
-                this.property((VertexProperty.Cardinality) key, value, keyValues[0],
-                        keyValues.length > 1 ?
+                this.property((VertexProperty.Cardinality) key, value, null == keyValues ? null : keyValues[0],
+                        keyValues != null && keyValues.length > 1 ?
                                 Arrays.copyOfRange(keyValues, 1, keyValues.length) :
                                 new Object[]{}) :
                 this.property(null, key, value, keyValues);
@@ -2645,13 +2696,13 @@ public interface GraphTraversal<S, E> extends Traversal<S, E> {
      * Indexes all items of the current collection. The indexing format can be configured using the {@link GraphTraversal#with(String, Object)}
      * and {@link org.apache.tinkerpop.gremlin.process.traversal.step.util.WithOptions#indexer}.
      *
-     * Indexed as list: ["a","b","c"] => [["a",0],["b",1],["c",2]]
-     * Indexed as map:  ["a","b","c"] => {0:"a",1:"b",2:"c"}
+     * Indexed as list: ["a","b","c"] =&gt; [["a",0],["b",1],["c",2]]
+     * Indexed as map:  ["a","b","c"] =&gt; {0:"a",1:"b",2:"c"}
      *
      * If the current object is not a collection, this step will map the object to a single item collection/map:
      *
-     * Indexed as list: "a" => ["a",0]
-     * Indexed as map:  "a" => {0:"a"}
+     * Indexed as list: "a" =&gt; ["a",0]
+     * Indexed as map:  "a" =&gt; {0:"a"}
      *
      * @return the traversal with an appended {@link IndexStep}
      * @see <a href="http://tinkerpop.apache.org/docs/${project.version}/reference/#index-step" target="_blank">Reference Documentation - Index Step</a>

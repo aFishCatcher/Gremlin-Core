@@ -38,9 +38,6 @@ import org.apache.tinkerpop.gremlin.structure.util.Attachable;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.structure.util.empty.EmptyGraph;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.List;
 import java.util.Set;
 
@@ -48,7 +45,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Stephen Mallette (http://stephen.genoprime.com)
  */
-public class AddEdgeStep<S> extends MapStep<S, Edge>
+public class AddEdgeStep<S> extends ScalarMapStep<S, Edge>
         implements Mutating<Event.EdgeAddedEvent>, TraversalParent, Scoping, FromToModulating {
 
     private static final String FROM = Graph.Hidden.hide("from");
@@ -99,15 +96,28 @@ public class AddEdgeStep<S> extends MapStep<S, Edge>
 
     @Override
     protected Edge map(final Traverser.Admin<S> traverser) {
-        Vertex toVertex = this.parameters.get(traverser, TO, () -> (Vertex) traverser.get()).get(0);
-        Vertex fromVertex = this.parameters.get(traverser, FROM, () -> (Vertex) traverser.get()).get(0);
+        final String edgeLabel = this.parameters.get(traverser, T.label, () -> Edge.DEFAULT_LABEL).get(0);
+        final Object theTo = this.parameters.get(traverser, TO, traverser::get).get(0);
+        if (!(theTo instanceof Vertex))
+            throw new IllegalStateException(String.format(
+                    "addE(%s) could not find a Vertex for to() - encountered: %s", edgeLabel,
+                    null == theTo ? "null" : theTo.getClass().getSimpleName()));
+
+        final Object theFrom = this.parameters.get(traverser, FROM, traverser::get).get(0);
+        if (!(theFrom instanceof Vertex))
+            throw new IllegalStateException(String.format(
+                    "addE(%s) could not find a Vertex for from() - encountered: %s", edgeLabel,
+                    null == theFrom ? "null" : theFrom.getClass().getSimpleName()));
+
+        Vertex toVertex = (Vertex) theTo;
+        Vertex fromVertex = (Vertex) theFrom;
+
         if (toVertex instanceof Attachable)
             toVertex = ((Attachable<Vertex>) toVertex)
                     .attach(Attachable.Method.get(this.getTraversal().getGraph().orElse(EmptyGraph.instance())));
         if (fromVertex instanceof Attachable)
             fromVertex = ((Attachable<Vertex>) fromVertex)
                     .attach(Attachable.Method.get(this.getTraversal().getGraph().orElse(EmptyGraph.instance())));
-        final String edgeLabel = this.parameters.get(traverser, T.label, () -> Edge.DEFAULT_LABEL).get(0);
 
         final Edge edge = fromVertex.addEdge(edgeLabel, toVertex, this.parameters.getKeyValues(traverser, TO, FROM, T.label));
         if (callbackRegistry != null && !callbackRegistry.getCallbacks().isEmpty()) {
@@ -151,29 +161,5 @@ public class AddEdgeStep<S> extends MapStep<S, Edge>
         clone.parameters = this.parameters.clone();
         return clone;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

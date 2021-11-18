@@ -18,7 +18,7 @@
  */
 package org.apache.tinkerpop.gremlin.process.computer.ranking.pagerank;
 
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.computer.Memory;
 import org.apache.tinkerpop.gremlin.process.computer.MemoryComputeKey;
@@ -161,8 +161,10 @@ public class PageRankVertexProgram implements VertexProgram<Double> {
 
     @Override
     public void setup(final Memory memory) {
+    	//可能是一个对pageRank的修正值
         memory.set(TELEPORTATION_ENERGY, null == this.initialRankTraversal ? 1.0d : 0.0d);
         memory.set(VERTEX_COUNT, 0.0d);
+        //表明pageRank值的迭代变化，即收敛情况
         memory.set(CONVERGENCE_ERROR, 1.0d);
     }
 
@@ -178,6 +180,7 @@ public class PageRankVertexProgram implements VertexProgram<Double> {
             if (1 == memory.getIteration()) {
                 edgeCount = IteratorUtils.reduce(messenger.receiveMessages(), 0.0d, (a, b) -> a + b);
                 vertex.property(VertexProperty.Cardinality.single, EDGE_COUNT, edgeCount);
+                //初始化pageRank的值
                 pageRank = null == this.initialRankTraversal ?
                         0.0d :
                         TraversalUtil.apply(vertex, this.initialRankTraversal.get()).doubleValue();
@@ -188,15 +191,15 @@ public class PageRankVertexProgram implements VertexProgram<Double> {
             //////////////////////////
             final double teleporationEnergy = memory.get(TELEPORTATION_ENERGY);
             if (teleporationEnergy > 0.0d) {
-                final double localTerminalEnergy = teleporationEnergy / vertexCount;
+                final double localTerminalEnergy = teleporationEnergy / vertexCount;  //注意存在worker这个概念
                 pageRank = pageRank + localTerminalEnergy;
-                memory.add(TELEPORTATION_ENERGY, -localTerminalEnergy);
+                memory.add(TELEPORTATION_ENERGY, -localTerminalEnergy);  //有啥用？
             }
             final double previousPageRank = vertex.<Double>property(this.property).orElse(0.0d);
             memory.add(CONVERGENCE_ERROR, Math.abs(pageRank - previousPageRank));
-            vertex.property(VertexProperty.Cardinality.single, this.property, pageRank);
+            vertex.property(VertexProperty.Cardinality.single, this.property, pageRank); //此处写入的pageRank值才是我们的目标值
             memory.add(TELEPORTATION_ENERGY, (1.0d - this.alpha) * pageRank);
-            pageRank = this.alpha * pageRank;
+            pageRank = this.alpha * pageRank;  //这里是对链接出去的pageRank值施加一个阻尼系数
             if (edgeCount > 0.0d)
                 messenger.sendMessage(this.incidentMessageScope, pageRank / edgeCount);
             else
@@ -256,31 +259,6 @@ public class PageRankVertexProgram implements VertexProgram<Double> {
         public Builder initialRank(final Traversal.Admin<Vertex, ? extends Number> initialRankTraversal) {
             PureTraversal.storeState(this.configuration, INITIAL_RANK_TRAVERSAL, initialRankTraversal);
             return this;
-        }
-
-        /**
-         * @deprecated As of release 3.2.0, replaced by {@link org.apache.tinkerpop.gremlin.process.computer.ranking.pagerank.PageRankVertexProgram.Builder#initialRank(Traversal.Admin)}
-         */
-        @Deprecated
-        public Builder vertexCount(final long vertexCount) {
-            this.configuration.setProperty(VERTEX_COUNT, (double) vertexCount);
-            return this;
-        }
-
-        /**
-         * @deprecated As of release 3.2.0, replaced by {@link org.apache.tinkerpop.gremlin.process.computer.ranking.pagerank.PageRankVertexProgram.Builder#edges(Traversal.Admin)}
-         */
-        @Deprecated
-        public Builder traversal(final TraversalSource traversalSource, final String scriptEngine, final String traversalScript, final Object... bindings) {
-            return this.edges(new ScriptTraversal<>(traversalSource, scriptEngine, traversalScript, bindings));
-        }
-
-        /**
-         * @deprecated As of release 3.2.0, replaced by {@link org.apache.tinkerpop.gremlin.process.computer.ranking.pagerank.PageRankVertexProgram.Builder#edges(Traversal.Admin)}
-         */
-        @Deprecated
-        public Builder traversal(final Traversal.Admin<Vertex, Edge> traversal) {
-            return this.edges(traversal);
         }
     }
 

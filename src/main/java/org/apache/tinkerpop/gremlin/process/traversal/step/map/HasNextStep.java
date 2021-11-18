@@ -23,9 +23,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.NoSuchElementException;
 
 /**
@@ -43,28 +40,4 @@ public final class HasNextStep<S> extends AbstractStep<S, Boolean> {
                 this.starts.next().split(Boolean.TRUE, this) :
                 this.getTraversal().getTraverserGenerator().generate(Boolean.FALSE, (Step) this, 1L);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

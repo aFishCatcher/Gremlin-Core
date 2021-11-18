@@ -26,13 +26,10 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.PathProcessor;
 import org.apache.tinkerpop.gremlin.process.traversal.step.Scoping;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
-import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalHelper;
+import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.EmptyTraverser;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalRing;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,10 +38,12 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
+ * @author Stephen Mallette (http://stephen.genoprime.com)
  */
 public final class SelectStep<S, E> extends MapStep<S, Map<String, E>> implements Scoping, TraversalParent, PathProcessor, ByModulating {
 
@@ -64,19 +63,21 @@ public final class SelectStep<S, E> extends MapStep<S, Map<String, E>> implement
     }
 
     @Override
-    protected Map<String, E> map(final Traverser.Admin<S> traverser) {
+    protected Traverser.Admin<Map<String, E>> processNextStart() throws NoSuchElementException {
+        final Traverser.Admin<S> traverser = this.starts.next();
         final Map<String, E> bindings = new LinkedHashMap<>(this.selectKeys.size(), 1.0f);
-        for (final String selectKey : this.selectKeys) {
-            final E end = this.getNullableScopeValue(this.pop, selectKey, traverser);
-            if (null != end)
+        try {
+            for (final String selectKey : this.selectKeys) {
+                final E end = this.getScopeValue(this.pop, selectKey, traverser);
                 bindings.put(selectKey, TraversalUtil.applyNullable(end, this.traversalRing.next()));
-            else {
-                this.traversalRing.reset();
-                return null;
             }
+        } catch (KeyNotFoundException nfe) {
+            return EmptyTraverser.instance();
+        } finally {
+            this.traversalRing.reset();
         }
-        this.traversalRing.reset();
-        return bindings;
+
+        return PathProcessor.processTraverserPathLabels(traverser.split(bindings, this), this.keepLabels);
     }
 
     @Override
@@ -122,6 +123,13 @@ public final class SelectStep<S, E> extends MapStep<S, Map<String, E>> implement
     }
 
     @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        this.traversalRing.replaceTraversal(
+                (Traversal.Admin<Object, E>) oldTraversal,
+                (Traversal.Admin<Object, E>) newTraversal);
+    }
+
+    @Override
     public Set<TraverserRequirement> getRequirements() {
         return this.getSelfAndChildRequirements(TraverserRequirement.OBJECT, TraverserRequirement.SIDE_EFFECTS);
     }
@@ -153,33 +161,4 @@ public final class SelectStep<S, E> extends MapStep<S, Map<String, E>> implement
     public Set<String> getKeepLabels() {
         return this.keepLabels;
     }
-
-    @Override
-    protected Traverser.Admin<Map<String, E>> processNextStart() {
-        return PathProcessor.processTraverserPathLabels(super.processNextStart(), this.keepLabels);
-    }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

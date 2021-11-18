@@ -18,8 +18,8 @@
  */
 package org.apache.tinkerpop.gremlin.structure.io.binary.types;
 
-import org.apache.commons.configuration.ConfigurationConverter;
-import org.apache.commons.configuration.MapConfiguration;
+import org.apache.commons.configuration2.ConfigurationConverter;
+import org.apache.commons.configuration2.MapConfiguration;
 import org.apache.tinkerpop.gremlin.structure.io.binary.DataType;
 import org.apache.tinkerpop.gremlin.structure.io.binary.GraphBinaryReader;
 import org.apache.tinkerpop.gremlin.structure.io.binary.GraphBinaryWriter;

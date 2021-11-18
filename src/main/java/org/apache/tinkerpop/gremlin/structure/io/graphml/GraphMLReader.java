@@ -177,7 +177,6 @@ public final class GraphMLReader implements GraphReader {
 
                         findOrCreate(currentVertexId, graphToWriteTo, vertexFeatures, cache,
                                 true, ElementHelper.upsert(propsAsArray, T.label, currentVertexLabel));
-                        // Graph中Node+1
 
                         if (supportsTx && counter.incrementAndGet() % batchSize == 0)
                             graphToWriteTo.tx().commit();
@@ -191,7 +190,6 @@ public final class GraphMLReader implements GraphReader {
                         final Object[] propsReady = null != edgeId && edgeFeatures.willAllowId(edgeId) ? ElementHelper.upsert(propsAsArray, T.id, edgeId) : propsAsArray;
 
                         edgeOutVertex.addEdge(null == edgeLabel ? Edge.DEFAULT_LABEL : edgeLabel, edgeInVertex, propsReady);
-                        // Graph中Edge+1
 
                         if (supportsTx && counter.incrementAndGet() % batchSize == 0)
                             graphToWriteTo.tx().commit();

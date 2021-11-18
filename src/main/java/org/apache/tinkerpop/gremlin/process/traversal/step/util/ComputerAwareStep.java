@@ -24,9 +24,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.GraphComputing;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -100,30 +97,6 @@ public abstract class ComputerAwareStep<S, E> extends AbstractStep<S, E> impleme
         public void onGraphComputer() {
             this.traverserStepIdAndLabelsSetByChild = true;
         }
-
-		@Override
-		public void setProducer(Producer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void setConsumer(Consumer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void init() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void work() {
-			// TODO Auto-generated method stub
-			
-		}
     }
 
 }

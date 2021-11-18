@@ -36,9 +36,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,7 +49,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-public class PropertyMapStep<K,E> extends MapStep<Element, Map<K, E>>
+public class PropertyMapStep<K,E> extends ScalarMapStep<Element, Map<K, E>>
         implements TraversalParent, ByModulating, Configuring {
 
     protected final String[] propertyKeys;
@@ -64,21 +61,17 @@ public class PropertyMapStep<K,E> extends MapStep<Element, Map<K, E>>
     private Parameters parameters = new Parameters();
     private TraversalRing<K, E> traversalRing;
 
-    /**
-     * @deprecated As of release 3.4.0, replaced by {@link #PropertyMapStep(Traversal.Admin, PropertyType, String...)}.
-     */
-    @Deprecated
-    public PropertyMapStep(final Traversal.Admin traversal, final boolean includeTokens, final PropertyType propertyType, final String... propertyKeys) {
-        this(traversal, propertyType, propertyKeys);
-        this.configure(WithOptions.tokens, includeTokens ? WithOptions.all : WithOptions.none);
-    }
-
     public PropertyMapStep(final Traversal.Admin traversal, final PropertyType propertyType, final String... propertyKeys) {
         super(traversal);
         this.propertyKeys = propertyKeys;
         this.returnType = propertyType;
         this.propertyTraversal = null;
         this.traversalRing = new TraversalRing<>();
+    }
+
+    public PropertyMapStep(final Traversal.Admin traversal, final int options, final PropertyType propertyType, final String... propertyKeys) {
+        this(traversal, propertyType, propertyKeys);
+        this.configure(WithOptions.tokens, options);
     }
 
     @Override
@@ -170,14 +163,6 @@ public class PropertyMapStep<K,E> extends MapStep<Element, Map<K, E>>
         return propertyKeys;
     }
 
-    /**
-     * @deprecated As of release 3.4.0, replaced by {@link #getIncludedTokens()}.
-     */
-    @Deprecated
-    public boolean isIncludeTokens() {
-        return this.tokens != WithOptions.none;
-    }
-
     public String toString() {
         return StringFactory.stepString(this, Arrays.asList(this.propertyKeys),
                 this.traversalRing, this.returnType.name().toLowerCase());
@@ -223,28 +208,4 @@ public class PropertyMapStep<K,E> extends MapStep<Element, Map<K, E>>
     private boolean includeToken(final int token) {
         return 0 != (this.tokens & token);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -18,13 +18,13 @@
  */
 package org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.MapConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.MapConfiguration;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
-import org.apache.tinkerpop.gremlin.process.traversal.lambda.ElementValueTraversal;
+import org.apache.tinkerpop.gremlin.process.traversal.lambda.ValueTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.ClassFilterStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.FilterStep;
@@ -150,18 +150,7 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
             traversal.getStartStep().removeLabel(MARKER);
             return;
         }
-        for (final Step step : traversal.getSteps()) {
-            if (step instanceof TraversalParent) {
-                for (final Traversal.Admin t : ((TraversalParent) step).getLocalChildren()) {
-                    this.apply(t);
-                    t.getStartStep().addLabel(MARKER);
-                }
-                for (final Traversal.Admin t : ((TraversalParent) step).getGlobalChildren()) {
-                    this.apply(t);
-                    t.getStartStep().addLabel(MARKER);
-                }
-            }
-        }
+
         //
         final List<GraphStep> graphSteps = TraversalHelper.getStepsOfAssignableClass(GraphStep.class, traversal);
         final List<VertexStep> vertexSteps = TraversalHelper.getStepsOfAssignableClass(VertexStep.class, traversal);
@@ -231,19 +220,19 @@ public final class SubgraphStrategy extends AbstractTraversalStrategy<TraversalS
                         }
                     } else {
                         Stream.concat(((TraversalParent) step).getGlobalChildren().stream(), ((TraversalParent) step).getLocalChildren().stream())
-                                .filter(t -> t instanceof ElementValueTraversal)
+                                .filter(t -> t instanceof ValueTraversal)
                                 .forEach(t -> {
                                     final char propertyType = processesPropertyType(step.getPreviousStep());
                                     if ('p' != propertyType) {
                                         final Traversal.Admin<?, ?> temp = new DefaultTraversal<>();
-                                        temp.addStep(new PropertiesStep<>(temp, PropertyType.PROPERTY, ((ElementValueTraversal) t).getPropertyKey()));
+                                        temp.addStep(new PropertiesStep<>(temp, PropertyType.PROPERTY, ((ValueTraversal) t).getPropertyKey()));
                                         if ('v' == propertyType)
                                             TraversalHelper.insertTraversal(0, nonCheckPropertyCriterion.clone(), temp);
                                         else
                                             temp.addStep(checkPropertyCriterion.clone());
                                         temp.addStep(new PropertyValueStep<>(temp));
                                         temp.setParent((TraversalParent) step);
-                                        ((ElementValueTraversal) t).setBypassTraversal(temp);
+                                        ((ValueTraversal) t).setBypassTraversal(temp);
                                     }
                                 });
                     }

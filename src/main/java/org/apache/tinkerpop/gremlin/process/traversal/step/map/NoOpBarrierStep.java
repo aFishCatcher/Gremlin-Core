@@ -28,9 +28,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.TraverserSe
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -120,27 +117,7 @@ public final class NoOpBarrierStep<S> extends AbstractStep<S, S> implements Loca
         this.barrier.clear();
     }
 
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
+    public int getMaxBarrierSize() {
+        return maxBarrierSize;
+    }
 }

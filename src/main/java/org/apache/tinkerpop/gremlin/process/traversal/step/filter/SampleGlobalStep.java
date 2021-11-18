@@ -22,6 +22,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.lambda.ConstantTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.ByModulating;
+import org.apache.tinkerpop.gremlin.process.traversal.step.Seedable;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.CollectingBarrierStep;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.ProjectedTraverser;
@@ -29,9 +30,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.TraverserSet;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,15 +39,20 @@ import java.util.Set;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public final class SampleGlobalStep<S> extends CollectingBarrierStep<S> implements TraversalParent, ByModulating {
+public final class SampleGlobalStep<S> extends CollectingBarrierStep<S> implements TraversalParent, ByModulating, Seedable {
 
     private Traversal.Admin<S, Number> probabilityTraversal = new ConstantTraversal<>(1.0d);
     private final int amountToSample;
-    private static final Random RANDOM = new Random();
+    private final Random random = new Random();
 
     public SampleGlobalStep(final Traversal.Admin traversal, final int amountToSample) {
         super(traversal);
         this.amountToSample = amountToSample;
+    }
+
+    @Override
+    public void resetSeed(final long seed) {
+        random.setSeed(seed);
     }
 
     @Override
@@ -60,6 +63,12 @@ public final class SampleGlobalStep<S> extends CollectingBarrierStep<S> implemen
     @Override
     public void modulateBy(final Traversal.Admin<?, ?> probabilityTraversal) {
         this.probabilityTraversal = this.integrateChild(probabilityTraversal);
+    }
+
+    @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        if (null != this.probabilityTraversal && this.probabilityTraversal.equals(oldTraversal))
+            this.probabilityTraversal = this.integrateChild(newTraversal);
     }
 
     @Override
@@ -95,7 +104,7 @@ public final class SampleGlobalStep<S> extends CollectingBarrierStep<S> implemen
                 if (sampleBulk < s.bulk()) {
                     final double currentWeight = ((ProjectedTraverser<S, Number>) s).getProjections().get(0).doubleValue();
                     for (int i = 0; i < (s.bulk() - sampleBulk); i++) {
-                        if (RANDOM.nextDouble() <= ((currentWeight / runningTotalWeight))) {
+                        if (random.nextDouble() <= ((currentWeight / runningTotalWeight))) {
                             final Traverser.Admin<S> split = s.split();
                             split.setBulk(1L);
                             sampledSet.add(split);
@@ -141,26 +150,4 @@ public final class SampleGlobalStep<S> extends CollectingBarrierStep<S> implemen
     public int hashCode() {
         return super.hashCode() ^ this.amountToSample ^ this.probabilityTraversal.hashCode();
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

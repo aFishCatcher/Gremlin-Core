@@ -28,9 +28,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalRing;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -40,7 +37,7 @@ import java.util.Set;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public final class ProjectStep<S, E> extends MapStep<S, Map<String, E>> implements TraversalParent, ByModulating {
+public final class ProjectStep<S, E> extends ScalarMapStep<S, Map<String, E>> implements TraversalParent, ByModulating {
 
     private final List<String> projectKeys;
     private TraversalRing<S, E> traversalRing;
@@ -100,6 +97,13 @@ public final class ProjectStep<S, E> extends MapStep<S, Map<String, E>> implemen
         this.traversalRing.addTraversal(this.integrateChild(selectTraversal));
     }
 
+    @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        this.traversalRing.replaceTraversal(
+                (Traversal.Admin<S, E>) oldTraversal,
+                (Traversal.Admin<S, E>) newTraversal);
+    }
+
     public List<String> getProjectKeys() {
         return this.projectKeys;
     }
@@ -108,28 +112,4 @@ public final class ProjectStep<S, E> extends MapStep<S, Map<String, E>> implemen
     public Set<TraverserRequirement> getRequirements() {
         return this.getSelfAndChildRequirements();
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

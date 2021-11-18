@@ -43,9 +43,6 @@ import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.structure.util.detached.DetachedFactory;
 import org.apache.tinkerpop.gremlin.structure.util.empty.EmptyGraph;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -108,16 +105,35 @@ public class AddEdgeStartStep extends AbstractStep<Edge, Edge>
         if (this.first) {
             this.first = false;
             final TraverserGenerator generator = this.getTraversal().getTraverserGenerator();
-            final Traverser.Admin traverser = generator.generate(1, (Step) this, 1); // a dead traverser to trigger the traversal
-            Vertex toVertex = (Vertex) this.parameters.get(traverser, TO, Collections::emptyList).get(0);
-            Vertex fromVertex = (Vertex) this.parameters.get(traverser, FROM, Collections::emptyList).get(0);
+
+            // a dead traverser to trigger the traversal
+            final Traverser.Admin traverser = generator.generate(1, (Step) this, 1);
+
+            final String edgeLabel = (String) this.parameters.get(traverser, T.label, () -> Edge.DEFAULT_LABEL).get(0);
+
+            // FROM/TO must be set and must be vertices
+            final Object theTo = this.parameters.get(traverser, TO, () -> null).get(0);
+            if (!(theTo instanceof Vertex))
+                throw new IllegalStateException(String.format(
+                        "addE(%s) could not find a Vertex for to() - encountered: %s", edgeLabel,
+                        null == theTo ? "null" : theTo.getClass().getSimpleName()));
+
+            final Object theFrom = this.parameters.get(traverser, FROM, () -> null).get(0);
+            if (!(theFrom instanceof Vertex))
+                throw new IllegalStateException(String.format(
+                        "addE(%s) could not find a Vertex for from() - encountered: %s", edgeLabel,
+                        null == theFrom ? "null" : theFrom.getClass().getSimpleName()));
+
+            Vertex toVertex = (Vertex) theTo;
+            Vertex fromVertex = (Vertex) theFrom;
+
             if (toVertex instanceof Attachable)
                 toVertex = ((Attachable<Vertex>) toVertex)
                         .attach(Attachable.Method.get(this.getTraversal().getGraph().orElse(EmptyGraph.instance())));
             if (fromVertex instanceof Attachable)
                 fromVertex = ((Attachable<Vertex>) fromVertex)
                         .attach(Attachable.Method.get(this.getTraversal().getGraph().orElse(EmptyGraph.instance())));
-            final String edgeLabel = (String) this.parameters.get(traverser, T.label, () -> Edge.DEFAULT_LABEL).get(0);
+
             final Edge edge = fromVertex.addEdge(edgeLabel, toVertex, this.parameters.getKeyValues(traverser, TO, FROM, T.label));
             if (callbackRegistry != null && !callbackRegistry.getCallbacks().isEmpty()) {
                 final EventStrategy eventStrategy = getTraversal().getStrategies().getStrategy(EventStrategy.class).get();
@@ -159,29 +175,5 @@ public class AddEdgeStartStep extends AbstractStep<Edge, Edge>
         clone.parameters = this.parameters.clone();
         return clone;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

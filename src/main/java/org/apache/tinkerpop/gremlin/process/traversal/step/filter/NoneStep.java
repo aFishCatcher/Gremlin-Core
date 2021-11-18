@@ -23,9 +23,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
@@ -43,25 +40,5 @@ public final class NoneStep<S> extends FilterStep<S> {
     @Override
     public String toString() {
         return StringFactory.stepString(this);
-    }
-    
-    //////////////////////////////////
-    // ÐÞ¸ÄÇø
-    private Consumer<Traverser> consumer;
-    
-    public void setConsumer(Consumer<Traverser> consumer) {
-    	this.consumer = consumer;
-    }
-    
-    public void setProducer(Producer<Traverser> buffer) {
-
-    }
-    
-    public void init() {
-    	
-    }
-    
-    public void work() {
-    	consumer.pollElement();
     }
 }

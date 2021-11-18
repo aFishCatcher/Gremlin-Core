@@ -33,9 +33,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.function.TreeSupplier;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -122,6 +119,13 @@ public final class TreeSideEffectStep<S> extends SideEffectStep<S> implements Si
     }
 
     @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        this.traversalRing.replaceTraversal(
+                (Traversal.Admin<Object, Object>) oldTraversal,
+                (Traversal.Admin<Object, Object>) newTraversal);
+    }
+
+    @Override
     public Set<TraverserRequirement> getRequirements() {
         return this.getSelfAndChildRequirements(TraverserRequirement.PATH, TraverserRequirement.SIDE_EFFECTS);
     }
@@ -135,28 +139,4 @@ public final class TreeSideEffectStep<S> extends SideEffectStep<S> implements Si
     public Set<String> getKeepLabels() {
         return this.keepLabels;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

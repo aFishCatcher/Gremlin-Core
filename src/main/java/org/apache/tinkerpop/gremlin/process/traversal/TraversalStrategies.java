@@ -27,7 +27,9 @@ import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.Prof
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.AdjacentToIncidentStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.CountStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.EarlyLimitStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.ByModulatorOptimizationStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.FilterRankingStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.IdentityRemovalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.IncidentToAdjacentStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.InlineFilterStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.LazyBarrierStrategy;
@@ -41,6 +43,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.strategy.verification.Stan
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.util.empty.EmptyGraph;
+import org.apache.tinkerpop.gremlin.util.iterator.IteratorUtils;
 import org.apache.tinkerpop.gremlin.util.tools.MultiMap;
 
 import java.io.Serializable;
@@ -49,6 +52,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -64,14 +68,22 @@ import java.util.stream.Collectors;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Matthias Broecheler (me@matthiasb.com)
  */
-public interface TraversalStrategies extends Serializable, Cloneable {
+public interface TraversalStrategies extends Serializable, Cloneable, Iterable<TraversalStrategy<?>> {
 
     static List<Class<? extends TraversalStrategy>> STRATEGY_CATEGORIES = Collections.unmodifiableList(Arrays.asList(TraversalStrategy.DecorationStrategy.class, TraversalStrategy.OptimizationStrategy.class, TraversalStrategy.ProviderOptimizationStrategy.class, TraversalStrategy.FinalizationStrategy.class, TraversalStrategy.VerificationStrategy.class));
 
     /**
-     * Return all the {@link TraversalStrategy} singleton instances associated with this {@link TraversalStrategies}.
+     * Return an immutable list of the {@link TraversalStrategy} instances.
      */
-    public List<TraversalStrategy<?>> toList();
+    public default List<TraversalStrategy<?>> toList() {
+        return Collections.unmodifiableList(IteratorUtils.list(iterator()));
+    }
+
+    /**
+     * Return an {@code Iterator} of the {@link TraversalStrategy} instances.
+     */
+    @Override
+    public Iterator<TraversalStrategy<?>> iterator();
 
     /**
      * Return the {@link TraversalStrategy} instance associated with the provided class.
@@ -81,23 +93,14 @@ public interface TraversalStrategies extends Serializable, Cloneable {
      * @return an optional containing the strategy instance or not
      */
     public default <T extends TraversalStrategy> Optional<T> getStrategy(final Class<T> traversalStrategyClass) {
-        return (Optional) toList().stream().filter(s -> traversalStrategyClass.isAssignableFrom(s.getClass())).findAny();
+        return (Optional<T>) IteratorUtils.stream(iterator()).
+                filter(s -> traversalStrategyClass.isAssignableFrom(s.getClass())).findAny();
     }
 
     /**
-     * Apply all the {@link TraversalStrategy} optimizers to the {@link Traversal}. This method must ensure that the
-     * strategies are sorted prior to application.
-     *
-     * @param traversal the traversal to apply the strategies to
-     * @deprecated As of release 3.3.10, not directly replaced as this mode of strategy application has not been
-     * utilized since early days of 3.x
-     */
-    @Deprecated
-    public void applyStrategies(final Traversal.Admin<?, ?> traversal);
-
-    /**
-     * Add all the provided {@link TraversalStrategy} instances to the current collection.
-     * When all the provided strategies have been added, the collection is resorted.
+     * Add all the provided {@link TraversalStrategy} instances to the current collection. When all the provided
+     * strategies have been added, the collection is resorted. If a strategy class is found to already be defined, it
+     * is removed and replaced by the newly added one.
      *
      * @param strategies the traversal strategies to add
      * @return the newly updated/sorted traversal strategies collection
@@ -134,7 +137,6 @@ public interface TraversalStrategies extends Serializable, Cloneable {
             strategyClasses.add(s.getClass());
             MultiMap.put(strategiesByCategory, s.getTraversalCategory(), s.getClass());
         });
-
 
         //Initialize all the dependencies
         strategies.forEach(strategy -> {
@@ -190,7 +192,6 @@ public interface TraversalStrategies extends Serializable, Cloneable {
                     + seenStrategyClases + ']');
         }
 
-
         if (unprocessedStrategyClasses.contains(strategyClass)) {
             seenStrategyClases.add(strategyClass);
             for (Class<? extends TraversalStrategy> dependency : MultiMap.get(dependencyMap, strategyClass)) {
@@ -208,7 +209,7 @@ public interface TraversalStrategies extends Serializable, Cloneable {
          * Keeps track of {@link GraphComputer} and/or {@link Graph} classes that have been initialized to the
          * classloader so that they do not have to be reflected again.
          */
-        private static Set<Class> LOADED = ConcurrentHashMap.newKeySet();
+        private static final Set<Class<?>> LOADED = ConcurrentHashMap.newKeySet();
 
         private static final Map<Class<? extends Graph>, TraversalStrategies> GRAPH_CACHE = new HashMap<>();
         private static final Map<Class<? extends GraphComputer>, TraversalStrategies> GRAPH_COMPUTER_CACHE = new HashMap<>();
@@ -216,11 +217,13 @@ public interface TraversalStrategies extends Serializable, Cloneable {
         static {
             final TraversalStrategies graphStrategies = new DefaultTraversalStrategies();
             graphStrategies.addStrategies(
+                    IdentityRemovalStrategy.instance(),
                     ConnectiveStrategy.instance(),
                     EarlyLimitStrategy.instance(),
                     InlineFilterStrategy.instance(),
                     IncidentToAdjacentStrategy.instance(),
                     AdjacentToIncidentStrategy.instance(),
+                    ByModulatorOptimizationStrategy.instance(),
                     FilterRankingStrategy.instance(),
                     MatchPredicateStrategy.instance(),
                     RepeatUnrollStrategy.instance(),

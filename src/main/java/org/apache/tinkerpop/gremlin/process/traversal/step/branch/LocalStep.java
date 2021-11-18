@@ -26,10 +26,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.costream.lib.LinkedListBuffer;
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -106,28 +102,4 @@ public final class LocalStep<S, E> extends AbstractStep<S, E> implements Travers
     public int hashCode() {
         return super.hashCode() ^ this.localTraversal.hashCode();
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -25,9 +25,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.ReducingBarrierS
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.util.function.ConstantSupplier;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.BinaryOperator;
@@ -54,29 +51,5 @@ public final class CountGlobalStep<S> extends ReducingBarrierStep<S, Long> {
     public Set<TraverserRequirement> getRequirements() {
         return REQUIREMENTS;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

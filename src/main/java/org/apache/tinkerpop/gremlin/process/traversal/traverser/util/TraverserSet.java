@@ -32,6 +32,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 import java.util.Spliterator;
 
@@ -153,10 +154,10 @@ public class TraverserSet<S> extends AbstractSet<Traverser.Admin<S>> implements 
         list.forEach(traverser -> this.map.put(traverser, traverser));
     }
 
-    public void shuffle() {
+    public void shuffle(final Random random) {
         final List<Traverser.Admin<S>> list = new ArrayList<>(this.map.size());
         IteratorUtils.removeOnNext(this.map.values().iterator()).forEachRemaining(list::add);
-        Collections.shuffle(list);
+        Collections.shuffle(list, random);
         this.map.clear();
         list.forEach(traverser -> this.map.put(traverser, traverser));
     }

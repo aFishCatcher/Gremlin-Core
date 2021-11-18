@@ -27,6 +27,7 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
+import com.squareup.javapoet.WildcardTypeName;
 import org.apache.tinkerpop.gremlin.process.remote.RemoteConnection;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
@@ -60,6 +61,7 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
+import javax.lang.model.type.WildcardType;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
@@ -239,10 +241,10 @@ public class GremlinDslProcessor extends AbstractProcessor {
                 .addStatement("super($N)", "connection")
                 .build());
 
-        // override methods to return a the DSL TraversalSource. find GraphTraversalSource class somewhere in the hierarchy
+        // override methods to return the DSL TraversalSource. find GraphTraversalSource class somewhere in the hierarchy
         final Element tinkerPopsGraphTraversalSource = findClassAsElement(graphTraversalSourceElement, GraphTraversalSource.class);
-        final Predicate<ExecutableElement> ignore = e -> !(e.getReturnType().getKind() == TypeKind.DECLARED && ((DeclaredType) e.getReturnType()).asElement().getSimpleName().contentEquals(GraphTraversalSource.class.getSimpleName()));
-        for (ExecutableElement elementOfGraphTraversalSource : findMethodsOfElement(tinkerPopsGraphTraversalSource, ignore)) {
+        final Predicate<ExecutableElement> notGraphTraversalSourceReturnValues = e -> !(e.getReturnType().getKind() == TypeKind.DECLARED && ((DeclaredType) e.getReturnType()).asElement().getSimpleName().contentEquals(GraphTraversalSource.class.getSimpleName()));
+        for (ExecutableElement elementOfGraphTraversalSource : findMethodsOfElement(tinkerPopsGraphTraversalSource, notGraphTraversalSourceReturnValues)) {
             // first copy/override methods that return a GraphTraversalSource so that we can instead return
             // the DSL TraversalSource class.
             traversalSourceClass.addMethod(constructMethod(elementOfGraphTraversalSource, ctx.traversalSourceClassName, "",Modifier.PUBLIC));
@@ -250,7 +252,8 @@ public class GremlinDslProcessor extends AbstractProcessor {
 
         // override methods that return GraphTraversal that come from the user defined extension of GraphTraversal
         if (!graphTraversalSourceElement.getSimpleName().contentEquals(GraphTraversalSource.class.getSimpleName())) {
-            for (ExecutableElement templateMethod : findMethodsOfElement(graphTraversalSourceElement, null)) {
+            final Predicate<ExecutableElement> notGraphTraversalReturnValues = e -> !(e.getReturnType().getKind() == TypeKind.DECLARED && ((DeclaredType) e.getReturnType()).asElement().getSimpleName().contentEquals(GraphTraversal.class.getSimpleName()));
+            for (ExecutableElement templateMethod : findMethodsOfElement(graphTraversalSourceElement, notGraphTraversalReturnValues)) {
                 final MethodSpec.Builder methodToAdd = MethodSpec.methodBuilder(templateMethod.getSimpleName().toString())
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class);
@@ -353,7 +356,8 @@ public class GremlinDslProcessor extends AbstractProcessor {
                     .addModifiers(Modifier.PUBLIC)
                     .addAnnotation(Override.class)
                     .addStatement("return Optional.of(__.class)")
-                    .returns(ParameterizedTypeName.get(Optional.class, Class.class))
+                    .returns(ParameterizedTypeName.get(ClassName.get(Optional.class),
+                             ParameterizedTypeName.get(ClassName.get(Class.class), WildcardTypeName.subtypeOf(Object.class))))
                     .build());
         }
 

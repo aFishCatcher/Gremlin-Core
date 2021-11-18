@@ -18,8 +18,8 @@
  */
 package org.apache.tinkerpop.gremlin.structure.io.binary.types;
 
-import org.apache.commons.configuration.BaseConfiguration;
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.BaseConfiguration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.structure.io.binary.DataType;
 import org.apache.tinkerpop.gremlin.structure.io.binary.GraphBinaryReader;
 import org.apache.tinkerpop.gremlin.structure.io.binary.GraphBinaryWriter;

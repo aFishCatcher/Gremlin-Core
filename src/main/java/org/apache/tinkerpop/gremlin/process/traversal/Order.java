@@ -32,52 +32,16 @@ import org.apache.tinkerpop.gremlin.util.NumberHelper;
 public enum Order implements Comparator<Object> {
 
     /**
-     * Order in ascending fashion
-     *
-     * @since 3.0.0-incubating
-     * @deprecated As of release 3.3.4, replaced by {@link #asc}.
-     */
-    @Deprecated
-    incr {
-        @Override
-        public int compare(final Object first, final Object second) {
-            return asc.compare(first, second);
-        }
-
-        @Override
-        public Order reversed() {
-            return decr;
-        }
-    },
-
-    /**
-     * Order in descending fashion.
-     *
-     * @since 3.0.0-incubating
-     * @deprecated As of release 3.3.4, replaced by {@link #desc}.
-     */
-    @Deprecated
-    decr {
-        @Override
-        public int compare(final Object first, final Object second) {
-            return desc.compare(first, second);
-        }
-
-        @Override
-        public Order reversed() {
-            return incr;
-        }
-    },
-
-    /**
-     * Order in a random fashion.
+     * Order in a random fashion. While this enum implements {@code Comparator}, the {@code compare(a,b)} method is not
+     * supported as a direct call. This change to the implementation of {@code compare(a,b)} occurred at 3.5.0 but
+     * this implementation was never used directly within the TinkerPop code base.
      *
      * @since 3.0.0-incubating
      */
     shuffle {
         @Override
         public int compare(final Object first, final Object second) {
-            return RANDOM.nextBoolean() ? -1 : 1;
+            throw new UnsupportedOperationException("Order.shuffle should not be used as an actual Comparator - it is a marker only");
         }
 
         @Override
@@ -87,11 +51,13 @@ public enum Order implements Comparator<Object> {
     },
 
     /**
-     * Order in ascending fashion
+     * Order in ascending fashion.
      *
      * @since 3.3.4
      */
     asc {
+        private final Comparator<Comparable> ascendingComparator = Comparator.nullsFirst(Comparator.<Comparable>naturalOrder());
+
         @Override
         public int compare(final Object first, final Object second) {
             // need to convert enum to string representations for comparison or else you can get cast exceptions.
@@ -100,7 +66,7 @@ public enum Order implements Comparator<Object> {
             final Object s = second instanceof Enum<?> ? ((Enum<?>) second).name() : second;
             return f instanceof Number && s instanceof Number
                     ? NumberHelper.compare((Number) f, (Number) s)
-                    : Comparator.<Comparable>naturalOrder().compare((Comparable) f, (Comparable) s);
+                    : ascendingComparator.compare((Comparable) f, (Comparable) s);
         }
 
         @Override
@@ -115,6 +81,8 @@ public enum Order implements Comparator<Object> {
      * @since 3.3.4
      */
     desc {
+        private final Comparator<Comparable> descendingComparator = Comparator.nullsLast(Comparator.<Comparable>reverseOrder());
+
         @Override
         public int compare(final Object first, final Object second) {
             // need to convert enum to string representations for comparison or else you can get cast exceptions.
@@ -123,7 +91,7 @@ public enum Order implements Comparator<Object> {
             final Object s = second instanceof Enum<?> ? ((Enum<?>) second).name() : second;
             return f instanceof Number && s instanceof Number
                     ? NumberHelper.compare((Number) s, (Number) f)
-                    : Comparator.<Comparable>reverseOrder().compare((Comparable) f, (Comparable) s);
+                    : descendingComparator.compare((Comparable) f, (Comparable) s);
         }
 
         @Override

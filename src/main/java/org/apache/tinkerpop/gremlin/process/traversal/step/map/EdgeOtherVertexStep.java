@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.util.ElementHelper;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +34,7 @@ import java.util.Set;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public class EdgeOtherVertexStep extends MapStep<Edge, Vertex> implements Configuring {
+public class EdgeOtherVertexStep extends ScalarMapStep<Edge, Vertex> implements Configuring {
     protected Parameters parameters = new Parameters();
 
     public EdgeOtherVertexStep(final Traversal.Admin traversal) {
@@ -71,28 +68,4 @@ public class EdgeOtherVertexStep extends MapStep<Edge, Vertex> implements Config
     public Set<TraverserRequirement> getRequirements() {
         return Collections.singleton(TraverserRequirement.PATH);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

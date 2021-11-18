@@ -32,11 +32,10 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
+import org.apache.tinkerpop.gremlin.structure.Property;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.structure.util.detached.DetachedFactory;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
+import org.apache.tinkerpop.gremlin.structure.util.reference.ReferenceFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,7 +76,7 @@ public final class DedupGlobalStep<S> extends FilterStep<S> implements Traversal
             return this.duplicateSet.add(TraversalUtil.applyNullable(traverser, this.dedupTraversal));
         } else {
             final List<Object> objects = new ArrayList<>(this.dedupLabels.size());
-            this.dedupLabels.forEach(label -> objects.add(TraversalUtil.applyNullable((S) this.getScopeValue(Pop.last, label, traverser), this.dedupTraversal)));
+            this.dedupLabels.forEach(label -> objects.add(TraversalUtil.applyNullable((S) this.getSafeScopeValue(Pop.last, label, traverser), this.dedupTraversal)));
             return this.duplicateSet.add(objects);
         }
     }
@@ -116,6 +115,12 @@ public final class DedupGlobalStep<S> extends FilterStep<S> implements Traversal
     @Override
     public void modulateBy(final Traversal.Admin<?, ?> dedupTraversal) {
         this.dedupTraversal = this.integrateChild(dedupTraversal);
+    }
+
+    @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        if (null != this.dedupTraversal && this.dedupTraversal.equals(oldTraversal))
+            this.dedupTraversal = this.integrateChild(newTraversal);
     }
 
     @Override
@@ -192,15 +197,30 @@ public final class DedupGlobalStep<S> extends FilterStep<S> implements Traversal
             if (null != this.dedupLabels) {
                 object = new ArrayList<>(this.dedupLabels.size());
                 for (final String label : this.dedupLabels) {
-                    ((List) object).add(TraversalUtil.applyNullable((S) this.getScopeValue(Pop.last, label, traverser), this.dedupTraversal));
+                    ((List) object).add(TraversalUtil.applyNullable((S) this.getSafeScopeValue(Pop.last, label, traverser), this.dedupTraversal));
                 }
             } else {
                 object = TraversalUtil.applyNullable(traverser, this.dedupTraversal);
             }
             if (!map.containsKey(object)) {
                 traverser.setBulk(1L);
-                // traverser.detach();
-                traverser.set(DetachedFactory.detach(traverser.get(), true)); // TODO: detect required detachment accordingly
+
+                // DetachedProperty and DetachedVertexProperty both have a transient for the Host element. that causes
+                // trouble for olap which ends up requiring the Host later. can't change the transient without some
+                // consequences: (1) we break gryo formatting and io tests start failing (2) storing the element with
+                // the property has the potential to bloat detached Element instances as it basically stores that data
+                // twice. Not sure if it's smart to change that at least in 3.4.x and not without some considerable
+                // thought as to what might be major changes. To work around the problem we will detach properties as
+                // references so that the parent element goes with it. Also, given TINKERPOP-2318 property comparisons
+                // have changed in such a way that allows this to work properly
+                if (this.onGraphComputer) {
+                    if (traverser.get() instanceof Property)
+                        traverser.set(ReferenceFactory.detach(traverser.get()));
+                    else
+                        traverser.set(DetachedFactory.detach(traverser.get(), true));
+                } else {
+                    traverser.set(traverser.get());
+                }
                 map.put(object, traverser);
             }
         }
@@ -226,7 +246,7 @@ public final class DedupGlobalStep<S> extends FilterStep<S> implements Traversal
     }
 
     @Override
-    public void setKeepLabels(Set<String> keepLabels) {
+    public void setKeepLabels(final Set<String> keepLabels) {
         this.keepLabels = new HashSet<>(keepLabels);
     }
 
@@ -234,28 +254,4 @@ public final class DedupGlobalStep<S> extends FilterStep<S> implements Traversal
     public Set<String> getKeepLabels() {
         return this.keepLabels;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

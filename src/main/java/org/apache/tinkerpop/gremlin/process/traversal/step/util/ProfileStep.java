@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.Profiling;
 import org.apache.tinkerpop.gremlin.process.traversal.util.MutableMetrics;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalHelper;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 import java.util.function.BinaryOperator;
@@ -144,28 +141,4 @@ public final class ProfileStep<S> extends AbstractStep<S, S> implements MemoryCo
             return INSTANCE;
         }
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

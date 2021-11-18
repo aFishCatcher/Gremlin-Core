@@ -38,9 +38,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.Serializer;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
@@ -184,29 +181,5 @@ public final class ShortestPathVertexProgramStep extends VertexProgramStep imple
     public int hashCode() {
         return super.hashCode();
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

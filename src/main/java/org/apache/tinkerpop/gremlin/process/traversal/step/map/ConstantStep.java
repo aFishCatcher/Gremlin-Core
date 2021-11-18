@@ -23,14 +23,11 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-public class ConstantStep<S, E> extends MapStep<S, E> {
+public class ConstantStep<S, E> extends ScalarMapStep<S, E> {
 
     private final E constant;
 
@@ -57,28 +54,4 @@ public class ConstantStep<S, E> extends MapStep<S, E> {
     public int hashCode() {
         return super.hashCode() ^ Objects.hashCode(this.constant);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

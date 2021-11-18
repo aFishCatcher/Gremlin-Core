@@ -24,9 +24,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.util.iterator.ArrayIterator;
 import org.apache.tinkerpop.gremlin.util.iterator.IteratorUtils;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.Iterator;
@@ -73,28 +70,4 @@ public final class UnfoldStep<S, E> extends FlatMapStep<S, E> {
             return new ArrayIterator<>((E[]) objectArray);
         }
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

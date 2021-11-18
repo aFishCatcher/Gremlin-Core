@@ -25,9 +25,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -39,7 +36,7 @@ import java.util.Set;
 /**
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-public final class RangeLocalStep<S> extends MapStep<S, S> {
+public final class RangeLocalStep<S> extends ScalarMapStep<S, S> {
 
     private final long low;
     private final long high;
@@ -149,28 +146,4 @@ public final class RangeLocalStep<S> extends MapStep<S, S> {
     public Set<TraverserRequirement> getRequirements() {
         return Collections.singleton(TraverserRequirement.OBJECT);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

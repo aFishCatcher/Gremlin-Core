@@ -19,8 +19,8 @@
 
 package org.apache.tinkerpop.gremlin.process.computer.traversal.strategy.decoration;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.MapConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.MapConfiguration;
 import org.apache.tinkerpop.gremlin.process.computer.Computer;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.step.VertexComputing;
@@ -34,7 +34,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.TraversalSource;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
-import org.apache.tinkerpop.gremlin.process.traversal.step.ReadWriting;
+import org.apache.tinkerpop.gremlin.process.traversal.lambda.AbstractLambdaTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.GraphStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.EmptyStep;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.AbstractTraversalStrategy;
@@ -71,7 +71,9 @@ public final class VertexProgramStrategy extends AbstractTraversalStrategy<Trave
     @Override
     public void apply(final Traversal.Admin<?, ?> traversal) {
         // VertexPrograms can only execute at the root level of a Traversal and should not be applied locally prior to RemoteStrategy
-        if (!(traversal.getParent() instanceof EmptyStep) || traversal.getStrategies().getStrategy(RemoteStrategy.class).isPresent())
+        if (!(traversal.isRoot())
+                || traversal instanceof AbstractLambdaTraversal
+                || traversal.getStrategies().getStrategy(RemoteStrategy.class).isPresent())
             return;
 
         // back propagate as()-labels off of vertex computing steps
@@ -160,8 +162,8 @@ public final class VertexProgramStrategy extends AbstractTraversalStrategy<Trave
     }
 
     public static Optional<Computer> getComputer(final TraversalStrategies strategies) {
-        final Optional<TraversalStrategy<?>> optional = strategies.toList().stream().filter(strategy -> strategy instanceof VertexProgramStrategy).findAny();
-        return optional.isPresent() ? Optional.of(((VertexProgramStrategy) optional.get()).computer) : Optional.empty();
+        final Optional<VertexProgramStrategy> optional = strategies.getStrategy(VertexProgramStrategy.class);
+        return optional.isPresent() ? Optional.of(optional.get().computer) : Optional.empty();
     }
 
     public void addGraphComputerStrategies(final TraversalSource traversalSource) {

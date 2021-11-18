@@ -25,6 +25,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.lambda.IdentityTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.ByModulating;
 import org.apache.tinkerpop.gremlin.process.traversal.step.ComparatorHolder;
+import org.apache.tinkerpop.gremlin.process.traversal.step.Seedable;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.CollectingBarrierStep;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.ProjectedTraverser;
@@ -35,15 +36,13 @@ import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.function.MultiComparator;
 import org.javatuples.Pair;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
@@ -51,14 +50,20 @@ import java.util.stream.Collectors;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBarrierStep<S> implements ComparatorHolder<S, C>, TraversalParent, ByModulating {
+public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBarrierStep<S> implements ComparatorHolder<S, C>, TraversalParent, ByModulating, Seedable {
 
     private List<Pair<Traversal.Admin<S, C>, Comparator<C>>> comparators = new ArrayList<>();
     private MultiComparator<C> multiComparator = null;
     private long limit = Long.MAX_VALUE;
+    private final Random random = new Random();
 
     public OrderGlobalStep(final Traversal.Admin traversal) {
         super(traversal);
+    }
+
+    @Override
+    public void resetSeed(long seed) {
+        this.random.setSeed(seed);
     }
 
     @Override
@@ -66,7 +71,7 @@ public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBa
         if (null == this.multiComparator) this.multiComparator = this.createMultiComparator();
         //
         if (this.multiComparator.isShuffle())
-            traverserSet.shuffle();
+            traverserSet.shuffle(random);
         else
             traverserSet.sort((Comparator) this.multiComparator);
     }
@@ -99,6 +104,19 @@ public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBa
     @Override
     public void modulateBy(final Traversal.Admin<?, ?> traversal, final Comparator comparator) {
         this.addComparator((Traversal.Admin<S, C>) traversal, comparator);
+    }
+
+    @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        int i = 0;
+        for (final Pair<Traversal.Admin<S, C>, Comparator<C>> pair : this.comparators) {
+            final Traversal.Admin<S, C> traversal = pair.getValue0();
+            if (null != traversal && traversal.equals(oldTraversal)) {
+                this.comparators.set(i, Pair.with(this.integrateChild(newTraversal), pair.getValue1()));
+                break;
+            }
+            i++;
+        }
     }
 
     @Override
@@ -149,15 +167,19 @@ public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBa
     @Override
     public MemoryComputeKey<TraverserSet<S>> getMemoryComputeKey() {
         if (null == this.multiComparator) this.multiComparator = this.createMultiComparator();
-        return MemoryComputeKey.of(this.getId(), new OrderBiOperator<>(this.limit, this.multiComparator), false, true);
+        return MemoryComputeKey.of(this.getId(), new OrderBiOperator<>(this.limit, this.multiComparator, this.random), false, true);
     }
 
     private final ProjectedTraverser<S, Object> createProjectedTraverser(final Traverser.Admin<S> traverser) {
+        // this was ProjectedTraverser<S, C> but the projection may not be C in the case of a lambda where a
+        // Comparable may not be expected but rather an object that can be compared in any way given a lambda.
+        // not sure why this is suddenly an issue but Intellij would not let certain tests pass without this
+        // adjustment here.
         final List<Object> projections = new ArrayList<>(this.comparators.size());
         for (final Pair<Traversal.Admin<S, C>, Comparator<C>> pair : this.comparators) {
             projections.add(TraversalUtil.apply(traverser, pair.getValue0()));
         }
-        return new ProjectedTraverser<>(traverser, projections);
+        return new ProjectedTraverser(traverser, projections);
     }
 
     private final MultiComparator<C> createMultiComparator() {
@@ -174,14 +196,16 @@ public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBa
 
         private long limit;
         private MultiComparator comparator;
+        private Random random;
 
         private OrderBiOperator() {
             // for serializers that need a no-arg constructor
         }
 
-        public OrderBiOperator(final long limit, final MultiComparator multiComparator) {
+        public OrderBiOperator(final long limit, final MultiComparator multiComparator, final Random random) {
             this.limit = limit;
             this.comparator = multiComparator;
+            this.random = random;
         }
 
         @Override
@@ -189,7 +213,7 @@ public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBa
             setA.addAll(setB);
             if (this.limit != -1 && setA.bulkSize() > this.limit) {
                 if (this.comparator.isShuffle())
-                    setA.shuffle();
+                    setA.shuffle(random);
                 else
                     setA.sort(this.comparator);
                 long counter = 0L;
@@ -204,28 +228,4 @@ public final class OrderGlobalStep<S, C extends Comparable> extends CollectingBa
             return setA;
         }
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

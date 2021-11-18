@@ -18,15 +18,12 @@
  */
 package org.apache.tinkerpop.gremlin.process.traversal.step.filter;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
-
-import dml.gremlin.assemblyLine.Buffer;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -41,26 +38,12 @@ public abstract class FilterStep<S> extends AbstractStep<S, S> {
     protected Traverser.Admin<S> processNextStart() {
         while (true) {
             final Traverser.Admin<S> traverser = this.starts.next();
-            // boolean filterTraverser = this.filter(traverser);
             if (this.filter(traverser))
                 return traverser;
         }
     }
 
     protected abstract boolean filter(final Traverser.Admin<S> traverser);
-    
-    public void work() {
-    	int size = this.getMyConsumer().getCopySize();
-    	int put_num = 0;
-    	for(int i=0; i<size; i++) {
-    		Traverser.Admin t = this.getMyConsumer().pollElement().asAdmin();
-    		if(this.filter(t)) {
-    			this.getMyProducer().offerElement(t);
-    			put_num++;
-    		}
-    	}
-    	this.getMyProducer().offerCopySize(put_num);
-    }
     
     @Override
     public List<Traverser> compute(Traverser t) {
@@ -70,19 +53,5 @@ public abstract class FilterStep<S> extends AbstractStep<S, S> {
     	else {
     		return null;
     	}
-    }
-    
-    @Override
-    public void compute(Buffer<Traverser> up, Buffer<Traverser> down)  {
-    	int N = up.takeNum();
-    	int count = 0;
-    	for(int i=0; i<N; i++) {
-    		Traverser t = up.takeData();
-    		if(this.filter(t.asAdmin())) {
-    			down.putData(t);
-    			count++;
-    		}
-    	}
-    	down.putNum(count);
     }
 }

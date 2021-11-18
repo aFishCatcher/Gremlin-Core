@@ -19,10 +19,6 @@
 package org.apache.tinkerpop.gremlin.process.traversal.step.map;
 
 import org.apache.tinkerpop.gremlin.util.NumberHelper;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
@@ -36,7 +32,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-public final class MeanLocalStep<E extends Number, S extends Iterable<E>> extends MapStep<S, Number> {
+public final class MeanLocalStep<E extends Number, S extends Iterable<E>> extends ScalarMapStep<S, Number> {
 
     public MeanLocalStep(final Traversal.Admin traversal) {
         super(traversal);
@@ -61,28 +57,4 @@ public final class MeanLocalStep<E extends Number, S extends Iterable<E>> extend
     public Set<TraverserRequirement> getRequirements() {
         return Collections.singleton(TraverserRequirement.OBJECT);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

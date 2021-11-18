@@ -19,8 +19,6 @@
 package org.apache.tinkerpop.gremlin.util;
 
 import org.apache.tinkerpop.gremlin.structure.io.Storage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,7 +27,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -173,7 +170,7 @@ public class TestSupport {
         final File tempFile = new File(temp, resourceName + extension);
 
         // these checks are present mostly for windows compatibility where an outputstream created on a non-existent
-        // file will cause an error. 
+        // file will cause an error.
         if(tempFile.exists() && !overwrite){
             // overwrite is disabled and file already exists -> reuse as-is
             return tempFile;

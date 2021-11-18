@@ -22,10 +22,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
 
-import dml.gremlin.assemblyLine.Buffer;
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,22 +39,9 @@ public final class IdentityStep<S> extends AbstractStep<S, S> {
     protected Traverser.Admin<S> processNextStart() throws NoSuchElementException {
         return this.starts.next();
     }
-
+    
     @Override
     public List<Traverser> compute(Traverser t) {
     	return Arrays.asList(t);
     }
-    
-    @Override
-    public void compute(Buffer<Traverser> up, Buffer<Traverser> down)  {
-    	int N = up.takeNum();
-    	int count = 0;
-    	for(int i=0; i<N; i++) {
-    		Traverser t = up.takeData();
-    		down.putData(t);
-    		count++;
-    	}
-    	down.putNum(count);
-    }
-
 }

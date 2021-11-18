@@ -26,10 +26,7 @@ import org.apache.tinkerpop.gremlin.process.computer.traversal.lambda.HaltedTrav
 import org.apache.tinkerpop.gremlin.process.traversal.step.Configuring;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
-import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
-import org.apache.tinkerpop.gremlin.process.traversal.step.ByModulating;
-import org.apache.tinkerpop.gremlin.process.traversal.step.TimesModulating;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.Parameters;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
@@ -39,9 +36,6 @@ import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -50,8 +44,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Stephen Mallette (http://stephen.genoprime.com)
  */
-public final class PageRankVertexProgramStep extends VertexProgramStep
-        implements TraversalParent, ByModulating, TimesModulating, Configuring {
+public final class PageRankVertexProgramStep extends VertexProgramStep implements TraversalParent, Configuring {
 
     private Parameters parameters = new Parameters();
     private PureTraversal<Vertex, Edge> edgeTraversal;
@@ -80,7 +73,7 @@ public final class PageRankVertexProgramStep extends VertexProgramStep
             if (!(keyValues[1] instanceof Integer))
                 throw new IllegalArgumentException("PageRank.times requires an Integer as its argument");
             this.times = (int) keyValues[1];
-        }else {
+        } else {
             this.parameters.set(this, keyValues);
         }
     }
@@ -88,33 +81,6 @@ public final class PageRankVertexProgramStep extends VertexProgramStep
     @Override
     public Parameters getParameters() {
         return parameters;
-    }
-
-    /**
-     * @deprecated As of release 3.4.0, replaced by {@link #configure(Object...)}
-     */
-    @Deprecated
-    @Override
-    public void modulateBy(final Traversal.Admin<?, ?> edgeTraversal) {
-        configure(PageRank.edges, edgeTraversal);
-    }
-
-    /**
-     * @deprecated As of release 3.4.0, replaced by {@link #configure(Object...)}
-     */
-    @Deprecated
-    @Override
-    public void modulateBy(final String pageRankProperty) {
-        configure(PageRank.propertyName, pageRankProperty);
-    }
-
-    /**
-     * @deprecated As of release 3.4.0, replaced by {@link #configure(Object...)}
-     */
-    @Deprecated
-    @Override
-    public void modulateTimes(int times) {
-        configure(PageRank.times, times);
     }
 
     @Override
@@ -163,29 +129,5 @@ public final class PageRankVertexProgramStep extends VertexProgramStep
     public int hashCode() {
         return super.hashCode() ^ this.edgeTraversal.hashCode() ^ this.pageRankProperty.hashCode() ^ this.times;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

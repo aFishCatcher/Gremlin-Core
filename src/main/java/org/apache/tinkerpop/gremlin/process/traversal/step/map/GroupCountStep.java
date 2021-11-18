@@ -30,9 +30,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.function.HashMapSupplier;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -82,6 +79,12 @@ public final class GroupCountStep<S, E> extends ReducingBarrierStep<S, Map<E, Lo
     }
 
     @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        if (null != this.keyTraversal && this.keyTraversal.equals(oldTraversal))
+            this.keyTraversal = this.integrateChild(newTraversal);
+    }
+
+    @Override
     public GroupCountStep<S, E> clone() {
         final GroupCountStep<S, E> clone = (GroupCountStep<S, E>) super.clone();
         if (null != this.keyTraversal)
@@ -125,28 +128,4 @@ public final class GroupCountStep<S, E> extends ReducingBarrierStep<S, Map<E, Lo
             return INSTANCE;
         }
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

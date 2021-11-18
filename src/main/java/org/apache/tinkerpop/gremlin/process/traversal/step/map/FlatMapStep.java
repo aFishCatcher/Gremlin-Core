@@ -24,10 +24,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
 import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
-import dml.gremlin.assemblyLine.Buffer;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,20 +66,6 @@ public abstract class FlatMapStep<S, E> extends AbstractStep<S, E> {
         CloseableIterator.closeIterator(iterator);
     }
     
-    public void work() {
-    	int size = this.getMyConsumer().getCopySize();
-    	int put_num = 0;
-    	for(int i=0; i<size; i++) {
-    		this.head = this.getMyConsumer().pollElement().asAdmin();
-    		this.iterator = this.flatMap(this.head);
-    		while(this.iterator.hasNext()) {
-    			this.getMyProducer().offerElement(this.head.split(this.iterator.next(),this));
-    			put_num++;
-    		}
-    	}
-    	this.getMyProducer().offerCopySize(put_num);
-    }
-    
     @Override
     public List<Traverser> compute(Traverser t) {
     	Iterator<E> iterator = this.flatMap(t.asAdmin());
@@ -90,20 +73,5 @@ public abstract class FlatMapStep<S, E> extends AbstractStep<S, E> {
     	while(iterator.hasNext())
     		list.add(t.asAdmin().split(iterator.next(),this));
     	return list;
-    }
-    
-    @Override
-    public void compute(Buffer<Traverser> up, Buffer<Traverser> down)  {
-    	int N = up.takeNum();
-    	int count = 0;
-    	for(int i=0; i<N; i++) {
-    		Traverser t = up.takeData();
-    		Iterator<E> iterator = this.flatMap(t.asAdmin());
-    		while(iterator.hasNext()) {
-    			down.putData(t.asAdmin().split(iterator.next(),this));
-    			count++;
-    		}
-    	}
-    	down.putNum(count);
     }
 }

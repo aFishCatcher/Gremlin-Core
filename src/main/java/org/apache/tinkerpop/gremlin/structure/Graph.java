@@ -18,7 +18,7 @@
  */
 package org.apache.tinkerpop.gremlin.structure;
 
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalSource;
@@ -323,8 +323,8 @@ public interface Graph extends AutoCloseable, Host {
     public Variables variables();
 
     /**
-     * Get the {@code Configuration} associated with the construction of this graph.  Whatever configuration was
-     * passed to {@link GraphFactory#open(Configuration)} is what should be returned by this method.
+     * Get the {@code Configuration} associated with the construction of this graph. Whatever configuration was passed
+     * to {@link GraphFactory#open(Configuration)} is what should be returned by this method.
      *
      * @return the configuration used during graph construction.
      */
@@ -686,6 +686,17 @@ public interface Graph extends AutoCloseable, Host {
             public static final String FEATURE_ANY_IDS = "AnyIds";
             public static final String FEATURE_ADD_PROPERTY = "AddProperty";
             public static final String FEATURE_REMOVE_PROPERTY = "RemoveProperty";
+            public static final String FEATURE_NULL_PROPERTY_VALUES = "NullPropertyValues";
+
+            /**
+             * Determines if an {@link Element} allows properties with {@code null} property values. In the event that
+             * this value is {@code false}, the underlying graph must treat {@code null} as an indication to remove
+             * the property.
+             */
+            @FeatureDescriptor(name = FEATURE_NULL_PROPERTY_VALUES)
+            public default boolean supportsNullPropertyValues() {
+                return true;
+            }
 
             /**
              * Determines if an {@link Element} allows properties to be added.  This feature is set independently from
@@ -820,6 +831,15 @@ public interface Graph extends AutoCloseable, Host {
             public static final String FEATURE_UUID_IDS = "UuidIds";
             public static final String FEATURE_CUSTOM_IDS = "CustomIds";
             public static final String FEATURE_ANY_IDS = "AnyIds";
+            public static final String FEATURE_NULL_PROPERTY_VALUES = "NullPropertyValues";
+
+            /**
+             * Determines if meta-properties allow for {@code null} property values.
+             */
+            @FeatureDescriptor(name = FEATURE_NULL_PROPERTY_VALUES)
+            public default boolean supportsNullPropertyValues() {
+                return true;
+            }
 
             /**
              * Determines if a {@link VertexProperty} allows properties to be removed.

@@ -19,40 +19,37 @@
 
 package org.apache.tinkerpop.gremlin.process.traversal.translator;
 
-import org.apache.commons.configuration.ConfigurationConverter;
+import org.apache.commons.configuration2.ConfigurationConverter;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.tinkerpop.gremlin.process.traversal.Bytecode;
-import org.apache.tinkerpop.gremlin.process.traversal.Operator;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.process.traversal.SackFunctions;
+import org.apache.tinkerpop.gremlin.process.traversal.Script;
 import org.apache.tinkerpop.gremlin.process.traversal.TextP;
 import org.apache.tinkerpop.gremlin.process.traversal.Translator;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalSource;
-import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalOptionParent;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.TraversalStrategyProxy;
 import org.apache.tinkerpop.gremlin.process.traversal.util.ConnectiveP;
 import org.apache.tinkerpop.gremlin.process.traversal.util.OrP;
 import org.apache.tinkerpop.gremlin.structure.Edge;
-import org.apache.tinkerpop.gremlin.structure.Element;
-import org.apache.tinkerpop.gremlin.structure.T;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.function.Lambda;
-import org.apache.tinkerpop.gremlin.util.iterator.ArrayIterator;
-import org.apache.tinkerpop.gremlin.util.iterator.IteratorUtils;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,26 +61,40 @@ import java.util.stream.Stream;
  */
 public final class PythonTranslator implements Translator.ScriptTranslator {
 
-    private static final Set<String> STEP_NAMES = Stream.of(GraphTraversal.class.getMethods()).filter(method -> Traversal.class.isAssignableFrom(method.getReturnType())).map(Method::getName).collect(Collectors.toSet());
-    private static final Set<String> NO_STATIC = Stream.of(T.values(), Operator.values())
-            .flatMap(arg -> IteratorUtils.stream(new ArrayIterator<>(arg)))
-            .map(arg -> ((Enum) arg).name())
-            .collect(Collectors.toCollection(() -> new HashSet<>(Collections.singleton("not"))));
+    private static final Set<String> STEP_NAMES = Stream.of(GraphTraversal.class.getMethods()).filter(
+            method -> Traversal.class.isAssignableFrom(method.getReturnType())).map(Method::getName).
+            collect(Collectors.toSet());
 
     private final String traversalSource;
-    private final boolean importStatics;
+    private final TypeTranslator typeTranslator;
 
-    PythonTranslator(final String traversalSource, final boolean importStatics) {
+    private PythonTranslator(final String traversalSource, final TypeTranslator typeTranslator) {
         this.traversalSource = traversalSource;
-        this.importStatics = importStatics;
+        this.typeTranslator = typeTranslator;
     }
 
-    public static PythonTranslator of(final String traversalSource, final boolean importStatics) {
-        return new PythonTranslator(traversalSource, importStatics);
-    }
-
+    /**
+     * Creates the translator with a {@code false} argument to {@code withParameters} using
+     * {@link #of(String, boolean)}.
+     */
     public static PythonTranslator of(final String traversalSource) {
-        return new PythonTranslator(traversalSource, false);
+        return of(traversalSource, false);
+    }
+
+    /**
+     * Creates the translator with the {@link DefaultTypeTranslator} passing the {@code withParameters} option to it
+     * which will handle type translation in a fashion that should typically increase cache hits and reduce
+     * compilation times if enabled at the sacrifice to rewriting of the script that could reduce readability.
+     */
+    public static PythonTranslator of(final String traversalSource, final boolean withParameters) {
+        return of(traversalSource, new DefaultTypeTranslator(withParameters));
+    }
+
+    /**
+     * Creates the translator with a custom {@link TypeTranslator} instance.
+     */
+    public static PythonTranslator of(final String traversalSource, final TypeTranslator typeTranslator) {
+        return new PythonTranslator(traversalSource, typeTranslator);
     }
 
     @Override
@@ -92,8 +103,8 @@ public final class PythonTranslator implements Translator.ScriptTranslator {
     }
 
     @Override
-    public String translate(final Bytecode bytecode) {
-        return this.internalTranslate(this.traversalSource, bytecode);
+    public Script translate(final Bytecode bytecode) {
+        return typeTranslator.apply(traversalSource, bytecode);
     }
 
     @Override
@@ -108,160 +119,235 @@ public final class PythonTranslator implements Translator.ScriptTranslator {
 
     ///////
 
-    private String internalTranslate(final String start, final Bytecode bytecode) {
-        final StringBuilder traversalScript = new StringBuilder(start);
-        for (final Bytecode.Instruction instruction : bytecode.getInstructions()) {
-            final String methodName = instruction.getOperator();
-            final Object[] arguments = instruction.getArguments();
-            if (0 == arguments.length)
-                traversalScript.append(".").append(resolveSymbol(methodName)).append("()");
-            else if (methodName.equals("range") && 2 == arguments.length)
-                if (((Number) arguments[0]).longValue() + 1 == ((Number) arguments[1]).longValue())
-                    traversalScript.append("[").append(arguments[0]).append("]");
-                else
-                    traversalScript.append("[").append(arguments[0]).append(":").append(arguments[1]).append("]");
-            else if (methodName.equals("limit") && 1 == arguments.length)
-                traversalScript.append("[0:").append(arguments[0]).append("]");
-            else if (methodName.equals("values") && 1 == arguments.length && traversalScript.length() > 3 && !STEP_NAMES.contains(arguments[0].toString()))
-                traversalScript.append(".").append(arguments[0]);
-            else {
-                traversalScript.append(".");
-                String temp = resolveSymbol(methodName) + "(";
+    /**
+     * Performs standard type translation for the TinkerPop types to Python.
+     */
+    public static class DefaultTypeTranslator extends AbstractTypeTranslator {
 
-                // jython has trouble with java varargs...wrapping in collection seems to solve the problem
-                final boolean varargsBeware = instruction.getOperator().equals(TraversalSource.Symbols.withStrategies)
-                        || instruction.getOperator().equals(TraversalSource.Symbols.withoutStrategies);
-                if (varargsBeware) temp = temp + "[";
+        public DefaultTypeTranslator(final boolean withParameters) {
+            super(withParameters);
+        }
 
-                for (final Object object : arguments) {
-                    temp = temp + convertToString(object) + ",";
-                }
-                temp = temp.substring(0, temp.length() - 1);
+        @Override
+        protected String getNullSyntax() {
+            return "None";
+        }
 
-                if (varargsBeware) temp = temp + "]";
+        @Override
+        protected String getSyntax(final String o) {
+            return o.contains("'") || o.contains(System.lineSeparator()) ?
+                    "\"\"\"" + o + "\"\"\"" : "'" + o + "'";
+        }
 
-                traversalScript.append(temp).append(")");
+        @Override
+        protected String getSyntax(final Boolean o) {
+            return o ? "True" : "False";
+        }
+
+        @Override
+        protected String getSyntax(final Date o) {
+            return "datetime.datetime.utcfromtimestamp(" + o.getTime() + " / 1000.0)";
+        }
+
+        @Override
+        protected String getSyntax(final Timestamp o) {
+            return "timestamp(" + o.getTime() + " / 1000.0)";
+        }
+
+        @Override
+        protected String getSyntax(final UUID o) {
+            return "UUID('" + o.toString() +"')";
+        }
+
+        @Override
+        protected String getSyntax(final Lambda o) {
+            final String lambdaString = o.getLambdaScript().trim();
+            return "lambda: \"" + StringEscapeUtils.escapeJava(lambdaString) + "\"";
+        }
+
+        @Override
+        protected String getSyntax(final Number o) {
+            // todo: nan/inf
+            // all int/short/BigInteger/long are just python int/bignum
+            if (o instanceof Double || o instanceof Float || o instanceof BigDecimal)
+                return "float(" + o + ")";
+            else if (o instanceof Byte)
+                return "SingleByte(" + o + ")";
+            else
+                return o.toString();
+        }
+
+        @Override
+        protected String getSyntax(final SackFunctions.Barrier o) {
+            return "Barrier." + resolveSymbol(o.toString());
+        }
+
+        @Override
+        protected String getSyntax(final VertexProperty.Cardinality o) {
+            return "Cardinality." + resolveSymbol(o.toString());
+        }
+
+        @Override
+        protected String getSyntax(final TraversalOptionParent.Pick o) {
+            return "Pick." + resolveSymbol(o.toString());
+        }
+
+        @Override
+        protected Script produceScript(final Set<?> o) {
+            final Iterator<?> iterator = o.iterator();
+            script.append("set(");
+            while(iterator.hasNext()) {
+                convertToScript(iterator.next());
+                if (iterator.hasNext())
+                    script.append(",");
             }
-            // clip off __.
-            if (this.importStatics && traversalScript.substring(0, 3).startsWith("__.")
-                    && !NO_STATIC.stream().filter(name -> traversalScript.substring(3).startsWith(resolveSymbol(name))).findAny().isPresent()) {
-                traversalScript.delete(0, 3);
+            return script.append(")");
+        }
+
+        @Override
+        protected Script produceScript(final List<?> o) {
+            final Iterator<?> iterator = o.iterator();
+            script.append("[");
+            while(iterator.hasNext()) {
+                convertToScript(iterator.next());
+                if (iterator.hasNext())
+                    script.append(",");
+            }
+            return script.append("]");
+        }
+
+        @Override
+        protected Script produceScript(final Map<?, ?> o) {
+            script.append("{");
+            final Iterator<? extends Map.Entry<?, ?>> itty = o.entrySet().iterator();
+            while (itty.hasNext()) {
+                final Map.Entry<?,?> entry = itty.next();
+                convertToScript(entry.getKey()).append(":");
+                convertToScript(entry.getValue());
+                if (itty.hasNext())
+                    script.append(",");
+            }
+            return script.append("}");
+        }
+
+        @Override
+        protected Script produceScript(final Class<?> o) {
+            return script.append("GremlinType(" + o.getCanonicalName() + ")");
+        }
+
+        @Override
+        protected Script produceScript(final Enum<?> o) {
+            return script.append(o.getDeclaringClass().getSimpleName() + "." + resolveSymbol(o.toString()));
+        }
+
+        @Override
+        protected Script produceScript(final Vertex o) {
+            script.append("Vertex(");
+            convertToScript(o.id()).append(",");
+            return convertToScript(o.label()).append(")");
+        }
+
+        @Override
+        protected Script produceScript(final Edge o) {
+            script.append("Edge(");
+            convertToScript(o.id()).append(",");
+            convertToScript(o.outVertex()).append(",");
+            convertToScript(o.label()).append(",");
+            return convertToScript(o.inVertex()).append(")");
+        }
+
+        @Override
+        protected Script produceScript(final VertexProperty<?> o) {
+            script.append("VertexProperty(");
+            convertToScript(o.id()).append(",");
+            convertToScript(o.label()).append(",");
+            return convertToScript(o.value()).append(")");
+        }
+
+        @Override
+        protected Script produceScript(final TraversalStrategyProxy<?> o) {
+            if (o.getConfiguration().isEmpty())
+                return script.append("TraversalStrategy('" + o.getStrategyClass().getSimpleName() + "', None, '" + o.getStrategyClass().getName() + "')");
+            else {
+                script.append("TraversalStrategy('").append(o.getStrategyClass().getSimpleName()).append("',");
+                convertToScript(ConfigurationConverter.getMap(o.getConfiguration()));
+                script.append(", '");
+                script.append(o.getStrategyClass().getName());
+                return script.append("')");
             }
         }
-        return traversalScript.toString();
-    }
 
-    protected String convertToString(final Object object) {
-        if (object instanceof Bytecode.Binding)
-            return ((Bytecode.Binding) object).variable();
-        else if (object instanceof Bytecode)
-            return this.internalTranslate("__", (Bytecode) object);
-        else if (object instanceof Traversal)
-            return convertToString(((Traversal) object).asAdmin().getBytecode());
-        else if (object instanceof String)
-            return ((String) object).contains("'") || ((String) object).contains(System.lineSeparator()) ?
-                    "\"\"\"" + object + "\"\"\"" : "'" + object + "'";
-        else if (object instanceof Set) {
-            final Set<String> set = new LinkedHashSet<>(((Set) object).size());
-            for (final Object item : (Set) object) {
-                set.add(convertToString(item));
+        @Override
+        protected Script produceScript(final String traversalSource, final Bytecode o) {
+            script.append(traversalSource);
+            for (final Bytecode.Instruction instruction : o.getInstructions()) {
+                final String methodName = instruction.getOperator();
+                final Object[] arguments = instruction.getArguments();
+                if (0 == arguments.length)
+                    script.append(".").append(resolveSymbol(methodName)).append("()");
+                else if (methodName.equals("range") && 2 == arguments.length)
+                    if (((Number) arguments[0]).longValue() + 1 == ((Number) arguments[1]).longValue())
+                        script.append("[").append(arguments[0].toString()).append("]");
+                    else
+                        script.append("[").append(arguments[0].toString()).append(":").append(arguments[1].toString()).append("]");
+                else if (methodName.equals("limit") && 1 == arguments.length)
+                    script.append("[0:").append(arguments[0].toString()).append("]");
+                else if (methodName.equals("values") && 1 == arguments.length && script.getScript().length() > 3 && !STEP_NAMES.contains(arguments[0].toString()))
+                    script.append(".").append(arguments[0].toString());
+                else {
+                    script.append(".").append(resolveSymbol(methodName)).append("(");
+
+                    // python has trouble with java varargs...wrapping in collection seems to solve the problem
+                    final boolean varargsBeware = instruction.getOperator().equals(TraversalSource.Symbols.withStrategies)
+                            || instruction.getOperator().equals(TraversalSource.Symbols.withoutStrategies);
+                    if (varargsBeware) script.append("*[");
+
+                    final Iterator<?> itty = Stream.of(arguments).iterator();
+                    while (itty.hasNext()) {
+                        convertToScript(itty.next());
+                        if (itty.hasNext()) script.append(",");
+                    }
+
+                    if (varargsBeware) script.append("]");
+
+                    script.append(")");
+                }
             }
-            return "set(" + set.toString() + ")";
-        } else if (object instanceof List) {
-            final List<String> list = new ArrayList<>(((List) object).size());
-            for (final Object item : (List) object) {
-                list.add(convertToString(item));
-            }
-            return list.toString();
-        } else if (object instanceof Map) {
-            final StringBuilder map = new StringBuilder("{");
-            for (final Map.Entry<?, ?> entry : ((Map<?, ?>) object).entrySet()) {
-                map.append(convertToString(entry.getKey())).
-                        append(":").
-                        append(convertToString(entry.getValue())).
-                        append(",");
-            }
-            return map.length() > 1 ? map.substring(0, map.length() - 1) + "}" : map.append("}").toString();
-        } else if (object instanceof Long)
-            return object + "L";
-        else if (object instanceof TraversalStrategyProxy) {
-            return resolveTraversalStrategyProxy((TraversalStrategyProxy) object);
-        } else if (object instanceof TraversalStrategy) {
-            return convertToString(new TraversalStrategyProxy((TraversalStrategy) object));
-        } else if (object instanceof Boolean)
-            return object.equals(Boolean.TRUE) ? "True" : "False";
-        else if (object instanceof Class)
-            return ((Class) object).getCanonicalName();
-        else if (object instanceof VertexProperty.Cardinality)
-            return "Cardinality." + resolveSymbol(object.toString());
-        else if (object instanceof SackFunctions.Barrier)
-            return "Barrier." + resolveSymbol(object.toString());
-        else if (object instanceof TraversalOptionParent.Pick)
-            return "Pick." + resolveSymbol(object.toString());
-        else if (object instanceof Enum)
-            return convertStatic(((Enum) object).getDeclaringClass().getSimpleName() + ".") + resolveSymbol(object.toString());
-        else if (object instanceof P)
-            return convertPToString((P) object, new StringBuilder()).toString();
-        else if (object instanceof Element) {
-            if (object instanceof Vertex) {
-                final Vertex vertex = (Vertex) object;
-                return "Vertex(" + convertToString(vertex.id()) + "," + convertToString(vertex.label()) + ")";
-            } else if (object instanceof Edge) {
-                final Edge edge = (Edge) object;
-                return "Edge(" + convertToString(edge.id()) + "," +
-                        convertToString(edge.outVertex()) + "," +
-                        convertToString(edge.label()) + "," +
-                        convertToString(edge.inVertex()) + ")";
+            return script;
+        }
+
+        @Override
+        protected Script produceScript(final P<?> p) {
+            if (p instanceof TextP) {
+                script.append("TextP.").append(resolveSymbol(p.getBiPredicate().toString())).append("(");
+                convertToScript(p.getValue());
+            } else if (p instanceof ConnectiveP) {
+                // ConnectiveP gets some special handling because it's reduced to and(P, P, P) and we want it
+                // generated the way it was written which was P.and(P).and(P)
+                final List<P<?>> list = ((ConnectiveP) p).getPredicates();
+                final String connector = p instanceof OrP ? "or_" : "and_";
+                for (int i = 0; i < list.size(); i++) {
+                    produceScript(list.get(i));
+
+                    // for the first/last P there is no parent to close
+                    if (i > 0 && i < list.size() - 1) script.append(")");
+
+                    // add teh connector for all but last P
+                    if (i < list.size() - 1) {
+                        script.append(".").append(connector).append("(");
+                    }
+                }
             } else {
-                final VertexProperty vertexProperty = (VertexProperty) object;
-                return "VertexProperty(" + convertToString(vertexProperty.id()) + "," +
-                        convertToString(vertexProperty.label()) + "," +
-                        convertToString(vertexProperty.value()) + ")";
+                script.append("P.").append(resolveSymbol(p.getBiPredicate().toString())).append("(");
+                convertToScript(p.getValue());
             }
-        } else if (object instanceof Lambda)
-            return convertLambdaToString((Lambda) object);
-        else
-            return null == object ? "None" : object.toString();
-    }
+            script.append(")");
+            return script;
+        }
 
-    private String convertStatic(final String name) {
-        return this.importStatics ? "" : name;
-    }
-
-    private StringBuilder convertPToString(final P p, final StringBuilder current) {
-        if (p instanceof TextP) return convertTextPToString((TextP) p, current);
-        if (p instanceof ConnectiveP) {
-            final List<P<?>> list = ((ConnectiveP) p).getPredicates();
-            for (int i = 0; i < list.size(); i++) {
-                convertPToString(list.get(i), current);
-                if (i < list.size() - 1)
-                    current.append(p instanceof OrP ? ".or_(" : ".and_(");
-            }
-            current.append(")");
-        } else
-            current.append(convertStatic("P.")).append(p.getBiPredicate().toString()).append("(").append(convertToString(p.getValue())).append(")");
-        return current;
-    }
-
-    private StringBuilder convertTextPToString(final TextP p, final StringBuilder current) {
-        current.append(convertStatic("TextP.")).append(p.getBiPredicate().toString()).append("(").append(convertToString(p.getValue())).append(")");
-        return current;
-    }
-
-    protected String convertLambdaToString(final Lambda lambda) {
-        final String lambdaString = lambda.getLambdaScript().trim();
-        return lambdaString.startsWith("lambda") ? lambdaString : "lambda " + lambdaString;
-    }
-
-    protected String resolveSymbol(final String methodName) {
-        return SymbolHelper.toPython(methodName);
-    }
-
-    protected String resolveTraversalStrategyProxy(final TraversalStrategyProxy proxy) {
-        if (proxy.getConfiguration().isEmpty())
-            return "TraversalStrategy('" + proxy.getStrategyClass().getSimpleName() + "')";
-        else
-            return "TraversalStrategy('" + proxy.getStrategyClass().getSimpleName() + "'," + convertToString(ConfigurationConverter.getMap(proxy.getConfiguration())) + ")";
+        protected String resolveSymbol(final String methodName) {
+            return SymbolHelper.toPython(methodName);
+        }
     }
 
     static final class SymbolHelper {

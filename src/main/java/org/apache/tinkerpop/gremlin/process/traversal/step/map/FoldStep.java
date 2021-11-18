@@ -25,9 +25,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.ReducingBarrierS
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.util.function.ArrayListSupplier;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -96,28 +93,4 @@ public final class FoldStep<S, E> extends ReducingBarrierStep<S, E> {
         }
 
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

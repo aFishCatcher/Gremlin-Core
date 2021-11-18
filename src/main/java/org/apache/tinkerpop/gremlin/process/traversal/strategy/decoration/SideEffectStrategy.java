@@ -44,13 +44,13 @@ public final class SideEffectStrategy extends AbstractTraversalStrategy<Traversa
 
     @Override
     public void apply(final Traversal.Admin<?, ?> traversal) {
-        if (traversal.getParent() instanceof EmptyStep) {
+        if (traversal.isRoot()) {
             this.sideEffects.forEach(triplet -> traversal.getSideEffects().register(triplet.getValue0(), triplet.getValue1(), triplet.getValue2()));
         }
     }
 
     public static <A> void addSideEffect(final TraversalStrategies traversalStrategies, final String key, final A value, final BinaryOperator<A> reducer) {
-        SideEffectStrategy strategy = (SideEffectStrategy) traversalStrategies.toList().stream().filter(s -> s instanceof SideEffectStrategy).findAny().orElse(null);
+        SideEffectStrategy strategy = traversalStrategies.getStrategy(SideEffectStrategy.class).orElse(null);
         if (null == strategy) {
             strategy = new SideEffectStrategy();
             traversalStrategies.addStrategies(strategy);

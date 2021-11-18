@@ -23,9 +23,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -35,7 +32,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-public final class CountLocalStep<S> extends MapStep<S, Long> {
+public final class CountLocalStep<S> extends ScalarMapStep<S, Long> {
 
     public CountLocalStep(final Traversal.Admin traversal) {
         super(traversal);
@@ -53,28 +50,4 @@ public final class CountLocalStep<S> extends MapStep<S, Long> {
     public Set<TraverserRequirement> getRequirements() {
         return Collections.singleton(TraverserRequirement.OBJECT);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

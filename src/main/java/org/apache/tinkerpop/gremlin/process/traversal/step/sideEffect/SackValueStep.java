@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -52,6 +49,12 @@ public final class SackValueStep<S, A, B> extends SideEffectStep<S> implements T
     @Override
     public void modulateBy(final Traversal.Admin<?, ?> sackTraversal) {
         this.sackTraversal = this.integrateChild(sackTraversal);
+    }
+
+    @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        if (null != this.sackTraversal && this.sackTraversal.equals(oldTraversal))
+            this.sackTraversal = this.integrateChild(newTraversal);
     }
 
     @Override
@@ -96,28 +99,4 @@ public final class SackValueStep<S, A, B> extends SideEffectStep<S> implements T
         super.setTraversal(parentTraversal);
         this.integrateChild(this.sackTraversal);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

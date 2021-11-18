@@ -26,9 +26,6 @@ import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.apache.tinkerpop.gremlin.structure.util.Attachable;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -108,28 +105,4 @@ public class StartStep<S> extends AbstractStep<S, S> {
     public static boolean isVariableStartStep(final Step<?, ?> step) {
         return step.getClass().equals(StartStep.class) && null == ((StartStep) step).start && ((StartStep) step).labels.size() == 1;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

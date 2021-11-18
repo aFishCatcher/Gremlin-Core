@@ -30,9 +30,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.BytecodeHelper;
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversal;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.NoSuchElementException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -91,7 +88,6 @@ public final class RemoteStep<S, E> extends AbstractStep<S, E> {
             if (null == traversalFuture.get()) {
                 traversalFuture.set(this.remoteConnection.submitAsync(this.traversal.getBytecode()).<Traversal<?, E>>thenApply(t -> {
                     this.remoteTraversal = (RemoteTraversal<?, E>) t;
-                    this.traversal.setSideEffects(this.remoteTraversal.getSideEffects());
                     return traversal;
                 }));
             }
@@ -101,28 +97,4 @@ public final class RemoteStep<S, E> extends AbstractStep<S, E> {
             throw new IllegalStateException(rce);
         }
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

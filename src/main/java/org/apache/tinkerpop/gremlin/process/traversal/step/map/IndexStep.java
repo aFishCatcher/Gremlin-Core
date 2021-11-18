@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.WithOptions;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.util.iterator.IteratorUtils;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,7 +40,7 @@ import java.util.function.Function;
 /**
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-public class IndexStep<S, E> extends MapStep<S, E> implements TraversalParent, Configuring {
+public class IndexStep<S, E> extends ScalarMapStep<S, E> implements TraversalParent, Configuring {
 
     private final static IllegalArgumentException INVALID_CONFIGURATION_EXCEPTION =
             new IllegalArgumentException("WithOptions.indexer requires a single Integer argument (possible " + "" +
@@ -117,29 +114,5 @@ public class IndexStep<S, E> extends MapStep<S, E> implements TraversalParent, C
     public Parameters getParameters() {
         return parameters;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }
 

@@ -40,9 +40,6 @@ import org.apache.tinkerpop.gremlin.structure.io.gryo.GryoReader;
 import org.apache.tinkerpop.gremlin.structure.io.gryo.GryoWriter;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -191,7 +188,7 @@ public class IoStep<S> extends AbstractStep<S,S> implements ReadWriting {
                 final GryoMapper.Builder builder = GryoMapper.build();
                 detectRegistries().forEach(builder::addRegistry);
                 return GryoWriter.build().mapper(builder.create()).create();
-            }else if (objectOrClass.equals(IO.graphml))
+            } else if (objectOrClass.equals(IO.graphml))
                 return GraphMLWriter.build().create();
             else {
                 try {
@@ -254,28 +251,4 @@ public class IoStep<S> extends AbstractStep<S,S> implements ReadWriting {
         clone.mode = this.mode;
         return clone;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -18,8 +18,8 @@
  */
 package org.apache.tinkerpop.gremlin.process.traversal;
 
-import org.apache.commons.configuration.BaseConfiguration;
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.BaseConfiguration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.PartitionStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.ProfileStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.CountStrategy;
@@ -31,7 +31,7 @@ import java.util.Set;
 
 /**
  * A {@link TraversalStrategy} defines a particular atomic operation for mutating a {@link Traversal} prior to its evaluation.
- * There are 6 pre-defined "traversal categories": {@link DecorationStrategy}, {@link OptimizationStrategy}, {@link ProviderOptimizationStrategy}, {@link FinalizationStrategy}, and {@link VerificationStrategy}.
+ * There are 5 pre-defined "traversal categories": {@link DecorationStrategy}, {@link OptimizationStrategy}, {@link ProviderOptimizationStrategy}, {@link FinalizationStrategy}, and {@link VerificationStrategy}.
  * Strategies within a category are sorted amongst themselves and then category sorts are applied in the ordered specified previous.
  * That is, decorations are applied, then optimizations, then provider optimizations, then finalizations, and finally, verifications.
  * If a strategy does not fit within the specified categories, then it can simply implement {@link TraversalStrategy} and can have priors/posts that span categories.

@@ -38,10 +38,6 @@ import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
-import dml.gremlin.assemblyLine.Buffer;
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -152,21 +148,15 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
     @Override
     protected Traverser.Admin<E> processNextStart() {
         while (true) {
-            if (this.iterator.hasNext()) { //
-                return this.isStart ?
-                		this.getTraversal().getTraverserGenerator().generate(this.iterator.next(), (Step) this, 1l) :
-                		this.head.split(this.iterator.next(), this);
+            if (this.iterator.hasNext()) {
+                return this.isStart ? this.getTraversal().getTraverserGenerator().generate(this.iterator.next(), (Step) this, 1l) : this.head.split(this.iterator.next(), this);
             } else {
                 if (this.isStart) {
                     if (this.done)
                         throw FastNoSuchElementException.instance();
                     else {
-                    	// 绗竴娆′細鎵ц杩欓噷鐨勮灞�,姝ゆ椂 iterator 鏄� EmptyIterator, this.done = false
                         this.done = true;
                         this.iterator = null == this.iteratorSupplier ? EmptyIterator.instance() : this.iteratorSupplier.get();
-                        // 涓婇潰杩欏彞浼氳涓�涓� iterator 閬嶅巻鏁翠釜 Graph
-                        /** 鐩稿叧鐨勬柟娉曟湁 {@link TinkerGraphStep#edges(), vertices() }
-                         * */
                     }
                 } else {
                     this.head = this.starts.next();
@@ -220,14 +210,6 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
         }
         return false;
     }
-
-    /////////////////////////////
-    // 修改区
-    public void work() {
-    	Traverser<E> traverser = this.processNextStart();
-    	this.getMyProducer().offerElement(traverser);
-		this.getMyProducer().offerCopySize(1);
-    }
     
     @Override
     public List<Traverser> compute(Traverser t) {
@@ -236,13 +218,5 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
     	for(int i=0; i<N; i++)
     		list.add(this.processNextStart());
     	return list;
-    }
-    
-    @Override
-    public void compute(Buffer<Traverser> up, Buffer<Traverser> down)  {
-    	int N = 1;
-    	for(int i=0; i<N; i++)
-    		down.putData(this.processNextStart());
-    	down.putNum(N);
     }
 }

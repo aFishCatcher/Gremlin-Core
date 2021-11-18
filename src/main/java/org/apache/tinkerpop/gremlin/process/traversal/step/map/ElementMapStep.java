@@ -32,9 +32,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -48,7 +45,7 @@ import java.util.Set;
  * @author Daniel Kuppitz (http://gremlin.guru)
  * @author Stephen Mallette (http://stephen.genoprime.com)
  */
-public class ElementMapStep<K,E> extends MapStep<Element, Map<K, E>> implements TraversalParent, GraphComputing {
+public class ElementMapStep<K,E> extends ScalarMapStep<Element, Map<K, E>> implements TraversalParent, GraphComputing {
 
     protected final String[] propertyKeys;
     private boolean onGraphComputer = false;
@@ -125,28 +122,4 @@ public class ElementMapStep<K,E> extends MapStep<Element, Map<K, E>> implements 
     public Set<TraverserRequirement> getRequirements() {
         return this.getSelfAndChildRequirements(TraverserRequirement.OBJECT);
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

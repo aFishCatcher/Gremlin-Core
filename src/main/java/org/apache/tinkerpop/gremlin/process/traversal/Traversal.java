@@ -18,7 +18,7 @@
  */
 package org.apache.tinkerpop.gremlin.process.traversal;
 
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.remote.traversal.step.map.RemoteStep;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
@@ -153,7 +153,7 @@ public interface Traversal<S, E> extends Iterator<E>, Serializable, Cloneable, A
     /**
      * Starts a promise to execute a function on the current {@code Traversal} that will be completed in the future.
      * Note that this method can only be used if the {@code Traversal} is constructed using
-     * {@link TraversalSource#withRemote(Configuration)}. Calling this method otherwise will yield an
+     * {@link AnonymousTraversalSource#withRemote(Configuration)}. Calling this method otherwise will yield an
      * {@code IllegalStateException}.
      */
     public default <T> CompletableFuture<T> promise(final Function<Traversal<S, E>, T> traversalFunction) {
@@ -215,19 +215,11 @@ public interface Traversal<S, E> extends Iterator<E>, Serializable, Cloneable, A
         }
         return (Traversal<A, B>) this;
     }
-    
-    // iterate() 中前半部分代码
-    public default <A, B> Traversal<A, B> preApplyStrategies() {
-    	if (!this.asAdmin().isLocked()) {
-            this.none();
-            this.asAdmin().applyStrategies();
-        }
-    	return (Traversal<A, B>) this;
-    }
-    ////////////////////////////////
 
     /**
-     * Filter all traversers in the traversal.
+     * Filter all traversers in the traversal. This step has narrow use cases and is primarily intended for use as a
+     * signal to remote servers that {@link #iterate()} was called. While it may be directly used, it is often a sign
+     * that a traversal should be re-written in another form.
      *
      * @return the updated traversal with respective {@link NoneStep}.
      */
@@ -423,26 +415,21 @@ public interface Traversal<S, E> extends Iterator<E>, Serializable, Cloneable, A
             final List<Step> steps = this.getSteps();
             return steps.isEmpty() ? EmptyStep.instance() : steps.get(steps.size() - 1);
         }
-        
-        public default Step<?, ?> getStep(int index) {
-        	final List<Step> steps = this.getSteps();
-        	if(index >= steps.size())
-        		return this.getEndStep();
-			return steps.isEmpty() ? EmptyStep.instance() : steps.get(index);
-        }
 
         /**
          * Apply the registered {@link TraversalStrategies} to the traversal.
          * Once the strategies are applied, the traversal is "locked" and can no longer have steps added to it.
-         * The order of operations for strategy applications should be: globally id steps, apply strategies to root traversal, then to nested traversals.
+         * The order of operations for strategy applications should be: globally id steps, apply each strategy in turn
+         * to root traversal, then recursively to nested traversals.
          *
          * @throws IllegalStateException if the {@link TraversalStrategies} have already been applied
          */
         public void applyStrategies() throws IllegalStateException;
 
         /**
-         * Get the {@link TraverserGenerator} associated with this traversal. The traversal generator creates
-         * {@link Traverser} instances that are respective of the traversal's {@link TraverserRequirement}.
+         * Get the {@link TraverserGenerator} associated with this traversal.
+         * The traversal generator creates {@link Traverser} instances that are respective of the traversal's
+         * {@link TraverserRequirement}.
          *
          * @return the generator of traversers
          */
@@ -505,20 +492,28 @@ public interface Traversal<S, E> extends Iterator<E>, Serializable, Cloneable, A
         public TraversalStrategies getStrategies();
 
         /**
-         * Set the {@link TraversalParent} {@link Step} that is the parent of this traversal.
-         * Traversals can be nested and this is the means by which the traversal tree is connected.
+         * Set the {@link TraversalParent} {@link Step} that is the parent of this traversal. Traversals can be nested
+         * and this is the means by which the traversal tree is connected. If there is no parent, then it should be a
+         * {@link EmptyStep}.
          *
-         * @param step the traversal holder parent step
+         * @param step the traversal holder parent step or {@link EmptyStep} if it has no parent
          */
         public void setParent(final TraversalParent step);
 
         /**
-         * Get the {@link TraversalParent} {@link Step} that is the parent of this traversal.
-         * Traversals can be nested and this is the means by which the traversal tree is walked.
+         * Get the {@link TraversalParent} {@link Step} that is the parent of this traversal. Traversals can be nested
+         * and this is the means by which the traversal tree is walked.
          *
-         * @return the traversal holder parent step
+         * @return the traversal holder parent step or {@link EmptyStep} if it has no parent.
          */
         public TraversalParent getParent();
+
+        /**
+         * Determines if the traversal is at the root level.
+         */
+        public default boolean isRoot() {
+            return getParent() instanceof EmptyStep;
+        }
 
         /**
          * Cloning is used to duplicate the traversal typically in OLAP environments.

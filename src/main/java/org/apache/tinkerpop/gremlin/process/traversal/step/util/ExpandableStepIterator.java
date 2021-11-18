@@ -49,8 +49,7 @@ public final class ExpandableStepIterator<S> implements Iterator<Traverser.Admin
 
     @Override
     public Traverser.Admin<S> next() {
-    	boolean traverserSetIsEmpty = this.traverserSet.isEmpty();
-        if (!this.traverserSet.isEmpty())	// traverserSet 非空
+        if (!this.traverserSet.isEmpty())
             return this.traverserSet.remove();
         /////////////
         if (this.hostStep.getPreviousStep().hasNext())

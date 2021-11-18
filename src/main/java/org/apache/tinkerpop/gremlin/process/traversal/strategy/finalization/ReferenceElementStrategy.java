@@ -21,15 +21,12 @@ package org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
-import org.apache.tinkerpop.gremlin.process.traversal.step.map.MapStep;
+import org.apache.tinkerpop.gremlin.process.traversal.step.map.ScalarMapStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.ProfileSideEffectStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.EmptyStep;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.AbstractTraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalHelper;
 import org.apache.tinkerpop.gremlin.structure.util.reference.ReferenceFactory;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
 
 import java.util.Optional;
 
@@ -59,7 +56,7 @@ public final class ReferenceElementStrategy extends AbstractTraversalStrategy<Tr
         return INSTANCE;
     }
 
-    public static class ReferenceElementStep<S, E> extends MapStep<S, E> {
+    public static class ReferenceElementStep<S, E> extends ScalarMapStep<S, E> {
 
         public ReferenceElementStep(final Traversal.Admin traversal) {
             super(traversal);
@@ -69,29 +66,5 @@ public final class ReferenceElementStrategy extends AbstractTraversalStrategy<Tr
         protected E map(final Traverser.Admin<S> traverser) {
             return ReferenceFactory.detach(traverser.get());
         }
-
-		@Override
-		public void setProducer(Producer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void setConsumer(Consumer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void init() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void work() {
-			// TODO Auto-generated method stub
-			
-		}
     }
 }

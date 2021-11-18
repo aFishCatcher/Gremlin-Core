@@ -41,9 +41,11 @@ import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.EventS
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.HaltedTraverserStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.OptionsStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.PartitionStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.SeedStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.SubgraphStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.finalization.MatchAlgorithmStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.AdjacentToIncidentStrategy;
+import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.ByModulatorOptimizationStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.EarlyLimitStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.FilterRankingStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.optimization.IdentityRemovalStrategy;
@@ -185,9 +187,12 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                             HaltedTraverserStrategy.class,
                             PartitionStrategy.class,
                             SubgraphStrategy.class,
+                            SeedStrategy.class,
                             LazyBarrierStrategy.class,
                             MatchAlgorithmStrategy.class,
                             AdjacentToIncidentStrategy.class,
+                            ByModulatorOptimizationStrategy.class,
+                            CountStrategy.class,
                             FilterRankingStrategy.class,
                             IdentityRemovalStrategy.class,
                             IncidentToAdjacentStrategy.class,
@@ -197,7 +202,6 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                             OptionsStrategy.class,
                             PathProcessorStrategy.class,
                             PathRetractionStrategy.class,
-                            CountStrategy.class,
                             RepeatUnrollStrategy.class,
                             ComputerVerificationStrategy.class,
                             LambdaRestrictionStrategy.class,
@@ -311,9 +315,12 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                     HaltedTraverserStrategy.class,
                     PartitionStrategy.class,
                     SubgraphStrategy.class,
+                    SeedStrategy.class,
                     LazyBarrierStrategy.class,
                     MatchAlgorithmStrategy.class,
                     AdjacentToIncidentStrategy.class,
+                    ByModulatorOptimizationStrategy.class,
+                    CountStrategy.class,
                     FilterRankingStrategy.class,
                     IdentityRemovalStrategy.class,
                     IncidentToAdjacentStrategy.class,
@@ -323,7 +330,6 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                     OptionsStrategy.class,
                     PathProcessorStrategy.class,
                     PathRetractionStrategy.class,
-                    CountStrategy.class,
                     RepeatUnrollStrategy.class,
                     ComputerVerificationStrategy.class,
                     LambdaRestrictionStrategy.class,
@@ -417,9 +423,12 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                             HaltedTraverserStrategy.class,
                             PartitionStrategy.class,
                             SubgraphStrategy.class,
+                            SeedStrategy.class,
                             LazyBarrierStrategy.class,
                             MatchAlgorithmStrategy.class,
                             AdjacentToIncidentStrategy.class,
+                            ByModulatorOptimizationStrategy.class,
+                            CountStrategy.class,
                             FilterRankingStrategy.class,
                             IdentityRemovalStrategy.class,
                             IncidentToAdjacentStrategy.class,
@@ -429,7 +438,6 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                             OptionsStrategy.class,
                             PathProcessorStrategy.class,
                             PathRetractionStrategy.class,
-                            CountStrategy.class,
                             RepeatUnrollStrategy.class,
                             ComputerVerificationStrategy.class,
                             LambdaRestrictionStrategy.class,
@@ -533,9 +541,12 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                     HaltedTraverserStrategy.class,
                     PartitionStrategy.class,
                     SubgraphStrategy.class,
+                    SeedStrategy.class,
                     LazyBarrierStrategy.class,
                     MatchAlgorithmStrategy.class,
                     AdjacentToIncidentStrategy.class,
+                    ByModulatorOptimizationStrategy.class,
+                    CountStrategy.class,
                     FilterRankingStrategy.class,
                     IdentityRemovalStrategy.class,
                     IncidentToAdjacentStrategy.class,
@@ -545,7 +556,6 @@ abstract class GraphSONModule extends TinkerPopJacksonModule {
                     OptionsStrategy.class,
                     PathProcessorStrategy.class,
                     PathRetractionStrategy.class,
-                    CountStrategy.class,
                     RepeatUnrollStrategy.class,
                     ComputerVerificationStrategy.class,
                     LambdaRestrictionStrategy.class,

@@ -18,8 +18,8 @@
  */
 package org.apache.tinkerpop.gremlin.process.traversal;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.tinkerpop.gremlin.process.remote.RemoteConnection;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Graph;
@@ -62,7 +62,8 @@ public class AnonymousTraversalSource<T extends TraversalSource> {
      * @param configFile a path to a file that would normally be provided to configure a {@link RemoteConnection}
      */
     public T withRemote(final String configFile) throws Exception {
-        return withRemote(new PropertiesConfiguration(configFile));
+        final Configurations configs = new Configurations();
+        return withRemote(configs.properties((configFile)));
     }
 
     /**
@@ -93,6 +94,7 @@ public class AnonymousTraversalSource<T extends TraversalSource> {
      *
      * @deprecated As of release 3.4.9, replaced by {@link #withEmbedded(Graph)}
      */
+    @Deprecated
     public T withGraph(final Graph graph) {
         return withEmbedded(graph);
     }

@@ -31,9 +31,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalRing;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +38,7 @@ import java.util.Set;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public final class PathStep<S> extends MapStep<S, Path> implements TraversalParent, PathProcessor, ByModulating, FromToModulating {
+public final class PathStep<S> extends ScalarMapStep<S, Path> implements TraversalParent, PathProcessor, ByModulating, FromToModulating {
 
     private TraversalRing<Object, Object> traversalRing;
     private Set<String> keepLabels;
@@ -102,6 +99,13 @@ public final class PathStep<S> extends MapStep<S, Path> implements TraversalPare
     }
 
     @Override
+    public void replaceLocalChild(final Traversal.Admin<?, ?> oldTraversal, final Traversal.Admin<?, ?> newTraversal) {
+        this.traversalRing.replaceTraversal(
+                (Traversal.Admin<Object, Object>) oldTraversal,
+                (Traversal.Admin<Object, Object>) newTraversal);
+    }
+
+    @Override
     public String toString() {
         return StringFactory.stepString(this, this.traversalRing);
     }
@@ -144,28 +148,4 @@ public final class PathStep<S> extends MapStep<S, Path> implements TraversalPare
     public String getToLabel() {
         return toLabel;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 }

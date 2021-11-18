@@ -26,16 +26,12 @@ import org.apache.tinkerpop.gremlin.process.computer.traversal.TraversalVertexPr
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
-import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 import org.apache.tinkerpop.gremlin.process.traversal.util.PureTraversal;
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.iterator.IteratorUtils;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
 
 import java.util.Collections;
 import java.util.List;
@@ -78,7 +74,7 @@ public final class TraversalVertexProgramStep extends VertexProgramStep implemen
         final Traversal.Admin<?, ?> computerSpecificTraversal = this.computerTraversal.getPure();
         final TraversalStrategies computerSpecificStrategies = this.getTraversal().getStrategies().clone();
 
-        IteratorUtils.filter(TraversalStrategies.GlobalCache.getStrategies(graph.getClass()).toList(),
+        IteratorUtils.filter(TraversalStrategies.GlobalCache.getStrategies(graph.getClass()),
                 s -> s instanceof TraversalStrategy.ProviderOptimizationStrategy).forEach(computerSpecificStrategies::addStrategies);
 
         computerSpecificTraversal.setStrategies(computerSpecificStrategies);
@@ -102,30 +98,6 @@ public final class TraversalVertexProgramStep extends VertexProgramStep implemen
         super.setTraversal(parentTraversal);
         this.integrateChild(this.computerTraversal.get());
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
     /*@Override
     public int hashCode() {

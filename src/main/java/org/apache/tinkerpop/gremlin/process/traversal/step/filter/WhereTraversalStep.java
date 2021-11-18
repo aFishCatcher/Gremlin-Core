@@ -25,7 +25,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.PathProcessor;
 import org.apache.tinkerpop.gremlin.process.traversal.step.Scoping;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
-import org.apache.tinkerpop.gremlin.process.traversal.step.map.MapStep;
+import org.apache.tinkerpop.gremlin.process.traversal.step.map.ScalarMapStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.sideEffect.StartStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.ProfileStep;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.decoration.ConnectiveStrategy;
@@ -33,9 +33,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalHelper;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
-
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -152,7 +149,7 @@ public final class WhereTraversalStep<S> extends FilterStep<S> implements Traver
 
     //////////////////////////////
 
-    public static class WhereStartStep<S> extends MapStep<S, Object> implements Scoping {
+    public static class WhereStartStep<S> extends ScalarMapStep<S, Object> implements Scoping {
 
         private String selectKey;
 
@@ -167,7 +164,7 @@ public final class WhereTraversalStep<S> extends FilterStep<S> implements Traver
                 ((WhereEndStep) this.getTraversal().getEndStep()).processStartTraverser(traverser);
             else if (this.getTraversal().getEndStep() instanceof ProfileStep && this.getTraversal().getEndStep().getPreviousStep() instanceof WhereEndStep)     // TOTAL SUCKY HACK!
                 ((WhereEndStep) this.getTraversal().getEndStep().getPreviousStep()).processStartTraverser(traverser);
-            return null == this.selectKey ? traverser.get() : this.getScopeValue(Pop.last, this.selectKey, traverser);
+            return null == this.selectKey ? traverser.get() : this.getSafeScopeValue(Pop.last, this.selectKey, traverser);
         }
 
         @Override
@@ -188,30 +185,6 @@ public final class WhereTraversalStep<S> extends FilterStep<S> implements Traver
         public Set<String> getScopeKeys() {
             return null == this.selectKey ? Collections.emptySet() : Collections.singleton(this.selectKey);
         }
-
-		@Override
-		public void setProducer(Producer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void setConsumer(Consumer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void init() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void work() {
-			// TODO Auto-generated method stub
-			
-		}
     }
 
     public static class WhereEndStep extends FilterStep<Object> implements Scoping {
@@ -226,7 +199,7 @@ public final class WhereTraversalStep<S> extends FilterStep<S> implements Traver
 
         public void processStartTraverser(final Traverser.Admin traverser) {
             if (null != this.matchKey)
-                this.matchValue = this.getScopeValue(Pop.last, this.matchKey, traverser);
+                this.matchValue = this.getSafeScopeValue(Pop.last, this.matchKey, traverser);
         }
 
         @Override
@@ -248,55 +221,7 @@ public final class WhereTraversalStep<S> extends FilterStep<S> implements Traver
         public Set<String> getScopeKeys() {
             return null == this.matchKey ? Collections.emptySet() : Collections.singleton(this.matchKey);
         }
-
-		@Override
-		public void setProducer(Producer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void setConsumer(Consumer<Traverser> buffer) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void init() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void work() {
-			// TODO Auto-generated method stub
-			
-		}
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
     //////////////////////////////

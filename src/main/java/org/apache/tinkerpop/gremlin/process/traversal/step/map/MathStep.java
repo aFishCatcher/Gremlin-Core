@@ -33,9 +33,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalRing;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalUtil;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -48,7 +45,7 @@ import java.util.regex.Pattern;
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
-public final class MathStep<S> extends MapStep<S, Double> implements ByModulating, TraversalParent, Scoping, PathProcessor {
+public final class MathStep<S> extends ScalarMapStep<S, Double> implements ByModulating, TraversalParent, Scoping, PathProcessor {
 
     private static final String CURRENT = "_";
     private final String equation;
@@ -220,29 +217,5 @@ public final class MathStep<S> extends MapStep<S, Double> implements ByModulatin
             return variables;
         }
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

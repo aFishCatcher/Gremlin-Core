@@ -21,13 +21,10 @@ package org.apache.tinkerpop.gremlin.process.traversal.step.map;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 
-import dml.stream.util.Consumer;
-import dml.stream.util.Producer;
-
 /**
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-public final class LoopsStep<S> extends MapStep<S, Integer> {
+public final class LoopsStep<S> extends ScalarMapStep<S, Integer> {
 
     private String loopName;
 
@@ -58,29 +55,5 @@ public final class LoopsStep<S> extends MapStep<S, Integer> {
         result = 31 * result + (loopName != null ? loopName.hashCode() : 0);
         return result;
     }
-
-	@Override
-	public void setProducer(Producer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setConsumer(Consumer<Traverser> buffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void work() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
