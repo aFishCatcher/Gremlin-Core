@@ -23,6 +23,8 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.ReducingBarrierS
 import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequirement;
 
 import dml.gremlin.assemblyLine.Compute;
+import dml.gremlin.myThreadPool.LinkedBuffer;
+import dml.gremlin.myThreadPool.Worker;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -41,7 +43,8 @@ import java.util.Set;
  * @param <S> The incoming object type of the step
  * @param <E> The outgoing object type of the step
  */
-public interface Step<S, E> extends Iterator<Traverser.Admin<E>>, Serializable, Cloneable, Compute<Traverser, List<Traverser>> {
+public interface Step<S, E> extends Iterator<Traverser.Admin<E>>, Serializable, Cloneable,
+			Compute<Traverser, List<Traverser>>, Worker<LinkedBuffer, LinkedBuffer> {
 
     /**
      * Add a iterator of {@link Traverser.Admin} objects of type S to the step.

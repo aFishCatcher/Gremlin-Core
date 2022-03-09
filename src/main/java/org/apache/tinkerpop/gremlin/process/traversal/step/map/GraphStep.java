@@ -38,6 +38,8 @@ import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
+import dml.gremlin.myThreadPool.LinkedBuffer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -218,5 +220,14 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
     	for(int i=0; i<N; i++)
     		list.add(this.processNextStart());
     	return list;
+    }
+    
+    @Override
+    public void work(LinkedBuffer in, LinkedBuffer out) {
+    	int N = 1;
+    	while(N != 0) {
+    		out.add(this.processNextStart());
+    		N--;
+    	}
     }
 }

@@ -24,6 +24,8 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
 import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
+import dml.gremlin.myThreadPool.LinkedBuffer;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -73,5 +75,16 @@ public abstract class FlatMapStep<S, E> extends AbstractStep<S, E> {
     	while(iterator.hasNext())
     		list.add(t.asAdmin().split(iterator.next(),this));
     	return list;
+    }
+    
+    @Override
+    public void work(LinkedBuffer in, LinkedBuffer out) {
+    	Iterator it = in.iterator();
+    	while(it.hasNext()) {
+    		Traverser t = (Traverser)it.next();
+    		Iterator<E> iterator = this.flatMap(t.asAdmin());
+    		while(iterator.hasNext())
+        		out.add(t.asAdmin().split(iterator.next(),this));
+    	}
     }
 }

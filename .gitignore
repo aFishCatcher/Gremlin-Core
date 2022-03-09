@@ -1,5 +1,8 @@
 target/
+data/
 /testdata
+
+*.sh
 *.txt
 
 # Compiled class file

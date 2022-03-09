@@ -6,27 +6,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Task implements Runnable{
-	private static volatile int next_id = 0;
+public class Task implements Callable<String>{
 	
 	private final int id;
 	private final List<Worker> workers;
 	private final Barrier barrier;
 	
-	public Task(List<Worker> _workers, Barrier _barrier) {
+	public Task(List<Worker> _workers, Barrier _barrier, int _id) {
 		this.workers = new ArrayList<>();
 		workers.addAll(_workers);
 		this.barrier = _barrier;
-		id = next_id++;
+		this.id = _id;
 	}
 
 	@Override
-	public void run() {
+	public String call() {
 		//用于输出log.txt
-		PrintWriter out = getPrintWriter();
+//		PrintWriter out = getPrintWriter();
 		
 		/*计时变量*/
 		long cal=0, syn=0;  //total calculate time and synchronize time
@@ -62,10 +62,10 @@ public class Task implements Runnable{
 			//这里文件的读写似乎会影响到计算和同步的时间
 			//out.printf("%10d,%10d, %d--%d--%d\n",temp_cal/1_000,temp_syn/1_000, c1, c2,c3 );
 		}
-		out.close();
-		System.out.println("thread id: "+ Thread.currentThread().getId()+" cal: "+ cal/1_000_000+"ms syn: "+syn/1_000_000+"ms");
+//		out.close();
 		
-		
+		String info = "task id: "+ id +" cal_time: "+ cal/1_000_000+"ms syn_time: "+syn/1_000_000+"ms\n";
+		return info;
 	}
 	
 	private PrintWriter getPrintWriter()
