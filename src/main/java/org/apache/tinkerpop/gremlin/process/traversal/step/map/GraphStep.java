@@ -38,7 +38,7 @@ import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
-import dml.gremlin.myThreadPool.LinkedBuffer;
+import dml.gremlin.myThreadPool.TaskDataBuffer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -223,11 +223,11 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
     }
     
     @Override
-    public void work(LinkedBuffer in, LinkedBuffer out) {
-    	int N = 1;
-    	while(N != 0) {
+    public void work(TaskDataBuffer in, TaskDataBuffer out) {
+		int blockSize = dml.gremlin.myThreadPool.Global.blockSize;
+    	while(blockSize != 0) {
     		out.add(this.processNextStart());
-    		N--;
+    		blockSize--;
     	}
     }
 }
