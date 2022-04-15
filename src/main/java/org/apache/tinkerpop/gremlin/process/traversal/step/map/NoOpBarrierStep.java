@@ -28,7 +28,10 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.util.TraverserSe
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
+import dml.gremlin.myThreadPool.TaskDataBuffer;
+
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -119,5 +122,24 @@ public final class NoOpBarrierStep<S> extends AbstractStep<S, S> implements Loca
 
     public int getMaxBarrierSize() {
         return maxBarrierSize;
+    }
+    
+    /*
+     * we use a temp TraverserSet to hold result,
+     * and copy all elements to out
+     * TraverserSet用LinkedHashMap实现, 验重检索效率高
+     * TaskDataBuffer设计时没考虑检索, 没实现检索功能
+     */
+    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<S>> out) {
+    	TraverserSet<S> tempBarrier = new TraverserSet<S>();
+    	Iterator<Traverser.Admin<S>> it = in.iterator();
+    	while(it.hasNext()) {
+    		Traverser.Admin<S> t = it.next();
+    		t.setStepId(this.getNextStep().getId());
+    		tempBarrier.add(t);
+    	}
+    	for(Traverser.Admin<S> t:tempBarrier) {
+    		out.add(t);
+    	}
     }
 }

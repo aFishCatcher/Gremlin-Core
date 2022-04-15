@@ -18,8 +18,12 @@
  */
 package org.apache.tinkerpop.gremlin.process.traversal.step.map;
 
+import java.util.Iterator;
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
+
+import dml.gremlin.myThreadPool.TaskDataBuffer;
 
 /**
  * A type of {@link MapStep} class which will transform the object of one {@link Traverser} into another. This class
@@ -41,4 +45,13 @@ public abstract class ScalarMapStep<S, E> extends MapStep<S,E> {
     }
 
     protected abstract E map(final Traverser.Admin<S> traverser);
+    
+    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<E>> out) {
+    	Iterator<Traverser.Admin<S>> it = in.iterator();
+    	while(it.hasNext()) {
+    		Traverser.Admin<S> t = it.next();
+    		Traverser.Admin<E> result = t.split(this.map(t), this);
+    		out.add(result);
+    	}
+    }
 }

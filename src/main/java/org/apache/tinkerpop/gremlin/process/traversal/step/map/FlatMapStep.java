@@ -26,9 +26,7 @@ import org.apache.tinkerpop.gremlin.util.iterator.EmptyIterator;
 
 import dml.gremlin.myThreadPool.TaskDataBuffer;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -69,22 +67,14 @@ public abstract class FlatMapStep<S, E> extends AbstractStep<S, E> {
     }
     
     @Override
-    public List<Traverser> compute(Traverser t) {
-    	Iterator<E> iterator = this.flatMap(t.asAdmin());
-    	List<Traverser> list = new ArrayList<>();
-    	while(iterator.hasNext())
-    		list.add(t.asAdmin().split(iterator.next(),this));
-    	return list;
-    }
-    
-    @Override
-    public void work(TaskDataBuffer in, TaskDataBuffer out) {
-    	Iterator it = in.iterator();
+    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<E>> out) {
+    	Iterator<Traverser.Admin<S>> it = in.iterator();
     	while(it.hasNext()) {
-    		Traverser t = (Traverser)it.next();
-    		Iterator<E> iterator = this.flatMap(t.asAdmin());
+    		Traverser.Admin<S> t = it.next();  //here t equals to this.head
+    		Iterator<E> iterator = this.flatMap(t);
     		while(iterator.hasNext())
-        		out.add(t.asAdmin().split(iterator.next(),this));
+        		out.add(t.split(iterator.next(),this));
+    		CloseableIterator.closeIterator(iterator);
     	}
     }
 }

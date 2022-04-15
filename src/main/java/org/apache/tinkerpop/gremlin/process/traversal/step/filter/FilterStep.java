@@ -19,11 +19,15 @@
 package org.apache.tinkerpop.gremlin.process.traversal.step.filter;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
+import org.apache.tinkerpop.gremlin.structure.util.CloseableIterator;
+
+import dml.gremlin.myThreadPool.TaskDataBuffer;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -52,6 +56,15 @@ public abstract class FilterStep<S> extends AbstractStep<S, S> {
     	}
     	else {
     		return null;
+    	}
+    }
+    
+    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<S>> out) {
+    	Iterator<Traverser.Admin<S>> it = in.iterator();
+    	while(it.hasNext()) {
+    		Traverser.Admin<S> t = it.next();
+    		if(this.filter(t))
+    			out.add(t);
     	}
     }
 }

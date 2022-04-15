@@ -223,8 +223,8 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
     }
     
     @Override
-    public void work(TaskDataBuffer in, TaskDataBuffer out) {
-		int blockSize = dml.gremlin.myThreadPool.Global.blockSize;
+    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<E>> out) {
+		int blockSize = Integer.MAX_VALUE;
     	while(blockSize != 0) {
     		out.add(this.processNextStart());
     		blockSize--;

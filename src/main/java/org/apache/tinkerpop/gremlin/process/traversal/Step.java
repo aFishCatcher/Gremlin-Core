@@ -44,7 +44,7 @@ import java.util.Set;
  * @param <E> The outgoing object type of the step
  */
 public interface Step<S, E> extends Iterator<Traverser.Admin<E>>, Serializable, Cloneable,
-			Compute<Traverser, List<Traverser>>, Worker<TaskDataBuffer, TaskDataBuffer> {
+			Compute<Traverser, List<Traverser>>, Worker<TaskDataBuffer<Traverser.Admin<S>>, TaskDataBuffer<Traverser.Admin<E>>> {
 
     /**
      * Add a iterator of {@link Traverser.Admin} objects of type S to the step.

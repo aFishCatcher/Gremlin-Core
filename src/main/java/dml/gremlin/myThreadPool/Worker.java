@@ -10,4 +10,5 @@ public interface Worker<S, E> {
 	default void work(S in, E out) {
 		throw new UnsupportedOperationException("Worker: work");
 	}
+
 }
