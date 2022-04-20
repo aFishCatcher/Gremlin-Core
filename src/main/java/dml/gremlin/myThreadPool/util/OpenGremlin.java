@@ -19,8 +19,7 @@ public class OpenGremlin {
 		showStepsName(t);
 		
 		long start = System.currentTimeMillis();
-		t.next(5000);
-		//List result = t.toList();
+		List result = t.toList();
 		long end = System.currentTimeMillis();
 		
 		System.out.print("New steps: ");

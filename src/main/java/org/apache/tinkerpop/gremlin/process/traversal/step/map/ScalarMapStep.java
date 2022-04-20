@@ -46,12 +46,15 @@ public abstract class ScalarMapStep<S, E> extends MapStep<S,E> {
 
     protected abstract E map(final Traverser.Admin<S> traverser);
     
-    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<E>> out) {
+    @Override
+    public TaskDataBuffer<Traverser.Admin<E>> work(TaskDataBuffer<Traverser.Admin<S>> in) {
+    	TaskDataBuffer<Traverser.Admin<E>> out = new TaskDataBuffer<>(in.getCurNum(), in.isEnd());
     	Iterator<Traverser.Admin<S>> it = in.iterator();
     	while(it.hasNext()) {
     		Traverser.Admin<S> t = it.next();
     		Traverser.Admin<E> result = t.split(this.map(t), this);
     		out.add(result);
     	}
+    	return out;
     }
 }

@@ -223,11 +223,18 @@ public class GraphStep<S, E extends Element> extends AbstractStep<S, E> implemen
     }
     
     @Override
-    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<E>> out) {
+    public TaskDataBuffer<Traverser.Admin<E>> work(TaskDataBuffer<Traverser.Admin<S>> in) {
 		int blockSize = Integer.MAX_VALUE;
-    	while(blockSize != 0) {
-    		out.add(this.processNextStart());
-    		blockSize--;
-    	}
+		TaskDataBuffer<Traverser.Admin<E>> out = new TaskDataBuffer<>(1, true);
+		try {
+			while(blockSize != 0) {
+	    		out.add(this.processNextStart());
+	    		blockSize--;
+			}
+		}catch(FastNoSuchElementException e) {
+			return out;
+		}
+    	
+    	return out;
     }
 }

@@ -59,12 +59,15 @@ public abstract class FilterStep<S> extends AbstractStep<S, S> {
     	}
     }
     
-    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<S>> out) {
+    @Override
+    public TaskDataBuffer<Traverser.Admin<S>> work(TaskDataBuffer<Traverser.Admin<S>> in) {
+    	TaskDataBuffer<Traverser.Admin<S>> out = new TaskDataBuffer<>(in.getCurNum(), in.isEnd());
     	Iterator<Traverser.Admin<S>> it = in.iterator();
     	while(it.hasNext()) {
     		Traverser.Admin<S> t = it.next();
     		if(this.filter(t))
     			out.add(t);
     	}
+    	return out;
     }
 }

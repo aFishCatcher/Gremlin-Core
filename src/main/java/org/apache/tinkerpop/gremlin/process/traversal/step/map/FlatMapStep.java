@@ -67,7 +67,8 @@ public abstract class FlatMapStep<S, E> extends AbstractStep<S, E> {
     }
     
     @Override
-    public void work(TaskDataBuffer<Traverser.Admin<S>> in, TaskDataBuffer<Traverser.Admin<E>> out) {
+    public TaskDataBuffer<Traverser.Admin<E>> work(TaskDataBuffer<Traverser.Admin<S>> in) {
+    	TaskDataBuffer<Traverser.Admin<E>> out = new TaskDataBuffer<>(in.getCurNum(), in.isEnd());
     	Iterator<Traverser.Admin<S>> it = in.iterator();
     	while(it.hasNext()) {
     		Traverser.Admin<S> t = it.next();  //here t equals to this.head
@@ -76,5 +77,6 @@ public abstract class FlatMapStep<S, E> extends AbstractStep<S, E> {
         		out.add(t.split(iterator.next(),this));
     		CloseableIterator.closeIterator(iterator);
     	}
+    	return out;
     }
 }

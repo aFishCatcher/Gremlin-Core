@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LinkedDataBuffer<E> implements Iterable<E> {
-	Node first;
-	Node last;
-	int size;
+	private Node first;
+	private Node last;
+	private int size;
 	
 	LinkedDataBuffer(){
 		this.first = null;
@@ -64,7 +64,6 @@ public class LinkedDataBuffer<E> implements Iterable<E> {
 	 * get a node using index
 	 */
 	private Node getNode(int index) {
-		assert(index >= 0 && index < this.size);
 		Node node = first;
 		while(index > 0) {
 			node = node.next;
@@ -77,7 +76,7 @@ public class LinkedDataBuffer<E> implements Iterable<E> {
 	 * Split out blocks of data each contain n elements
 	 * until data size in buffer is less than n
 	 */
-	public List<LinkedDataBuffer<E>> split(int n, boolean isEnd){
+	public List<? extends LinkedDataBuffer<E>> split(int n, boolean isEnd){
 		if(this.size < n && !isEnd) return null;
 		List<LinkedDataBuffer<E>> blockList  = new ArrayList<>();
 		while(this.size >= n) {

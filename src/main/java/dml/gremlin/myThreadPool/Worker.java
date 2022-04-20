@@ -7,7 +7,7 @@ public interface Worker<S, E> {
 	 * take the input, then process, final output.
 	 * Step will implements Worker<LinkedBuffer, LinkedBuffer>.
 	 */
-	default void work(S in, E out) {
+	default E work(S in) {
 		throw new UnsupportedOperationException("Worker: work");
 	}
 

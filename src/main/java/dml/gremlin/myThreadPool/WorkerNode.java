@@ -1,42 +1,25 @@
 package dml.gremlin.myThreadPool;
 
-import org.apache.tinkerpop.gremlin.process.traversal.Step;
-
 import java.util.List;
 
-public class WorkerNode {
+public class WorkerNode<S,E> {
+	private final int num;
+	private final WorkerNode<S,E> nextNode;
+	private final StepOutputBuffer<E> stepOutputBuffer;
+	private final Worker<TaskDataBuffer<S>,TaskDataBuffer<E>> worker;  //here, workers are steps
 	
-	private final WorkerNode nextNode;
-	@SuppressWarnings("rawtypes")
-	private final StepOutputBuffer stepOutputBuffer;
-	@SuppressWarnings("rawtypes")
-	private Worker<TaskDataBuffer,TaskDataBuffer> worker;  //here, workers are steps
-	private boolean shutDown;
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public WorkerNode(Worker<TaskDataBuffer,TaskDataBuffer> worker, StepOutputBuffer stepOutputBuffer, WorkerNode nextNode) {
+	public WorkerNode(Worker<TaskDataBuffer<S>,TaskDataBuffer<E>> worker, StepOutputBuffer<E> stepOutputBuffer, WorkerNode<S,E> nextNode, int num) {
 		this.worker = worker;
 		this.stepOutputBuffer = stepOutputBuffer;
 		this.nextNode = nextNode;
-		this.shutDown = false;
+		this.num = num;
+	}
+	
+	public int getNum() {
+		return this.num;
 	}
 
-	/*
-	public WorkerNode clone(){
-		WorkerNode other = new WorkerNode(this.worker.clone(), this.stepOutputBuffer, this.nextNode);
-		other.shutDown = this.shutDown;
-		return other;
-	}
-
-
-	public WorkerNode(WorkerNode other){
-		this.worker = other.worker.clone();
-		this.stepOutputBuffer = other.stepOutputBuffer;
-		this.nextNode = other.nextNode;
-		this.shutDown = other.shutDown;
-	}
-	*/
-	public WorkerNode nextNode() {
+	public WorkerNode<S,E> nextNode() {
 		return nextNode;
 	}
 	
@@ -44,33 +27,26 @@ public class WorkerNode {
 		return nextNode == null;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public void work(TaskDataBuffer in, TaskDataBuffer out) {
-		worker.work(in, out);
+	public TaskDataBuffer<E> work(TaskDataBuffer<S> in) {
+		TaskDataBuffer<E> out = worker.work(in);
+		return out;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public StepOutputBuffer getStepOutputBuffer() {
+	public StepOutputBuffer<E> getStepOutputBuffer() {
 		return this.stepOutputBuffer;
-	}
-	
-	public boolean shutDown() {
-		return this.shutDown;
 	}
 	
 	/*
 	 * if source node is the end node, we should put temple result
 	 * into output buffer for later usage.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void mergeForSourceNode(TaskDataBuffer tempResult) {
+	public void mergeForSourceNode(TaskDataBuffer<E> tempResult) {
 		this.stepOutputBuffer.merge(tempResult);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<TaskDataBuffer> mergeAndSplit(TaskDataBuffer tempResult, int blockSize) {
+	public DataList<E> mergeAndSplit(TaskDataBuffer<E> tempResult, int blockSize) {
 		boolean isEnd = false;
-		List<TaskDataBuffer> blocks = null;
+		List<TaskDataBuffer<E>> blocks = null;
 		
 		if(!isEndWorker()) {
 			synchronized(stepOutputBuffer) {
@@ -80,9 +56,18 @@ public class WorkerNode {
 		}else { //if we are dealing with end node, we don't need to split out data to construct new tasks
 			synchronized(stepOutputBuffer) {
 				isEnd = this.stepOutputBuffer.merge(tempResult);
+				blocks = null;
 			}
 		}
-		this.shutDown = isEnd && this.isEndWorker();
-		return blocks;
+		
+		DataList<E> result = new DataList<E>();
+		if(blocks != null) {
+			for(TaskDataBuffer<E> block:blocks) {
+				result.add(block);		
+			}
+		}
+		
+		result.setEnd(isEnd && this.isEndWorker());
+		return result;
 	}
 }

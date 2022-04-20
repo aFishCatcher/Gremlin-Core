@@ -21,7 +21,10 @@ public class GraphTools {
 	
 	public static Traversal loadTraversal(GraphTraversalSource g) {
 		Traversal t =
-				g.V().out();
+				g.V();
+		for(int i=0; i<2; i++){
+			t.asAdmin().addStep(new MyTestStep(t.asAdmin()));
+		}
 		return t;
 		
 		/*common traversal query
